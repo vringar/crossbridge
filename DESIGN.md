@@ -189,7 +189,7 @@ hyperlink/
 |   +-- crossbridge-request     # wrapper: create outbound request in one command
 |   +-- crossbridge-answer      # wrapper: answer + mark answered in one command
 +-- skill/
-    +-- crossbridge-responder.md
+    +-- crossbridge.md              # unified skill: ask, answer, check
 ```
 
 Three source files. `route.rs` contains both phases because they share the

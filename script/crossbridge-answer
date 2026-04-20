@@ -1,0 +1,14 @@
+#!/bin/sh
+# Answer an inbound cross-project request.
+# Usage: crossbridge-answer <issue-id> "your answer"
+set -e
+
+if [ $# -ne 2 ]; then
+    echo "Usage: crossbridge-answer <issue-id> \"your answer\"" >&2
+    exit 1
+fi
+
+crosslink issue comment "$1" "$2" --kind result
+crosslink issue unlabel "$1" xb-status:open
+crosslink issue label "$1" xb-status:answered
+echo "Answered request #$1"
