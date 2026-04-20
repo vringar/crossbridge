@@ -1,0 +1,23 @@
+[package]
+name = "crossbridge"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.87"
+description = "Cross-project coordination bridge for crosslink repositories"
+license = "MIT"
+
+[[bin]]
+name = "crossbridge"
+path = "src/main.rs"
+
+[dependencies]
+crosslink = { git = "https://github.com/forecast-bio/crosslink.git", rev = "12eb7b917e9ef726f40eb2f9b36cf87fa38efa4d" }
+toml = "0.8"
+serde = { version = "1", features = ["derive"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+
+[dev-dependencies]
+tempfile = "3"
