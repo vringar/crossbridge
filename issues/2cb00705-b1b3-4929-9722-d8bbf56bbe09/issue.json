@@ -1,6 +1,6 @@
 {
   "uuid": "2cb00705-b1b3-4929-9722-d8bbf56bbe09",
-  "display_id": null,
+  "display_id": 2,
   "title": "Package crossbridge as systemd service for vringar/nixos-setup",
   "status": "open",
   "priority": "high",
