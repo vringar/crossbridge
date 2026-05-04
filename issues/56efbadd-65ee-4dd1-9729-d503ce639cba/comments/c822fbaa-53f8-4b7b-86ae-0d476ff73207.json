@@ -1,0 +1,8 @@
+{
+  "uuid": "c822fbaa-53f8-4b7b-86ae-0d476ff73207",
+  "issue_uuid": "56efbadd-65ee-4dd1-9729-d503ce639cba",
+  "author": "anon-433a2da8",
+  "content": "Replaced skill/crossbridge-responder.md with unified skill/crossbridge.md covering ask+answer+check. The new skill documents three operations (ask, answer, check), references the shell scripts as primary commands, includes manual fallback commands, and has a brief protocol lifecycle summary.",
+  "created_at": "2026-05-04T21:18:36.222408487Z",
+  "kind": "note"
+}
