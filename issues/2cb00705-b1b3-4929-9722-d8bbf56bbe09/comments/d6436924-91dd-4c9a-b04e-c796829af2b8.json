@@ -1,0 +1,10 @@
+{
+  "uuid": "d6436924-91dd-4c9a-b04e-c796829af2b8",
+  "issue_uuid": "2cb00705-b1b3-4929-9722-d8bbf56bbe09",
+  "author": "2ZD1",
+  "content": "Created default.nix (callPackage derivation with rustPlatform.buildRustPackage) and nix/module.nix (NixOS module with systemd timer+service, DynamicUser, configurable interval/logLevel)",
+  "created_at": "2026-05-04T21:19:36.163777985Z",
+  "kind": "note",
+  "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+  "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAs5G+2BM6ab8bP8UCyjbWmhSfzHScXTVmxBSogTmc9aWDxx7BU6qmRLVj4TQ9h20Hs8oj9ylo801tMenQvOG+AQ=="
+}
