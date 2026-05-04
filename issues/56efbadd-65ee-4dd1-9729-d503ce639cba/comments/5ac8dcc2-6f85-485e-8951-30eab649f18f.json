@@ -1,0 +1,10 @@
+{
+  "uuid": "5ac8dcc2-6f85-485e-8951-30eab649f18f",
+  "issue_uuid": "56efbadd-65ee-4dd1-9729-d503ce639cba",
+  "author": "2ZD1",
+  "content": "Design decision: Option A — single skill/crossbridge.md that covers ask+answer+check as prompt instructions. Keep the shell scripts as convenience accelerators, expose them in PATH via Nix package. Orchestrator just needs 'also respond to /crossbridge queries'.",
+  "created_at": "2026-05-04T18:04:42.444822769Z",
+  "kind": "note",
+  "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+  "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAUYqmq18fy4rYCLmh0MtOcYgtLJVnIGCfk698ZAyFs17hq8D36Y1VqLRCq4pV/vx2NGOr/N4ZT/OJ4SPCE4sjAg=="
+}
