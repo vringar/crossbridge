@@ -1,12 +1,14 @@
 {
   "name": "phase-1",
-  "status": "pending",
+  "status": "in_progress",
   "agents": [
     {
       "slug": "crossbridge-protocol",
       "description": "Convert to Cargo workspace, implement shared protocol crate with postcard message types and framing helpers",
-      "branch": "feature/crossbridge-protocol",
-      "status": "planned"
+      "agent_id": "IS4n-lwJr-convert-to-cargo-workspace-implement-shared-protocol",
+      "branch": "feature/IS4n-lwJr-convert-to-cargo-workspace-implement-shared-protocol",
+      "status": "running",
+      "started_at": "2026-05-05T21:02:12.514511311+00:00"
     }
   ]
 }
