@@ -1,0 +1,12 @@
+{
+  "name": "Phase 1",
+  "status": "pending",
+  "agents": [
+    {
+      "slug": "crossbridge-v2-implementation-plan",
+      "description": "Crossbridge v2 Implementation Plan",
+      "branch": "feature/crossbridge-v2-implementation-plan",
+      "status": "planned"
+    }
+  ]
+}
