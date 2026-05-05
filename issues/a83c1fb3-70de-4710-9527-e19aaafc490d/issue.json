@@ -1,0 +1,11 @@
+{
+  "uuid": "a83c1fb3-70de-4710-9527-e19aaafc490d",
+  "display_id": null,
+  "title": "crossbridge-client: Implement the per-agent CLI. See .design/client.md for full spec. SYNCHRONOUS (no tokio). Derives repo slug from git/jj origin remote (strip .git, take last path component). Three subcommands: (1) peers - list *.socket files in /run/crossbridge/<own-slug>/, (2) submit --issue <id> --target <slug> - read issue from local crosslink DB, connect to peer socket, send ClientRequest::Submit, on success update local labels (xb:outbound, xb-status:pending, xb-ref:<target-uuid>), (3) answer --issue <id> - read inbound issue, extract xb-source and xb-ref labels, collect result comments, send ClientRequest::Answer, on success mark xb-status:answered and close. Uses std::os::unix::net::UnixStream with sync framing helpers from crossbridge-protocol. Dependencies: crossbridge-protocol, crosslink, clap, anyhow. NO tokio.",
+  "description": "Created by crosslink kickoff",
+  "status": "open",
+  "priority": "medium",
+  "created_by": "2ZD1",
+  "created_at": "2026-05-05T23:04:13.454577487Z",
+  "updated_at": "2026-05-05T23:04:13.454577487Z"
+}
