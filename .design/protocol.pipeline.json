@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "design_doc": ".design/protocol.md",
+  "doc_hash": "sha256:b3bbe7a2602bd5d47276f2c75f30c718cc2dc3cbb2b3cd1ec1dd43b26a012b68",
+  "stage": "running",
+  "plans": [],
+  "runs": [
+    {
+      "agent_id": "pending",
+      "worktree": "pending",
+      "issue_id": 5,
+      "started_at": "2026-05-06T18:21:32.166417064+00:00",
+      "status": "running"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "design_doc": ".design/server.md",
+  "doc_hash": "sha256:35d20b21e8cbf7b35b746d11376987f2ca2c395d90615539d9bf2e45dffb2d1d",
+  "stage": "running",
+  "plans": [
+    {
+      "agent_id": "driver--plan-crossbridge-v2-repo-server-ec85",
+      "worktree": "/home/vringar/projects/AMD-PSP/crossbridge/.worktrees/plan-crossbridge-v2-repo-server-ec85",
+      "started_at": "2026-05-06T18:28:05.464380204+00:00",
+      "status": "running",
+      "blocking_gaps": 0,
+      "advisory_gaps": 0
+    }
+  ],
+  "runs": [
+    {
+      "agent_id": "pending",
+      "worktree": "pending",
+      "issue_id": 7,
+      "started_at": "2026-05-06T18:28:23.819764099+00:00",
+      "status": "running"
+    }
+  ]
+}

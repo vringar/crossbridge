@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "design_doc": ".design/client.md",
+  "doc_hash": "sha256:84bd01c8ea6408c732f16cdb14b85edc14379817270696097222a954cac51388",
+  "stage": "running",
+  "plans": [
+    {
+      "agent_id": "driver--plan-crossbridge-v2-client-cli-9be7",
+      "worktree": "/home/vringar/projects/AMD-PSP/crossbridge/.worktrees/plan-crossbridge-v2-client-cli-9be7",
+      "started_at": "2026-05-06T18:28:05.501186064+00:00",
+      "status": "running",
+      "blocking_gaps": 0,
+      "advisory_gaps": 0
+    }
+  ],
+  "runs": [
+    {
+      "agent_id": "pending",
+      "worktree": "pending",
+      "issue_id": 8,
+      "started_at": "2026-05-06T18:28:23.856311409+00:00",
+      "status": "running"
+    }
+  ]
+}

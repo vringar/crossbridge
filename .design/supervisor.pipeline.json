@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "design_doc": ".design/supervisor.md",
+  "doc_hash": "sha256:fc40394aee5efc0eaa56591a38c137cebfc0490f41fd30cdc6bc1bf82baf2958",
+  "stage": "running",
+  "plans": [
+    {
+      "agent_id": "driver--plan-crossbridge-v2-supervisor-658d",
+      "worktree": "/home/vringar/projects/AMD-PSP/crossbridge/.worktrees/plan-crossbridge-v2-supervisor-658d",
+      "started_at": "2026-05-06T18:28:05.430804498+00:00",
+      "status": "running",
+      "blocking_gaps": 0,
+      "advisory_gaps": 0
+    }
+  ],
+  "runs": [
+    {
+      "agent_id": "pending",
+      "worktree": "pending",
+      "issue_id": 6,
+      "started_at": "2026-05-06T18:28:23.781751251+00:00",
+      "status": "running"
+    }
+  ]
+}
