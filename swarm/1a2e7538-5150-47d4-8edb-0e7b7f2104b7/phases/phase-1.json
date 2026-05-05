@@ -1,12 +1,12 @@
 {
   "name": "phase-1",
-  "status": "in_progress",
+  "status": "pending",
   "agents": [
     {
       "slug": "crossbridge-protocol",
       "description": "Convert to Cargo workspace, implement shared protocol crate with postcard message types and framing helpers",
       "branch": "feature/crossbridge-protocol",
-      "status": "failed"
+      "status": "planned"
     }
   ]
 }
