@@ -1,0 +1,8 @@
+{
+  "uuid": "b11474df-afaa-4426-bada-84000b664844",
+  "issue_uuid": "427dd451-cf9d-48a7-a3b7-93c0565ad214",
+  "author": "va8e",
+  "content": "Result: Workspace conversion complete. Root Cargo.toml is now workspace with two members: crates/crossbridge (CLI binary) and crates/crossbridge-protocol (shared protocol crate). Protocol crate has postcard message types (Message, Request, Response, StatusUpdate, Status, Priority) and length-prefixed framing helpers (encode_frame, decode_frame, decode_all_frames). All 24 tests pass, clean compile with no warnings. default.nix updated with cargoBuildFlags for workspace.",
+  "created_at": "2026-05-05T21:10:53.405949422Z",
+  "kind": "result"
+}
