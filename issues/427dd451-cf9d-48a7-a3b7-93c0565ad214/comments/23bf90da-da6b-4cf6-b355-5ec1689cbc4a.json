@@ -1,0 +1,8 @@
+{
+  "uuid": "23bf90da-da6b-4cf6-b355-5ec1689cbc4a",
+  "issue_uuid": "427dd451-cf9d-48a7-a3b7-93c0565ad214",
+  "author": "va8e",
+  "content": "Committed: Convert to Cargo workspace, add crossbridge-protocol crate (62d5c73) | Files: 12 files changed, 596 insertions(+), 36 deletions(-)",
+  "created_at": "2026-05-05T21:11:43.196988883Z",
+  "kind": "result"
+}
