@@ -1,0 +1,8 @@
+{
+  "uuid": "1f4b9801-b6d5-4497-ac9c-8ed0836b1a35",
+  "issue_uuid": "427dd451-cf9d-48a7-a3b7-93c0565ad214",
+  "author": "va8e",
+  "content": "Plan: Convert single-crate project to Cargo workspace with two members: (1) crates/crossbridge/ for the existing CLI binary, (2) crates/crossbridge-protocol/ for the new shared protocol crate. The protocol crate will define message types (Request, Response, StatusUpdate, Error) using serde + postcard serialization, plus length-prefix framing helpers for encode/decode over streams. Will keep it no_std-compatible with alloc where possible.",
+  "created_at": "2026-05-05T21:06:45.603163816Z",
+  "kind": "plan"
+}
