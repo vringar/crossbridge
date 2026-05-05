@@ -1,0 +1,8 @@
+{
+  "uuid": "4ea25389-2318-4afd-9859-2f770f006b1b",
+  "issue_uuid": "427dd451-cf9d-48a7-a3b7-93c0565ad214",
+  "author": "va8e",
+  "content": "Plan: Protocol crate defines: Message enum (Request/Response/StatusUpdate variants), Priority enum, Status enum, Request struct (source, target, title, body, priority, uuid), Response struct (source_uuid, target_uuid, body), StatusUpdate struct (uuid, old/new status). Framing uses u32 LE length prefix + postcard serialization. decode_frame reads from byte slice returning (Message, bytes_consumed). All types derive Serialize/Deserialize/Debug/Clone/PartialEq.",
+  "created_at": "2026-05-05T21:08:00.073898190Z",
+  "kind": "plan"
+}
