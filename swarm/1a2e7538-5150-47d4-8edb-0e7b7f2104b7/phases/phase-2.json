@@ -1,0 +1,24 @@
+{
+  "name": "Components",
+  "status": "pending",
+  "agents": [
+    {
+      "slug": "crossbridge-supervisor",
+      "description": "Implement supervisor daemon: Unix socket registration, peer group tracking, join/leave notifications. No crosslink dependency.",
+      "branch": "feature/crossbridge-supervisor",
+      "status": "planned"
+    },
+    {
+      "slug": "crossbridge-server",
+      "description": "Implement per-repo server: supervisor registration, peer socket listeners, issue submission handling, crosslink DB writes, attachment materialization via jj worktrees.",
+      "branch": "feature/crossbridge-server",
+      "status": "planned"
+    },
+    {
+      "slug": "crossbridge-client",
+      "description": "Implement per-agent CLI: slug derivation from git remote, peer discovery via socket listing, issue/answer submission. Synchronous, no tokio.",
+      "branch": "feature/crossbridge-client",
+      "status": "planned"
+    }
+  ]
+}
