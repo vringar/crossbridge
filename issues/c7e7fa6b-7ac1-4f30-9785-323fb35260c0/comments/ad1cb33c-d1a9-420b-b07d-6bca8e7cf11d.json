@@ -1,0 +1,8 @@
+{
+  "uuid": "ad1cb33c-d1a9-420b-b07d-6bca8e7cf11d",
+  "issue_uuid": "c7e7fa6b-7ac1-4f30-9785-323fb35260c0",
+  "author": "4wFJ",
+  "content": "Plan: Convert root Cargo.toml to workspace with members crossbridge/ (existing CLI) and crossbridge-protocol/ (new crate). Protocol crate has message types, postcard serde, length-prefixed framing (sync+async). tokio optional behind feature flag. Max frame 16 MiB.",
+  "created_at": "2026-05-05T23:11:13.715519314Z",
+  "kind": "plan"
+}
