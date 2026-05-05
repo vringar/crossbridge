@@ -1,0 +1,8 @@
+{
+  "uuid": "6bf042de-3368-4945-a17b-61eac3c86abb",
+  "issue_uuid": "427dd451-cf9d-48a7-a3b7-93c0565ad214",
+  "author": "va8e",
+  "content": "Result: Workspace conversion complete. Root Cargo.toml is now a workspace with two members: crates/crossbridge (binary, existing CLI) and crates/crossbridge-protocol (library, new). Protocol crate implements Message enum (Request/Response/StatusUpdate), Status enum (with Error(String) variant), Priority enum, postcard-based to_bytes/from_bytes on Message, and length-prefixed framing (encode_frame/decode_frame/decode_all_frames with MAX_FRAME_LEN=1MiB cap). 24 tests pass (8 binary + 16 protocol). Nix derivation updated with --package crossbridge flag. clippy/fmt not available in env but code follows existing style.",
+  "created_at": "2026-05-05T21:11:10.364276850Z",
+  "kind": "result"
+}
