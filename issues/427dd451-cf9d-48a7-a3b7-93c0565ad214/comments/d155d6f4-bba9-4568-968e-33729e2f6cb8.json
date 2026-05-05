@@ -1,0 +1,8 @@
+{
+  "uuid": "d155d6f4-bba9-4568-968e-33729e2f6cb8",
+  "issue_uuid": "427dd451-cf9d-48a7-a3b7-93c0565ad214",
+  "author": "va8e",
+  "content": "Plan: Convert single crate to Cargo workspace with two members: crates/crossbridge (existing binary) and crates/crossbridge-protocol (new library). Protocol crate defines message types (Request, Response, StatusUpdate) matching the existing label protocol, serialized with postcard. Framing helpers implement length-prefixed (u32 LE) framing. Binary crate gains dependency on protocol crate. Nix packaging updated for workspace layout.",
+  "created_at": "2026-05-05T21:06:01.396776320Z",
+  "kind": "plan"
+}
