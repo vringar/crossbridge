@@ -1,6 +1,6 @@
 {
   "uuid": "427dd451-cf9d-48a7-a3b7-93c0565ad214",
-  "display_id": null,
+  "display_id": 4,
   "title": "Convert to Cargo workspace, implement shared protocol crate with postcard message types and framing helpers",
   "description": "Created by crosslink kickoff",
   "status": "open",

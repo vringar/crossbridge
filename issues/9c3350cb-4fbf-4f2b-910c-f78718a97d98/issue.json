@@ -1,6 +1,6 @@
 {
   "uuid": "9c3350cb-4fbf-4f2b-910c-f78718a97d98",
-  "display_id": null,
+  "display_id": 6,
   "title": "crossbridge-supervisor: Implement the supervisor daemon. See .design/supervisor.md for full spec. Listens on Unix socket for repo server registrations, tracks peer groups in-memory (HashMap<String, HashMap<String, Stream>>), sends join/leave notifications over persistent streams. Single-threaded tokio event loop. Creates/removes /run/crossbridge/<slug>/ directories. Handles registration (validate unique slug), peer departure (notify survivors, cleanup dirs), and own restart (wipe state). CLI: crossbridge-supervisor [--socket path]. Dependencies: tokio, crossbridge-protocol (workspace dep), tracing, tracing-subscriber, anyhow. NO crosslink dependency.",
   "description": "Created by crosslink kickoff",
   "status": "open",
