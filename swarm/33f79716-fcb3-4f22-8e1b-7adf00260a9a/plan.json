@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "title": "Crossbridge v2: Architecture Overview",
+  "design_doc": ".design/overview.md",
+  "created_at": "2026-05-05T20:58:34.973376158+00:00",
+  "phases": [
+    "Phase 1"
+  ]
+}

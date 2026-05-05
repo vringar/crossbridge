@@ -1,0 +1,12 @@
+{
+  "name": "Phase 1",
+  "status": "pending",
+  "agents": [
+    {
+      "slug": "crossbridge-v2-architecture-overview",
+      "description": "Crossbridge v2: Architecture Overview",
+      "branch": "feature/crossbridge-v2-architecture-overview",
+      "status": "planned"
+    }
+  ]
+}
