@@ -30,10 +30,6 @@
     "6": {
       "agent_id": "bPQu",
       "claimed_at": "2026-05-06T13:37:15.850752475Z"
-    },
-    "8": {
-      "agent_id": "2ZD1",
-      "claimed_at": "2026-05-06T17:35:36.197133803Z"
     }
   },
   "issues": {},
@@ -97,11 +93,16 @@
       "agent_id": "2ZD1",
       "agent_seq": 3,
       "timestamp": "2026-05-06T17:35:40.440607973Z"
+    },
+    {
+      "agent_id": "2ZD1",
+      "agent_seq": 4,
+      "timestamp": "2026-05-06T17:35:40.681381741Z"
     }
   ],
   "watermark": {
-    "timestamp": "2026-05-06T17:35:40.440607973Z",
+    "timestamp": "2026-05-06T17:35:40.681381741Z",
     "agent_id": "2ZD1",
-    "agent_seq": 3
+    "agent_seq": 4
   }
 }
