@@ -7,8 +7,11 @@
   "priority": "medium",
   "created_by": "2ZD1",
   "created_at": "2026-05-05T23:03:48.177877700Z",
-  "updated_at": "2026-05-05T23:03:48.231378093Z",
+  "updated_at": "2026-05-06T17:33:33.363632692Z",
   "labels": [
     "feature"
+  ],
+  "blockers": [
+    "c7e7fa6b-7ac1-4f30-9785-323fb35260c0"
   ]
 }
