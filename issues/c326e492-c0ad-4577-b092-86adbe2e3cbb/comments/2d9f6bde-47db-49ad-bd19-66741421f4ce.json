@@ -1,0 +1,8 @@
+{
+  "uuid": "2d9f6bde-47db-49ad-bd19-66741421f4ce",
+  "issue_uuid": "c326e492-c0ad-4577-b092-86adbe2e3cbb",
+  "author": "ur0W",
+  "content": "Plan: Set up Cargo workspace mirroring the protocol branch (root + crossbridge/ + crossbridge-protocol/), add crossbridge-server/ crate. Server: tokio current_thread runtime; reconnect with exp-backoff (1s..60s). On disconnect, drop peer listener map. tokio::select! over (a) supervisor SupervisorMessage stream, (b) accept across all peer UnixListeners (FuturesUnordered). Inline handlers (DB is !Send). DB: reuse crosslink (Database::open, list_issues+label scan, transaction, add_comment, close_issue). SubmitIssue: scan xb-ref:<uuid> first; on miss create_issue with body+footer, add 5 labels, materialize Attachments via temporary git worktree (write -> commit-tree -> SHA -> remove worktree), comment with SHA+filenames. SubmitAnswer: find by xb-ref label (open or closed); 404 -> Error; copy comments deduped, swap pending->resolved, close. Frame size errors return Error response (no crash). Slug derivation from 'git remote get-url origin' / 'jj git remote list'. Tests: tokio DuplexStream for sup-stub, tempdir+Database for handlers.",
+  "created_at": "2026-05-06T23:08:40.852230215Z",
+  "kind": "plan"
+}
