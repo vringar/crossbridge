@@ -1,0 +1,8 @@
+{
+  "uuid": "b644b573-740f-471c-9c28-2cb7eb4d74e1",
+  "issue_uuid": "9c3350cb-4fbf-4f2b-910c-f78718a97d98",
+  "author": "bPQu",
+  "content": "Plan: (1) Convert to workspace using existing feature/crossbridge-protocol branch as structural starting point, but redo protocol message types per issue #5 spec (Register, RegisterResponse, Notification, SupervisorMessage, ClientRequest, etc.). (2) Add crates/crossbridge-supervisor with single-threaded tokio rt + UnixListener. (3) State: Rc<RefCell<HashMap<String, HashMap<String, mpsc::Sender<Reply>>>>>. (4) Per-connection task reads Register, validates uniqueness, creates /run/crossbridge/slug/, spawns writer, notifies survivors on disconnect. (5) Tests via tempdir + custom socket path. NOTE: .design/supervisor.md and .design/protocol.md don't exist; I'm proceeding from issue descriptions and DESIGN.md. Other agents are concurrently working on #5 (protocol) and #7 (server) in their own worktrees.",
+  "created_at": "2026-05-06T14:09:07.338857235Z",
+  "kind": "plan"
+}
