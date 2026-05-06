@@ -1,0 +1,10 @@
+{
+  "uuid": "9aa51b7f-b97e-4531-85ba-996d92181a91",
+  "issue_uuid": "a83c1fb3-70de-4710-9527-e19aaafc490d",
+  "author": "Kklh",
+  "content": "Plan: Convert single crate to workspace. Create crossbridge-protocol with sync framing helpers (read_message_sync/write_message_sync), 16 MiB cap, postcard, ClientRequest/ServerResponse types. Create crossbridge-client (binary) with peers/submit/answer subcommands. Slug derivation: prefer jj if .jj/ exists else git remote get-url origin. DB access via crosslink::db::Database. Tests: in-process server using a thread + UnixListener for socket-level integration tests; unit tests for slug parsing and label extraction.",
+  "created_at": "2026-05-06T23:06:06.241545507Z",
+  "kind": "plan",
+  "signed_by": "SHA256:kI3DBa4wt6n+q9Oda/shCLBuTY6ca5kjtLYeh8urwMk",
+  "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgdD3Cpg1f1z8m/OX86w5zsGJMduiHvkKq0qWq7xe/pFAAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAR9fpK8EVDIhMehdRZ78BNx7A4/rr5KWcp81XodepHnnyvgtPB/ARQatMItgbUoYmJUw6LPQiXk+Fo6m77jRGBw=="
+}
