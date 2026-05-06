@@ -418,7 +418,7 @@ mod tests {
         target_db.add_label(target_id, "xb:inbound").unwrap();
         target_db.add_label(target_id, "xb-status:answered").unwrap();
         target_db
-            .add_label(target_id, &format!("xb-source:source"))
+            .add_label(target_id, "xb-source:source")
             .unwrap();
         target_db
             .add_label(target_id, &format!("xb-ref:{source_uuid}"))
