@@ -1,0 +1,10 @@
+{
+  "uuid": "531edaa4-ed22-4092-ba49-7f6831f99f0d",
+  "issue_uuid": "c7e7fa6b-7ac1-4f30-9785-323fb35260c0",
+  "author": "2ZD1",
+  "content": "## Orchestration role: foundation crate\n\nThis is the FOUNDATION. Issues #6 (supervisor), #7 (server), #8 (client) are blocked by this and depend on the protocol crate.\n\n**Scope for this issue:**\n1. Convert the project to a Cargo workspace (root Cargo.toml with workspace section)\n2. Move existing crossbridge code into crates/crossbridge/\n3. Create crates/crossbridge-protocol/ with all message types and framing helpers per .design/protocol.md\n4. Workspace.dependencies should include shared dep specs the consumer crates can inherit\n\n**Definition of done:**\n- cargo build passes for the workspace\n- cargo test passes (with unit tests for framing roundtrip)\n- All work committed and merged into main\n\n**For future orchestrators**: Once this is merged into main, run `crosslink issue ready` — issues #6/#7/#8 will then be unblocked and can run in parallel.",
+  "created_at": "2026-05-06T17:36:41.516930553Z",
+  "kind": "note",
+  "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+  "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAUBbrlBZNQVR+bYF6kfkIMWRaVxH58q2xoBo7D0egQYGIigjArBVp29nSXQhoKpSaRAFZNfGKS9F+wf19KJcpCg=="
+}
