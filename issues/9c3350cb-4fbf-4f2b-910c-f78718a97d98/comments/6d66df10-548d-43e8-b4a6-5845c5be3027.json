@@ -1,0 +1,10 @@
+{
+  "uuid": "6d66df10-548d-43e8-b4a6-5845c5be3027",
+  "issue_uuid": "9c3350cb-4fbf-4f2b-910c-f78718a97d98",
+  "author": "2ZD1",
+  "content": "## Orchestration role: supervisor crate (consumer)\n\n**Prerequisite**: Issue #5 (protocol) must be merged into main first. This issue is blocked by #5 in the dependency graph.\n\n**Hard constraints — DO NOT:**\n- Create or modify root Cargo.toml (workspace already exists)\n- Create or modify crates/crossbridge-protocol/ (already implemented; just import it)\n- Modify any other crate (crates/crossbridge/, crates/crossbridge-server/, crates/crossbridge-client/)\n- Re-implement protocol message types — import them from `crossbridge_protocol`\n\n**Scope for this issue:**\n- Add ONLY crates/crossbridge-supervisor/ to the existing workspace\n- Add the new crate to workspace.members in root Cargo.toml (one-line edit only)\n- Implement per .design/supervisor.md\n- Use `crossbridge-protocol = { workspace = true }` in your Cargo.toml\n\n**Definition of done:**\n- cargo build -p crossbridge-supervisor passes\n- cargo test -p crossbridge-supervisor passes\n- Work committed; ready to merge",
+  "created_at": "2026-05-06T17:36:46.169059200Z",
+  "kind": "note",
+  "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+  "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAABpJds28qz7+s+HTKLG0NoxT7rJE2Chq+ciWKxophWbuGxJCBfruFtcH9uI/NjDXsz+MNUTFIswcpnbK+YxRDA=="
+}
