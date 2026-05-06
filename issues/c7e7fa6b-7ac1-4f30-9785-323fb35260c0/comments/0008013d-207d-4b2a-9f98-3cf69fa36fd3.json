@@ -1,0 +1,8 @@
+{
+  "uuid": "0008013d-207d-4b2a-9f98-3cf69fa36fd3",
+  "issue_uuid": "c7e7fa6b-7ac1-4f30-9785-323fb35260c0",
+  "author": "qi3w",
+  "content": "Plan: Convert root to Cargo workspace with members crates/crossbridge (existing CLI) and crates/crossbridge-protocol (new library). Protocol crate defines all message types per kickoff: Register/RegisterResponse/Notification/SupervisorMessage (supervisor<->server), ClientRequest/SubmitIssue/SubmitAnswer/AnswerComment/Attachment/ServerResponse (agent<->server). postcard serde. Length-prefixed framing with u32 LE prefix and 16 MiB cap. Sync helpers using std::io::Read/Write; async helpers using tokio::io::{AsyncReadExt,AsyncWriteExt}, gated behind 'tokio' feature. No crosslink dep. Update default.nix cargoBuildFlags for workspace package selection.",
+  "created_at": "2026-05-06T13:38:39.111503418Z",
+  "kind": "plan"
+}
