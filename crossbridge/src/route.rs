@@ -115,11 +115,7 @@ fn route_single_outbound(
     }
 
     // Create issue in target repo
-    let target_id = target_db.create_issue(
-        &issue.title,
-        issue.description.as_deref(),
-        "high",
-    )?;
+    let target_id = target_db.create_issue(&issue.title, issue.description.as_deref(), "high")?;
     let target_uuid = target_db.get_issue_uuid_by_id(target_id)?;
 
     // Label the target issue
@@ -260,7 +256,12 @@ fn collect_single_answer(
     }
 
     // Close lifecycle
-    swap_status_label(&source_db, source_issue_id, "xb-status:pending", "xb-status:resolved")?;
+    swap_status_label(
+        &source_db,
+        source_issue_id,
+        "xb-status:pending",
+        "xb-status:resolved",
+    )?;
     source_db.close_issue(source_issue_id)?;
     db.close_issue(issue.id)?;
 
@@ -344,7 +345,9 @@ mod tests {
         assert!(source_labels.iter().any(|l| l.starts_with("xb-ref:")));
 
         // Verify target issue was created
-        let target_issues = target_db.list_issues(Some("open"), Some("xb:inbound"), None).unwrap();
+        let target_issues = target_db
+            .list_issues(Some("open"), Some("xb:inbound"), None)
+            .unwrap();
         assert_eq!(target_issues.len(), 1);
         assert_eq!(target_issues[0].title, "What is the PSP entry point?");
 
@@ -359,7 +362,9 @@ mod tests {
         // Reset source to open to simulate the scenario (in practice this wouldn't happen)
         // Instead, just run again and confirm no duplicate
         route_outbound(&source_db, "source", &config).unwrap();
-        let target_issues_2 = target_db.list_issues(Some("open"), Some("xb:inbound"), None).unwrap();
+        let target_issues_2 = target_db
+            .list_issues(Some("open"), Some("xb:inbound"), None)
+            .unwrap();
         assert_eq!(target_issues_2.len(), 1, "should not create duplicate");
 
         drop(target_db);
@@ -377,7 +382,9 @@ mod tests {
         source_db.add_label(issue_id, "type:request").unwrap();
         source_db.add_label(issue_id, "xb:outbound").unwrap();
         source_db.add_label(issue_id, "xb-status:open").unwrap();
-        source_db.add_label(issue_id, "xb-target:nonexistent").unwrap();
+        source_db
+            .add_label(issue_id, "xb-target:nonexistent")
+            .unwrap();
 
         let config = make_config(vec![("source", source_dir.path().to_path_buf())]);
 
@@ -416,10 +423,10 @@ mod tests {
         let target_uuid = target_db.get_issue_uuid_by_id(target_id).unwrap();
         target_db.add_label(target_id, "type:request").unwrap();
         target_db.add_label(target_id, "xb:inbound").unwrap();
-        target_db.add_label(target_id, "xb-status:answered").unwrap();
         target_db
-            .add_label(target_id, "xb-source:source")
+            .add_label(target_id, "xb-status:answered")
             .unwrap();
+        target_db.add_label(target_id, "xb-source:source").unwrap();
         target_db
             .add_label(target_id, &format!("xb-ref:{source_uuid}"))
             .unwrap();
@@ -494,7 +501,9 @@ mod tests {
         let a_labels = db_a.get_labels(req_id).unwrap();
         assert!(a_labels.contains(&"xb-status:pending".to_string()));
 
-        let b_issues = db_b.list_issues(Some("open"), Some("xb:inbound"), None).unwrap();
+        let b_issues = db_b
+            .list_issues(Some("open"), Some("xb:inbound"), None)
+            .unwrap();
         assert_eq!(b_issues.len(), 1);
 
         // Simulate: agent in repo B answers
@@ -547,7 +556,9 @@ mod tests {
         route_outbound(&source_db, "source", &config).unwrap();
 
         // Simulate crash: revert source to xb-status:open (as if the source update never happened)
-        source_db.remove_label(issue_id, "xb-status:pending").unwrap();
+        source_db
+            .remove_label(issue_id, "xb-status:pending")
+            .unwrap();
         source_db.add_label(issue_id, "xb-status:open").unwrap();
         // Remove xb-ref too, simulating the transaction rollback
         let labels = source_db.get_labels(issue_id).unwrap();
@@ -559,7 +570,9 @@ mod tests {
 
         // Re-open target DB to count issues before second run
         let target_db = Database::open(&config.repos["target"].db_path()).unwrap();
-        let before = target_db.list_issues(Some("open"), Some("xb:inbound"), None).unwrap();
+        let before = target_db
+            .list_issues(Some("open"), Some("xb:inbound"), None)
+            .unwrap();
         assert_eq!(before.len(), 1);
 
         // Second run: should detect existing target issue and not create a duplicate
@@ -567,7 +580,9 @@ mod tests {
         route_outbound(&source_db, "source", &config).unwrap();
 
         let target_db = Database::open(&config.repos["target"].db_path()).unwrap();
-        let after = target_db.list_issues(Some("open"), Some("xb:inbound"), None).unwrap();
+        let after = target_db
+            .list_issues(Some("open"), Some("xb:inbound"), None)
+            .unwrap();
         assert_eq!(after.len(), 1, "idempotency check should prevent duplicate");
 
         // Source should now be pending
