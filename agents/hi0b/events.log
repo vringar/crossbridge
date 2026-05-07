@@ -1,5 +1,0 @@
-{"agent_id":"hi0b","agent_seq":1,"timestamp":"2026-05-07T12:00:56.395897161Z","event":{"type":"LockClaimed","issue_display_id":5}}
-{"agent_id":"hi0b","agent_seq":2,"timestamp":"2026-05-07T12:00:58.318771510Z","event":{"type":"LockReleased","issue_display_id":5}}
-{"agent_id":"hi0b","agent_seq":3,"timestamp":"2026-05-07T12:01:07.083357437Z","event":{"type":"LockClaimed","issue_display_id":5}}
-{"agent_id":"hi0b","agent_seq":4,"timestamp":"2026-05-07T12:01:09.015682151Z","event":{"type":"LockReleased","issue_display_id":5}}
-{"agent_id":"hi0b","agent_seq":5,"timestamp":"2026-05-07T12:01:20.795585066Z","event":{"type":"LockClaimed","issue_display_id":5}}
