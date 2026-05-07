@@ -1,0 +1,8 @@
+{
+  "uuid": "170ebe46-8e39-4489-95d6-344b40220f65",
+  "issue_uuid": "248b66ed-426d-4d68-97f3-74328bcc5a6a",
+  "author": "tEc5",
+  "content": "Completed env-var unification across crossbridge-protocol/-supervisor/-server/-client, plus the new crossbridge-e2e workspace crate with submit_then_answer_round_trip and helpers. 91 workspace tests pass, clippy + fmt clean, commit 588ca1a. The e2e test is marked #[ignore] pending #18 (pre-existing client xb-ref labeling bug surfaced by the test); per kickoff constraint, the bug was filed separately and not fixed in-band.",
+  "created_at": "2026-05-07T22:24:57.842419121Z",
+  "kind": "handoff"
+}
