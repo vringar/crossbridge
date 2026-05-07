@@ -122,11 +122,16 @@
       "agent_id": "hi0b",
       "agent_seq": 3,
       "timestamp": "2026-05-07T12:01:07.083357437Z"
+    },
+    {
+      "agent_id": "hi0b",
+      "agent_seq": 4,
+      "timestamp": "2026-05-07T12:01:09.015682151Z"
     }
   ],
   "watermark": {
-    "timestamp": "2026-05-07T12:01:07.083357437Z",
+    "timestamp": "2026-05-07T12:01:09.015682151Z",
     "agent_id": "hi0b",
-    "agent_seq": 3
+    "agent_seq": 4
   }
 }
