@@ -55,26 +55,7 @@ fn run_client(runtime: &Path, repo_path: &Path, args: &[&str]) -> std::process::
         .expect("spawn crossbridge-client binary")
 }
 
-// NOTE on `#[ignore]`:
-//
-// The full round-trip is currently blocked on a pre-existing bug in
-// `crossbridge-client/src/main.rs:123`: the client labels the outbound
-// issue with `xb-ref:<target_id_i64>` (the i64 returned in
-// `ServerResponse::Ok`), but `crossbridge-server::handler::handle_answer`
-// looks up the local issue via `xb-ref:<source_uuid>` (the UUID the
-// answering side echoes back). The two never match, so the answer step
-// of this test fails with `no local issue with label xb-ref:<uuid>`.
-//
-// Per the kickoff's explicit constraint ("FILE A SEPARATE ISSUE rather
-// than fixing it in-band — this work is the env-var unification plus the
-// test, nothing more"), the bug is tracked in crosslink issue #18 and not
-// fixed here. The test is left intact (assertions are correct per the
-// design spec) and will start passing as soon as #18 is resolved.
-//
-// Run with `cargo test -p crossbridge-e2e -- --ignored` to reproduce the
-// failure once #18 is being worked on.
 #[test]
-#[ignore = "blocked on crosslink issue #18: client mislabels xb-ref with target i64 instead of source uuid"]
 fn submit_then_answer_round_trip() {
     let tmp = ShortTempDir::new();
     let runtime = tmp.path().join("runtime");
