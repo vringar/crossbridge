@@ -1,0 +1,8 @@
+{
+  "uuid": "53828d82-c684-416d-bdb3-bf73beed9306",
+  "issue_uuid": "c7e7fa6b-7ac1-4f30-9785-323fb35260c0",
+  "author": "hi0b",
+  "content": "Result: workspace conversion complete and crossbridge-protocol crate implemented per .design/protocol.md. Workspace members: '.' (existing crossbridge v1 binary, unchanged in behaviour) and 'crossbridge-protocol' (new). Protocol crate provides: all 10 spec'd message types (Register, RegisterResponse, Notification, SupervisorMessage, ClientRequest, SubmitIssue, SubmitAnswer, AnswerComment, Attachment, ServerResponse) with serde+postcard; sync framing (write_message_sync/read_message_sync over std::io); async framing (write_message/read_message over tokio AsyncRead/AsyncWrite, gated behind 'async' feature, default-on); ProtocolError enum (Io / Serialize / FrameTooLarge); MAX_FRAME_SIZE = 16 MiB enforced before payload allocation. Tests: 13 sync roundtrip + framing-edge cases, 4 async + sync↔async interop. cargo test --workspace: 25 passed / 0 failed. cargo clippy --all-targets --all-features -- -D warnings: clean. cargo fmt --check: clean. cargo build/test --no-default-features for crossbridge-protocol: clean (validates the future client crate's tokio-free dependency surface).",
+  "created_at": "2026-05-07T11:45:09.732693919Z",
+  "kind": "result"
+}
