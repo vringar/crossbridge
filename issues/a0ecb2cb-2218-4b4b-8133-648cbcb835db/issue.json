@@ -7,8 +7,9 @@
   "priority": "high",
   "created_by": "tEc5",
   "created_at": "2026-05-07T22:19:17.336664543Z",
-  "updated_at": "2026-05-07T22:19:23.274830671Z",
+  "updated_at": "2026-05-07T22:19:25.053360020Z",
   "labels": [
-    "bug"
+    "bug",
+    "client"
   ]
 }
