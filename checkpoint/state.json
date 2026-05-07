@@ -164,21 +164,11 @@
       "agent_id": "2ZD1",
       "agent_seq": 12,
       "timestamp": "2026-05-07T12:59:44.576323991Z"
-    },
-    {
-      "agent_id": "W0Nm",
-      "agent_seq": 1,
-      "timestamp": "2026-05-07T13:04:05.330669723Z"
-    },
-    {
-      "agent_id": "W0Nm",
-      "agent_seq": 2,
-      "timestamp": "2026-05-07T13:46:31.115570940Z"
     }
   ],
   "watermark": {
-    "timestamp": "2026-05-07T13:46:31.115570940Z",
-    "agent_id": "W0Nm",
-    "agent_seq": 2
+    "timestamp": "2026-05-07T12:59:44.576323991Z",
+    "agent_id": "2ZD1",
+    "agent_seq": 12
   }
 }

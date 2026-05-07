@@ -3,11 +3,12 @@
   "display_id": 7,
   "title": "crossbridge-server: Implement the per-repo server. See .design/server.md for full spec. Registers with supervisor (sends Register, receives RegisterAck with peer list), creates listening sockets at /run/crossbridge/<peer-slug>/<own-slug>.socket for each peer. Handles PeerJoined/PeerLeft notifications. Accepts ClientRequest (Submit/Answer) from agents on those sockets. SubmitIssue: creates issue in local crosslink DB with proper labels, handles attachments via jj worktree materialization, idempotent via xb-ref check. SubmitAnswer: finds source issue by UUID, copies comments, swaps status to resolved, closes. Single-threaded tokio. Supervisor reconnection with exponential backoff. CLI: crossbridge-server --group <group> [--slug <slug>] [--repo-path <path>]. Dependencies: tokio, crossbridge-protocol, crosslink, tracing, tracing-subscriber, anyhow, clap.",
   "description": "Created by crosslink kickoff",
-  "status": "open",
+  "status": "closed",
   "priority": "medium",
   "created_by": "2ZD1",
   "created_at": "2026-05-05T23:04:00.898629772Z",
-  "updated_at": "2026-05-06T17:35:48.119219701Z",
+  "updated_at": "2026-05-07T19:18:45.350827852Z",
+  "closed_at": "2026-05-07T19:18:45.350827852Z",
   "labels": [
     "feature"
   ],

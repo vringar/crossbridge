@@ -3,11 +3,12 @@
   "display_id": 5,
   "title": "crossbridge-protocol: Convert the project to a Cargo workspace and implement the shared protocol crate. See .design/protocol.md for the full spec. This includes: workspace Cargo.toml at root, crossbridge-protocol/ crate with all message types (Register, RegisterResponse, Notification, SupervisorMessage, ClientRequest, SubmitIssue, SubmitAnswer, AnswerComment, Attachment, ServerResponse), postcard serde, and length-prefixed framing helpers (both async with tokio AsyncRead/AsyncWrite and sync with std Read/Write). Max frame size 16 MiB. Dependencies: serde, postcard, tokio (for async helpers only). No crosslink dependency.",
   "description": "Created by crosslink kickoff",
-  "status": "open",
+  "status": "closed",
   "priority": "medium",
   "created_by": "2ZD1",
   "created_at": "2026-05-05T23:03:28.231406084Z",
-  "updated_at": "2026-05-05T23:03:28.348920517Z",
+  "updated_at": "2026-05-07T19:19:05.849872465Z",
+  "closed_at": "2026-05-07T19:19:05.849872465Z",
   "labels": [
     "feature"
   ]
