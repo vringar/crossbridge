@@ -6,6 +6,7 @@ pkgs.mkShell {
     rustc
     clippy
     rustfmt
+    rust-analyzer
     pkg-config
     jujutsu
   ];
