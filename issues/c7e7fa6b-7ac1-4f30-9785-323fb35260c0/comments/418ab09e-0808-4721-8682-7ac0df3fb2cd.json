@@ -1,0 +1,8 @@
+{
+  "uuid": "418ab09e-0808-4721-8682-7ac0df3fb2cd",
+  "issue_uuid": "c7e7fa6b-7ac1-4f30-9785-323fb35260c0",
+  "author": "WuVM",
+  "content": "Delivered Cargo workspace conversion + crossbridge-protocol crate per .design/protocol.md. Two commits on branch (be90617 workspace+protocol, 6e0442a clippy fmt). 27 tests pass; clippy --workspace --all-targets -- -D warnings clean; cargo fmt --check clean; sync-only build (--no-default-features) also clean. Caveats: (1) commits use --no-gpg-sign per user authorization since SSH key not present in sandbox; matches prior unsigned commits on branch. (2) Inherited unstaged change to .crosslink/hook-config.json deletes sandbox.command (per salvage handoff: DO NOT apply) — left unstaged. (3) Salvage patch from agent IS4n-s15o was not visible in the sandbox; implemented fresh from spec. Layout follows issue spec (crates/crossbridge + crates/crossbridge-protocol) rather than the salvage's root-package shape.",
+  "created_at": "2026-05-07T12:36:00.894739333Z",
+  "kind": "handoff"
+}
