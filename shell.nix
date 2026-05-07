@@ -7,6 +7,7 @@ pkgs.mkShell {
     clippy
     rustfmt
     pkg-config
+    jujutsu
   ];
 
   buildInputs = with pkgs; [

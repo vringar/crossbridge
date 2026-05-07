@@ -4,6 +4,7 @@ members = [
     "crossbridge",
     "crossbridge-protocol",
     "crossbridge-supervisor",
+    "crossbridge-server",
 ]
 
 [workspace.package]

@@ -396,6 +396,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "crossbridge-server"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "crossbridge-protocol",
+ "crosslink",
+ "tempfile",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
 name = "crossbridge-supervisor"
 version = "0.1.0"
 dependencies = [
