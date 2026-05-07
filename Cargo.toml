@@ -2,6 +2,7 @@
 resolver = "2"
 members = [
     "crossbridge",
+    "crossbridge-client",
     "crossbridge-protocol",
 ]
 

@@ -1,0 +1,23 @@
+[package]
+name = "crossbridge-client"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Per-agent CLI for submitting/answering issues via crossbridge repo-server sockets"
+
+[[bin]]
+name = "crossbridge-client"
+path = "src/main.rs"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+crossbridge-protocol = { path = "../crossbridge-protocol" }
+crosslink.workspace = true
+clap.workspace = true
+anyhow.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
