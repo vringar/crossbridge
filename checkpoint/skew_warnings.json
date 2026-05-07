@@ -5,5 +5,12 @@
     "event_timestamp": "2026-05-06T13:37:07.760417657Z",
     "commit_timestamp": "2026-05-07T11:45:59Z",
     "skew_seconds": 79731
+  },
+  {
+    "agent_id": "MIYh",
+    "event_description": "LockClaimed(#6)",
+    "event_timestamp": "2026-05-07T13:00:56.690168381Z",
+    "commit_timestamp": "2026-05-07T13:14:45Z",
+    "skew_seconds": 828
   }
 ]
