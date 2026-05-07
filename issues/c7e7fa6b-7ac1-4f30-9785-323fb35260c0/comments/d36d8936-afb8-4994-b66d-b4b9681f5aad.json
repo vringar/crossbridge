@@ -1,0 +1,8 @@
+{
+  "uuid": "d36d8936-afb8-4994-b66d-b4b9681f5aad",
+  "issue_uuid": "c7e7fa6b-7ac1-4f30-9785-323fb35260c0",
+  "author": "hi0b",
+  "content": "Found: shell.nix didn't include clippy/rustfmt — added to nativeBuildInputs so the agent_lint_commands hook can run. Also fixed two pre-existing v1 issues that would have blocked the lint hook: clippy::useless_format on src/route.rs:421 and rustfmt drift in src/main.rs and src/route.rs (blank lines around tracing!() macro args, line wrapping in #[command(...)]).",
+  "created_at": "2026-05-07T11:44:56.764884614Z",
+  "kind": "observation"
+}
