@@ -396,6 +396,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "crossbridge-server"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "crossbridge-protocol",
+ "crosslink",
+ "tempfile",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
 name = "crosslink"
 version = "0.8.0"
 source = "git+https://github.com/forecast-bio/crosslink.git?rev=12eb7b917e9ef726f40eb2f9b36cf87fa38efa4d#12eb7b917e9ef726f40eb2f9b36cf87fa38efa4d"
