@@ -397,6 +397,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "crossbridge-e2e"
+version = "0.1.0"
+dependencies = [
+ "crossbridge-client",
+ "crossbridge-protocol",
+ "crossbridge-server",
+ "crossbridge-supervisor",
+ "crosslink",
+ "tempfile",
+]
+
+[[package]]
 name = "crossbridge-protocol"
 version = "0.1.0"
 dependencies = [
