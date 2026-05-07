@@ -1,8 +1,0 @@
-{
-  "uuid": "255e4741-6846-4c8d-90a3-3c632589b015",
-  "issue_uuid": "9c3350cb-4fbf-4f2b-910c-f78718a97d98",
-  "author": "MIYh",
-  "content": "Result: Implemented crossbridge-supervisor crate. Public API: async fn run(socket_path) loops indefinitely. Single tokio current_thread runtime; main task uses tokio::select! over listener.accept() and an mpsc<Event> channel. Per-connection registration readers and EOF watchers spawn as separate tasks and report back via the channel — keeps state owned by a single task with no locking. Topology: HashMap<group, HashMap<slug, ConnId>> + HashMap<ConnId, ConnRecord{slug, group, write_half, reader_join_handle}>. On registration: nack on duplicate, mkdir slug dir, ack with peer slugs, fanout PeerJoined, store conn. On departure: remove from maps, abort reader, drop write half, rmdir slug, fanout PeerLeft. Failed notification fanout enqueues a Departed event for that peer (recursive cleanup as spec requires). Startup wipes base_dir contents (covers AC-4, AC-5). 8 integration tests cover all scenarios in AC-6. cargo build/test/clippy/fmt clean on whole workspace.",
-  "created_at": "2026-05-07T13:13:19.126874004Z",
-  "kind": "result"
-}

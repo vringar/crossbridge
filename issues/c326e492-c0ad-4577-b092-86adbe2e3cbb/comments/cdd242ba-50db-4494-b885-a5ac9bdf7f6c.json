@@ -1,0 +1,8 @@
+{
+  "uuid": "cdd242ba-50db-4494-b885-a5ac9bdf7f6c",
+  "issue_uuid": "c326e492-c0ad-4577-b092-86adbe2e3cbb",
+  "author": "W0Nm",
+  "content": "Plan: Create new workspace crate `crossbridge-server` with: (a) slug.rs for git/jj origin parsing, (b) supervisor.rs for register-socket lifecycle with exponential backoff, (c) listeners.rs to manage per-peer UnixListener set + cleanup, (d) handler.rs for SubmitIssue/SubmitAnswer with idempotency by xb-ref:<source_uuid>, (e) attachment.rs that materializes attachments via `jj workspace add` + `jj describe` then forgets workspace, (f) main.rs with tokio current_thread runtime + select-based event loop + ctrl_c cleanup. Reuse crosslink Database API already used in v1 route.rs. Crossbridge-protocol crate already provides framing + 16 MiB cap.",
+  "created_at": "2026-05-07T13:07:33.864381113Z",
+  "kind": "plan"
+}
