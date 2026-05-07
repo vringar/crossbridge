@@ -1,6 +1,6 @@
 {
   "uuid": "1a45becd-585d-415f-adf4-77efca7a9dd4",
-  "display_id": null,
+  "display_id": 15,
   "title": "Debug repro v2: kickoff from repo root for worktree teardown observation",
   "description": "Created by crosslink kickoff",
   "status": "open",
