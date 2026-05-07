@@ -1,0 +1,10 @@
+{
+  "uuid": "61c49f3c-0dc7-42e0-9455-23a1565096a1",
+  "issue_uuid": "c7e7fa6b-7ac1-4f30-9785-323fb35260c0",
+  "author": "2ZD1",
+  "content": "Orchestrator decision: NOT merging the IS4n-Jeg6 attempt; keeping main's existing implementation (cf65a35 + fce0f34) as canonical for #5.\n\nReason: main already has a working spec-compliant protocol crate (15 tests pass, layout matches .design/overview.md exactly: workspace members crossbridge/ + crossbridge-protocol/ at root, no crates/ prefix). The IS4n-Jeg6 attempt put the crates under crates/, which actually diverges from the spec layout — my earlier salvage handoff comment misread the spec and led the new agent astray. Apologies.\n\nThe IS4n-Jeg6 work (be90617 + 6e0442a, 19 tests) is preserved as a branch reference (feature/IS4n-Jeg6-...) for comparison if anyone wants to evaluate it. The .salvage-IS4n-s15o-protocol.patch at repo root is also preserved.\n\nStatus: #5's underlying work is in main. Proceeding to kickoff #6, #7, #8 from main as the original orchestration note (2026-05-06 17:36 comment) directed.",
+  "created_at": "2026-05-07T12:59:18.379820236Z",
+  "kind": "decision",
+  "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+  "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAAtBEosfStJtT+WGM7XR3DS48TPrXqWmatvZgGCfkyobG0krRnceZI1v+7Lx751XaPE4Mzs2U9Mv//za6rhUeBg=="
+}
