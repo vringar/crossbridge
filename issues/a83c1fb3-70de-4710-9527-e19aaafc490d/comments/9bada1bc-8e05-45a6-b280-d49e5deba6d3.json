@@ -1,0 +1,8 @@
+{
+  "uuid": "9bada1bc-8e05-45a6-b280-d49e5deba6d3",
+  "issue_uuid": "a83c1fb3-70de-4710-9527-e19aaafc490d",
+  "author": "DTBq",
+  "content": "Plan: Add new crate crossbridge-client (workspace member, bin name crossbridge-client). Deps: crossbridge-protocol, crosslink, clap, anyhow (no tokio). Slug derivation: prefer 'jj git remote list' if .jj/ exists, else 'git remote get-url origin'; strip optional .git, take last path segment. Repo root: 'git rev-parse --show-toplevel' (or 'jj workspace root' if jj). DB at <repo-root>/.crosslink/issues.db opened via crosslink::db::Database::open. Subcommands via clap derive: peers (list /run/crossbridge/<own>/*.socket, strip .socket), submit (read issue + uuid + labels, build SubmitIssue, connect UnixStream + write_message_sync + read_message_sync, on Ok stringify issue_id for xb-ref since protocol returns i64 not uuid, then add xb:outbound/xb-status:pending/xb-ref:<id>), answer (require xb:inbound, parse xb-source/xb-ref labels, collect comments where kind==result, send SubmitAnswer to source.socket, on Ok add xb-status:answered and close_issue). Frame size limit handled by protocol crate. Tests: slug parsing (https/ssh/with .git suffix), label parsing helpers, frame size guard.",
+  "created_at": "2026-05-07T13:35:00.706833620Z",
+  "kind": "plan"
+}
