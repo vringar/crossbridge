@@ -1,0 +1,11 @@
+{
+  "uuid": "fd2940b5-1fd3-4a7c-aa4b-9c612025ba88",
+  "display_id": 13,
+  "title": "Debug repro: minimal kickoff agent for worktree teardown observation",
+  "description": "Created by crosslink kickoff",
+  "status": "open",
+  "priority": "medium",
+  "created_by": "Kklh",
+  "created_at": "2026-05-07T10:03:57.177284736Z",
+  "updated_at": "2026-05-07T10:03:57.177284736Z"
+}
