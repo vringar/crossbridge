@@ -6,7 +6,10 @@ use clap::Parser;
 use std::path::PathBuf;
 
 #[derive(Parser)]
-#[command(name = "crossbridge", about = "Cross-project coordination bridge for crosslink repositories")]
+#[command(
+    name = "crossbridge",
+    about = "Cross-project coordination bridge for crosslink repositories"
+)]
 struct Cli {
     /// Path to config file
     #[arg(short, long, default_value = "crossbridge.toml")]
@@ -24,10 +27,7 @@ fn main() -> Result<()> {
     let cli = Cli::parse();
     let config = config::Config::load(&cli.config)?;
 
-    tracing::info!(
-        repos = config.repos.len(),
-        "crossbridge starting cycle"
-    );
+    tracing::info!(repos = config.repos.len(), "crossbridge starting cycle");
 
     route::run_cycle(&config)?;
 
