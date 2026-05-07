@@ -9,7 +9,7 @@ use std::path::PathBuf;
 use anyhow::{Context, Result};
 use clap::Parser;
 
-use crossbridge_server::paths::SocketLayout;
+use crossbridge_server::paths::{resolve_runtime_root, SocketLayout};
 use crossbridge_server::run::{self, ServerConfig};
 use crossbridge_server::slug;
 
@@ -34,8 +34,11 @@ struct Cli {
     /// Override the runtime socket root (default `/run/crossbridge`). Mainly
     /// useful for tests and dev environments where `/run/crossbridge` is not
     /// writable.
-    #[arg(long, default_value = crossbridge_server::paths::DEFAULT_RUNTIME_ROOT)]
-    runtime_root: PathBuf,
+    ///
+    /// Resolution precedence: this flag > `CROSSBRIDGE_SOCKET_ROOT` env var
+    /// > compiled-in default (`/run/crossbridge`).
+    #[arg(long)]
+    runtime_root: Option<PathBuf>,
 }
 
 fn main() -> Result<()> {
@@ -58,18 +61,20 @@ fn main() -> Result<()> {
             .with_context(|| format!("deriving slug from {}", repo_path.display()))?,
     };
 
+    let runtime_root = resolve_runtime_root(cli.runtime_root.as_deref(), |k| std::env::var_os(k));
+
     let cfg = ServerConfig {
         slug: slug.clone(),
         group: cli.group.clone(),
         repo_path: repo_path.clone(),
-        layout: SocketLayout::new(cli.runtime_root.clone()),
+        layout: SocketLayout::new(runtime_root.clone()),
     };
 
     tracing::info!(
         slug = %slug,
         group = %cli.group,
         repo_path = %repo_path.display(),
-        runtime_root = %cli.runtime_root.display(),
+        runtime_root = %runtime_root.display(),
         "starting crossbridge-server"
     );
 

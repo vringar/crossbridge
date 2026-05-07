@@ -12,6 +12,16 @@ pub use framing::{
     read_message, read_message_sync, write_message, write_message_sync, MAX_FRAME_SIZE,
 };
 
+/// Default runtime root for crossbridge sockets (supervisor register socket
+/// and per-peer listener sockets).
+pub const DEFAULT_SOCKET_ROOT: &str = "/run/crossbridge";
+
+/// Environment variable that overrides [`DEFAULT_SOCKET_ROOT`] for all three
+/// crossbridge binaries (supervisor, server, client). When set and no
+/// binary-specific CLI flag is provided, the binary uses this directory as
+/// its runtime root.
+pub const SOCKET_ROOT_ENV: &str = "CROSSBRIDGE_SOCKET_ROOT";
+
 /// Errors produced by framing helpers and message (de)serialization.
 #[derive(Debug, thiserror::Error)]
 pub enum Error {

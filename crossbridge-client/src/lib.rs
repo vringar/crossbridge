@@ -9,12 +9,18 @@ pub mod slug;
 
 /// Default supervisor socket root. Per-peer sockets live at
 /// `<SOCKET_ROOT>/<own-slug>/<peer-slug>.socket`.
-pub const SOCKET_ROOT: &str = "/run/crossbridge";
+///
+/// Re-exported from `crossbridge-protocol` so all three binaries share a
+/// single source of truth.
+pub use crossbridge_protocol::DEFAULT_SOCKET_ROOT as SOCKET_ROOT;
 
 /// Environment variable that overrides [`SOCKET_ROOT`]. The supervisor
 /// spec hard-codes `/run/crossbridge`; the override exists so integration
 /// tests can stand up a sandbox socket tree without root.
-pub const SOCKET_ROOT_ENV: &str = "CROSSBRIDGE_SOCKET_ROOT";
+///
+/// Re-exported from `crossbridge-protocol` so all three binaries share a
+/// single source of truth.
+pub use crossbridge_protocol::SOCKET_ROOT_ENV;
 
 /// Resolve the active socket root: the env override if set, otherwise the
 /// default [`SOCKET_ROOT`].

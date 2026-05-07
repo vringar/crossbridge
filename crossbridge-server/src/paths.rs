@@ -1,10 +1,34 @@
 //! Filesystem paths for the supervisor register socket and per-peer listener
 //! sockets under `/run/crossbridge/`.
 
+use std::ffi::OsString;
 use std::path::{Path, PathBuf};
 
-/// Default root for crossbridge runtime sockets.
-pub const DEFAULT_RUNTIME_ROOT: &str = "/run/crossbridge";
+use crossbridge_protocol::{DEFAULT_SOCKET_ROOT, SOCKET_ROOT_ENV};
+
+/// Default root for crossbridge runtime sockets. Re-exported from
+/// `crossbridge-protocol` so all three binaries share one source of truth.
+pub const DEFAULT_RUNTIME_ROOT: &str = DEFAULT_SOCKET_ROOT;
+
+/// Resolve the server's runtime root with this precedence:
+/// 1. `flag` (e.g. `--runtime-root /custom/run`)
+/// 2. `$CROSSBRIDGE_SOCKET_ROOT` if the env var is set
+/// 3. compiled-in default `/run/crossbridge`
+///
+/// `env_lookup` is parameterized so tests can inject env values without
+/// touching the global process environment.
+pub fn resolve_runtime_root<F>(flag: Option<&Path>, env_lookup: F) -> PathBuf
+where
+    F: FnOnce(&str) -> Option<OsString>,
+{
+    if let Some(p) = flag {
+        return p.to_path_buf();
+    }
+    if let Some(root) = env_lookup(SOCKET_ROOT_ENV) {
+        return PathBuf::from(root);
+    }
+    PathBuf::from(DEFAULT_RUNTIME_ROOT)
+}
 
 /// Filename of the supervisor register socket.
 pub const REGISTER_SOCKET_NAME: &str = "register.socket";
@@ -83,5 +107,32 @@ mod tests {
             l.listener_socket("a", "b"),
             PathBuf::from("/tmp/xb/a/b.socket")
         );
+    }
+
+    #[test]
+    fn resolve_runtime_root_flag_only_wins() {
+        let flag = PathBuf::from("/custom/run");
+        let resolved = resolve_runtime_root(Some(&flag), |_| None);
+        assert_eq!(resolved, flag);
+    }
+
+    #[test]
+    fn resolve_runtime_root_env_only_used_when_no_flag() {
+        let resolved =
+            resolve_runtime_root(None, |k| (k == SOCKET_ROOT_ENV).then(|| "/srv/run".into()));
+        assert_eq!(resolved, PathBuf::from("/srv/run"));
+    }
+
+    #[test]
+    fn resolve_runtime_root_flag_overrides_env() {
+        let flag = PathBuf::from("/custom/run");
+        let resolved = resolve_runtime_root(Some(&flag), |_| Some(OsString::from("/srv/run")));
+        assert_eq!(resolved, flag);
+    }
+
+    #[test]
+    fn resolve_runtime_root_neither_falls_back_to_default() {
+        let resolved = resolve_runtime_root(None, |_| None);
+        assert_eq!(resolved, PathBuf::from(DEFAULT_RUNTIME_ROOT));
     }
 }

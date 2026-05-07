@@ -106,7 +106,7 @@ fn submit_cmd(issue_id: i64, target: &str) -> Result<()> {
         body: issue.description.unwrap_or_default(),
         labels: local_labels,
         source_slug: own,
-        source_uuid,
+        source_uuid: source_uuid.clone(),
         attachments: Vec::new(),
     });
 
@@ -116,11 +116,14 @@ fn submit_cmd(issue_id: i64, target: &str) -> Result<()> {
         ServerResponse::Error { message } => bail!("{message}"),
     };
 
-    // The on-wire protocol returns only the i64 issue id. We use that as
-    // the cross-repo reference value; keep the spec's `xb-ref:<id>` shape.
+    // The xb-ref value must equal `source_uuid` — that's what the answerer
+    // echoes back in `SubmitAnswer.source_uuid`, and what the server uses to
+    // locate the outbound issue when routing the answer. Labelling with the
+    // receiver's i64 issue_id (which the wire's `Ok { issue_id }` carries)
+    // would break the answer round-trip.
     db.add_label(issue.id, labels::OUTBOUND)?;
     db.add_label(issue.id, labels::STATUS_PENDING)?;
-    db.add_label(issue.id, &labels::ref_label(&target_id.to_string()))?;
+    db.add_label(issue.id, &labels::ref_label(&source_uuid))?;
 
     println!("submitted issue #{issue_id} to '{target}' (remote id {target_id})");
     Ok(())

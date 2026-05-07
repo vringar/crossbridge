@@ -209,7 +209,11 @@ fn submit_round_trips_and_labels_local_issue() {
         labels.iter().any(|l| l == "xb-status:pending"),
         "{labels:?}"
     );
-    assert!(labels.iter().any(|l| l == "xb-ref:4242"), "{labels:?}");
+    let expected_ref = format!("xb-ref:{local_uuid}");
+    assert!(
+        labels.iter().any(|l| l == &expected_ref),
+        "expected {expected_ref:?} in {labels:?}"
+    );
 }
 
 // ---- AC-4: submit, target not connected --------------------------------
