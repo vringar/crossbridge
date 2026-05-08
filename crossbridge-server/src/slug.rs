@@ -17,6 +17,11 @@ use std::path::Path;
 use std::process::Command;
 
 /// Derive a slug from `repo_path`'s origin remote.
+///
+/// # Errors
+/// Returns an error if the origin remote URL cannot be obtained (no `jj`/`git`
+/// remote configured, command failure) or if the URL has no extractable
+/// last path segment.
 pub fn derive_from_repo(repo_path: &Path) -> Result<String> {
     let url = origin_remote_url(repo_path)?;
     parse_slug(&url).ok_or_else(|| {
@@ -98,6 +103,7 @@ fn jj_origin_url(repo_path: &Path) -> Result<String> {
 
 /// Parse a slug from an origin remote URL. Returns `None` if the URL does not
 /// have an extractable last path segment.
+#[must_use]
 pub fn parse_slug(url: &str) -> Option<String> {
     let url = url.trim();
     if url.is_empty() {
@@ -106,19 +112,17 @@ pub fn parse_slug(url: &str) -> Option<String> {
 
     // SCP-style git URL: `git@host:org/repo.git` — split on `:` once and take
     // the right side as the path portion.
-    let path_part = if !url.contains("://") {
-        if let Some((_, rhs)) = url.split_once(':') {
-            rhs
-        } else {
-            url
-        }
-    } else {
+    let path_part = if url.contains("://") {
         // URL form: scheme://[user@]host[:port]/path...
-        let after_scheme = url.split_once("://").map(|(_, rest)| rest).unwrap_or(url);
+        let after_scheme = url.split_once("://").map_or(url, |(_, rest)| rest);
         match after_scheme.split_once('/') {
             Some((_, path)) => path,
             None => return None,
         }
+    } else if let Some((_, rhs)) = url.split_once(':') {
+        rhs
+    } else {
+        url
     };
 
     // Strip query/fragment.

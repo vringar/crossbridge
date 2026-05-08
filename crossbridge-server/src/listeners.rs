@@ -49,18 +49,22 @@ impl ListenerSet {
         )
     }
 
+    #[must_use]
     pub fn own_slug(&self) -> &str {
         &self.own_slug
     }
 
+    #[must_use]
     pub fn layout(&self) -> &SocketLayout {
         &self.layout
     }
 
+    #[must_use]
     pub fn len(&self) -> usize {
         self.entries.len()
     }
 
+    #[must_use]
     pub fn is_empty(&self) -> bool {
         self.entries.is_empty()
     }
@@ -68,6 +72,10 @@ impl ListenerSet {
     /// Add a listener for `peer_slug`. Idempotent: an existing listener for the
     /// same peer is dropped first (its socket file unlinked, task aborted)
     /// before binding a new one.
+    ///
+    /// # Errors
+    /// Returns an error if the peer directory cannot be created or the listener
+    /// socket cannot be bound at `<peer_dir>/<own_slug>.socket`.
     pub fn add(&mut self, peer_slug: &str) -> io::Result<()> {
         let dir = self.layout.peer_dir(peer_slug);
         std::fs::create_dir_all(&dir)?;

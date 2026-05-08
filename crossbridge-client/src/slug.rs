@@ -43,7 +43,7 @@ pub fn derive_own_slug(repo_root: &Path) -> Result<String> {
 
 fn read_origin_url(repo_root: &Path) -> Result<String> {
     if repo_root.join(".jj").is_dir() {
-        if let Some(url) = jj_origin_url(repo_root)? {
+        if let Some(url) = jj_origin_url(repo_root) {
             return Ok(url);
         }
     }
@@ -67,17 +67,15 @@ fn git_origin_url(repo_root: &Path) -> Result<String> {
     Ok(s)
 }
 
-fn jj_origin_url(repo_root: &Path) -> Result<Option<String>> {
+fn jj_origin_url(repo_root: &Path) -> Option<String> {
     let output = Command::new("jj")
         .arg("--repository")
         .arg(repo_root)
         .args(["git", "remote", "list"])
-        .output();
-    let Ok(output) = output else {
-        return Ok(None);
-    };
+        .output()
+        .ok()?;
     if !output.status.success() {
-        return Ok(None);
+        return None;
     }
     let stdout = String::from_utf8_lossy(&output.stdout);
     for line in stdout.lines() {
@@ -86,10 +84,10 @@ fn jj_origin_url(repo_root: &Path) -> Result<Option<String>> {
         let name = parts.next().unwrap_or("");
         let url = parts.next().unwrap_or("");
         if name == "origin" && !url.is_empty() {
-            return Ok(Some(url.to_string()));
+            return Some(url.to_string());
         }
     }
-    Ok(None)
+    None
 }
 
 #[cfg(test)]

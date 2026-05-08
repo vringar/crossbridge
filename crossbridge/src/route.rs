@@ -5,7 +5,7 @@ use crosslink::models::Issue;
 use crate::config::Config;
 
 /// Run one full bridge cycle: route outbound requests, then collect answers.
-pub fn run_cycle(config: &Config) -> Result<()> {
+pub fn run_cycle(config: &Config) {
     for (slug, repo) in &config.repos {
         let db_path = repo.db_path();
         let db = match Database::open(&db_path) {
@@ -24,7 +24,6 @@ pub fn run_cycle(config: &Config) -> Result<()> {
             tracing::error!(repo = slug, "answer collection failed: {e:#}");
         }
     }
-    Ok(())
 }
 
 /// Phase 1: find outbound requests in this repo and deliver them to target repos.
@@ -38,9 +37,8 @@ fn route_outbound(db: &Database, source_slug: &str, config: &Config) -> Result<(
     let labels_map = db.get_labels_batch(&ids)?;
 
     for issue in &candidates {
-        let labels = match labels_map.get(&issue.id) {
-            Some(l) => l,
-            None => continue,
+        let Some(labels) = labels_map.get(&issue.id) else {
+            continue;
         };
 
         // Post-filter: must have xb-status:open
@@ -72,24 +70,21 @@ fn route_single_outbound(
         .find_map(|l| l.strip_prefix("xb-target:"))
         .ok_or_else(|| anyhow::anyhow!("outbound issue {} missing xb-target label", issue.id))?;
 
-    let target_repo = match config.repos.get(target_slug) {
-        Some(r) => r,
-        None => {
-            let available = config.repo_slugs().join(", ");
-            db.add_comment(
-                issue.id,
-                &format!("crossbridge: unknown target '{target_slug}'. Available: {available}"),
-                "note",
-            )?;
-            // Remove xb:outbound to prevent scan waste from error-state issues
-            db.transaction(|| {
-                db.remove_label(issue.id, "xb-status:open")?;
-                db.remove_label(issue.id, "xb:outbound")?;
-                db.add_label(issue.id, "xb-status:error")?;
-                Ok(())
-            })?;
-            return Ok(());
-        }
+    let Some(target_repo) = config.repos.get(target_slug) else {
+        let available = config.repo_slugs().join(", ");
+        db.add_comment(
+            issue.id,
+            &format!("crossbridge: unknown target '{target_slug}'. Available: {available}"),
+            "note",
+        )?;
+        // Remove xb:outbound to prevent scan waste from error-state issues
+        db.transaction(|| {
+            db.remove_label(issue.id, "xb-status:open")?;
+            db.remove_label(issue.id, "xb:outbound")?;
+            db.add_label(issue.id, "xb-status:error")?;
+            Ok(())
+        })?;
+        return Ok(());
     };
 
     let source_uuid = db.get_issue_uuid_by_id(issue.id)?;
@@ -159,9 +154,8 @@ fn collect_answered(db: &Database, this_slug: &str, config: &Config) -> Result<(
     let labels_map = db.get_labels_batch(&ids)?;
 
     for issue in &candidates {
-        let labels = match labels_map.get(&issue.id) {
-            Some(l) => l,
-            None => continue,
+        let Some(labels) = labels_map.get(&issue.id) else {
+            continue;
         };
 
         // Post-filter: must have xb-status:answered
@@ -198,32 +192,26 @@ fn collect_single_answer(
         .find_map(|l| l.strip_prefix("xb-ref:"))
         .ok_or_else(|| anyhow::anyhow!("inbound issue {} missing xb-ref label", issue.id))?;
 
-    let source_repo = match config.repos.get(source_slug) {
-        Some(r) => r,
-        None => {
-            tracing::warn!(
-                issue = issue.id,
-                source = source_slug,
-                "source repo not in config, skipping"
-            );
-            return Ok(());
-        }
+    let Some(source_repo) = config.repos.get(source_slug) else {
+        tracing::warn!(
+            issue = issue.id,
+            source = source_slug,
+            "source repo not in config, skipping"
+        );
+        return Ok(());
     };
 
     let source_db = Database::open(&source_repo.db_path())
         .with_context(|| format!("opening source DB for '{source_slug}'"))?;
 
-    let source_issue_id = match source_db.get_issue_id_by_uuid(source_ref) {
-        Ok(id) => id,
-        Err(_) => {
-            tracing::warn!(
-                issue = issue.id,
-                source_uuid = source_ref,
-                "source issue not found (deleted?), closing orphaned target"
-            );
-            db.close_issue(issue.id)?;
-            return Ok(());
-        }
+    let Ok(source_issue_id) = source_db.get_issue_id_by_uuid(source_ref) else {
+        tracing::warn!(
+            issue = issue.id,
+            source_uuid = source_ref,
+            "source issue not found (deleted?), closing orphaned target"
+        );
+        db.close_issue(issue.id)?;
+        return Ok(());
     };
 
     // Copy result comments with deduplication
@@ -473,6 +461,8 @@ mod tests {
     }
 
     #[test]
+    // `repo_a_dir` / `repo_b_dir` are intentionally parallel test fixtures.
+    #[allow(clippy::similar_names)]
     fn test_full_cycle() {
         let repo_a_dir = tempfile::tempdir().unwrap();
         let repo_b_dir = tempfile::tempdir().unwrap();
@@ -495,7 +485,7 @@ mod tests {
         ]);
 
         // Cycle 1: bridge routes the request
-        run_cycle(&config).unwrap();
+        run_cycle(&config);
 
         // Verify: source is pending, target has inbound issue
         let a_labels = db_a.get_labels(req_id).unwrap();
@@ -514,7 +504,7 @@ mod tests {
         db_b.add_label(b_issue_id, "xb-status:answered").unwrap();
 
         // Cycle 2: bridge collects the answer
-        run_cycle(&config).unwrap();
+        run_cycle(&config);
 
         // Verify: both issues closed, source has the answer
         let a_issue = db_a.get_issue(req_id).unwrap().unwrap();

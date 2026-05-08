@@ -25,6 +25,10 @@ pub const ANSWER_INSTRUCTION_FOOTER: &str =
 /// Read one framed `ClientRequest` from `stream`, dispatch it, and write back
 /// the framed `ServerResponse`. Errors are *converted* to `ServerResponse::Error`
 /// — a single bad request must never crash the server.
+///
+/// # Errors
+/// Returns an error only if the response frame cannot be written back to the
+/// stream. Request-side failures are encoded as `ServerResponse::Error`.
 pub async fn handle_connection(
     stream: &mut UnixStream,
     peer_slug: &str,
@@ -69,7 +73,7 @@ pub async fn handle_connection(
 
     write_message(stream, &response)
         .await
-        .map_err(|e| anyhow!("writing response frame: {}", e))?;
+        .map_err(|e| anyhow!("writing response frame: {e}"))?;
     Ok(())
 }
 
@@ -78,6 +82,10 @@ pub async fn handle_connection(
 /// Idempotent: if an issue already carries the `xb-ref:<source_uuid>` label,
 /// its id is returned without creating a duplicate row or re-applying side
 /// effects (no duplicate attachments, no duplicate footer).
+///
+/// # Errors
+/// Returns an error if the database query fails (idempotency lookup, issue
+/// creation, label application).
 pub fn handle_submit(
     db: &Database,
     peer_slug: &str,
@@ -99,7 +107,7 @@ pub fn handle_submit(
     let body_with_footer = format!("{}{}", submit.body, ANSWER_INSTRUCTION_FOOTER);
     let issue_id = db
         .create_issue(&submit.title, Some(body_with_footer.as_str()), "high")
-        .map_err(|e| anyhow!("creating local issue: {}", e))?;
+        .map_err(|e| anyhow!("creating local issue: {e}"))?;
 
     let mut labels = vec![
         "type:request".to_string(),
@@ -120,7 +128,7 @@ pub fn handle_submit(
         }
         Ok(())
     })
-    .map_err(|e| anyhow!("applying labels: {}", e))?;
+    .map_err(|e| anyhow!("applying labels: {e}"))?;
 
     if !submit.attachments.is_empty() {
         match attachment::materialize(repo_path, &submit.attachments) {
@@ -158,6 +166,11 @@ pub fn handle_submit(
 ///
 /// Returns `Err` if no local issue carries `xb-ref:<source_uuid>` — the spec
 /// requires this to surface as `ServerResponse::Error` to the caller.
+///
+/// # Errors
+/// Returns an error if no local issue carries `xb-ref:<source_uuid>`, or if
+/// any of the database operations (read comments, apply answer, close issue)
+/// fail.
 pub fn handle_answer(db: &Database, peer_slug: &str, answer: &SubmitAnswer) -> Result<i64> {
     let ref_label = format!("xb-ref:{}", answer.source_uuid);
     let issue_id = find_issue_with_label(db, &ref_label)?
@@ -165,7 +178,7 @@ pub fn handle_answer(db: &Database, peer_slug: &str, answer: &SubmitAnswer) -> R
 
     let existing_comments = db
         .get_comments(issue_id)
-        .map_err(|e| anyhow!("reading comments: {}", e))?;
+        .map_err(|e| anyhow!("reading comments: {e}"))?;
     let existing_contents: std::collections::HashSet<&str> = existing_comments
         .iter()
         .map(|c| c.content.as_str())
@@ -193,15 +206,15 @@ pub fn handle_answer(db: &Database, peer_slug: &str, answer: &SubmitAnswer) -> R
         }
         Ok(())
     })
-    .map_err(|e| anyhow!("applying answer: {}", e))?;
+    .map_err(|e| anyhow!("applying answer: {e}"))?;
 
     let issue = db
         .get_issue(issue_id)
-        .map_err(|e| anyhow!("loading issue {issue_id}: {}", e))?
+        .map_err(|e| anyhow!("loading issue {issue_id}: {e}"))?
         .ok_or_else(|| anyhow!("issue {issue_id} disappeared"))?;
     if issue.status.as_str() != "closed" {
         db.close_issue(issue_id)
-            .map_err(|e| anyhow!("closing issue {issue_id}: {}", e))?;
+            .map_err(|e| anyhow!("closing issue {issue_id}: {e}"))?;
     }
 
     tracing::info!(
@@ -221,7 +234,7 @@ fn find_issue_with_label(db: &Database, label: &str) -> Result<Option<i64>> {
     for status in ["open", "closed"] {
         let issues = db
             .list_issues(Some(status), Some(label), None)
-            .map_err(|e| anyhow!("listing issues by label {label}: {}", e))?;
+            .map_err(|e| anyhow!("listing issues by label {label}: {e}"))?;
         if let Some(i) = issues.into_iter().next() {
             return Ok(Some(i.id));
         }

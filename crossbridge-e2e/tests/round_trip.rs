@@ -56,6 +56,11 @@ fn run_client(runtime: &Path, repo_path: &Path, args: &[&str]) -> std::process::
 }
 
 #[test]
+// `labels_a` / `labels_b` are intentionally parallel test fixtures.
+#[allow(clippy::similar_names)]
+// Long single-narrative test: keeping the round-trip steps together is
+// clearer than chopping them across helpers.
+#[allow(clippy::too_many_lines)]
 fn submit_then_answer_round_trip() {
     let tmp = ShortTempDir::new();
     let runtime = tmp.path().join("runtime");
