@@ -1,0 +1,8 @@
+{
+  "uuid": "94b5caed-1e32-4180-afcf-01b18afe84d7",
+  "issue_uuid": "1bfe6fbb-416e-4431-843d-d2bf75b4138c",
+  "author": "O22C",
+  "content": "Result: Created .github/workflows/ci.yml with three jobs (test, clippy, fmt) on ubuntu-latest, pinned to Rust 1.87 via dtolnay/rust-toolchain@stable, with Swatinem/rust-cache@v2 on test and clippy jobs. README badge added. Local verification: cargo test --workspace passes, cargo clippy --workspace --all-targets -- -W clippy::pedantic -D warnings passes, cargo fmt --check passes.",
+  "created_at": "2026-05-08T20:09:58.171672918Z",
+  "kind": "result"
+}
