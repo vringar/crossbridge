@@ -26,10 +26,6 @@
     "12": {
       "agent_id": "Kklh",
       "claimed_at": "2026-05-07T10:03:40.434697481Z"
-    },
-    "25": {
-      "agent_id": "mtSP",
-      "claimed_at": "2026-05-08T14:37:29.304350250Z"
     }
   },
   "issues": {},
@@ -168,16 +164,11 @@
       "agent_id": "2ZD1",
       "agent_seq": 12,
       "timestamp": "2026-05-07T12:59:44.576323991Z"
-    },
-    {
-      "agent_id": "mtSP",
-      "agent_seq": 1,
-      "timestamp": "2026-05-08T14:37:29.304350250Z"
     }
   ],
   "watermark": {
-    "timestamp": "2026-05-08T14:37:29.304350250Z",
-    "agent_id": "mtSP",
-    "agent_seq": 1
+    "timestamp": "2026-05-07T12:59:44.576323991Z",
+    "agent_id": "2ZD1",
+    "agent_seq": 12
   }
 }
