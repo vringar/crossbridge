@@ -20,6 +20,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 ### Changed
+- Test (#26)
+- Quality pass: clippy pedantic cleanup in crossbridge-e2e (#23)
+- Quality pass: clippy pedantic cleanup in crossbridge-client (#22)
+- Quality pass: clippy pedantic cleanup in crossbridge-server (#21)
+- Quality pass: clippy pedantic cleanup in crossbridge-supervisor (#20)
+- Quality pass: clippy pedantic cleanup in crossbridge-protocol (#19)
+- Quality pass: clippy pedantic cleanup in crossbridge (v1 bin) (#18)
 - Quality pass: clippy pedantic cleanup in crossbridge (v1 bin) (#24)
 - Convert to Cargo workspace, implement shared protocol crate with postcard message types and framing helpers (#3)
 - Package crossbridge as systemd service for vringar/nixos-setup (#2)
