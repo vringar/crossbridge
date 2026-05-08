@@ -1,0 +1,11 @@
+{
+  "uuid": "120b5168-4b2c-441d-ac0b-dae4abee30ff",
+  "display_id": null,
+  "title": "Quality pass: clippy pedantic cleanup in crossbridge-e2e",
+  "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun cargo clippy -p crossbridge-e2e with -W clippy::pedantic and resolve all 57 warnings. Top categories: missing_errors_doc, cast_possible_truncation, map_unwrap_or, similar_names (labels_a_after vs labels_b_after — keep them, allow similar_names for the e2e test specifically), too_many_lines (the round_trip test is intentionally a single linear narrative — allow too_many_lines on that fn with a comment), manual_assert.\n\nAcceptance criteria:\n- cargo clippy -p crossbridge-e2e --all-targets -- -W clippy::pedantic -D warnings exits 0.\n- No blanket #[allow] over whole modules — fix the underlying issues; only allow specific lints with a one-line justification.\n- The submit_then_answer_round_trip integration test must still run unconditionally (no #[ignore]) and pass.\n- cargo fmt --check clean.",
+  "status": "open",
+  "priority": "low",
+  "created_by": "2ZD1",
+  "created_at": "2026-05-08T13:55:21.131712053Z",
+  "updated_at": "2026-05-08T13:55:21.131712053Z"
+}
