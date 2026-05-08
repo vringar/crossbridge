@@ -1,8 +1,0 @@
-{
-  "uuid": "ffa15705-0656-428e-820b-95979c198dbc",
-  "issue_uuid": "c6ad08b7-cf3c-465c-81f8-64e3b656dabd",
-  "author": "GOqH",
-  "content": "Resolved all 94 pedantic clippy warnings across the workspace. cargo clippy --workspace --all-targets -- -W clippy::pedantic -D warnings exits 0; 92/92 tests pass; cargo fmt --check clean. Specific-lint allows added with one-line justifications where the suggestion was genuinely worse (cast_possible_truncation bounded by MAX_FRAME_SIZE, unused_async on test fixture, similar_names labels_a/labels_b and repo_a_dir/repo_b_dir, too_many_lines on linear narrative test). No public API or wire protocol changes.",
-  "created_at": "2026-05-08T15:18:56.614650098Z",
-  "kind": "handoff"
-}

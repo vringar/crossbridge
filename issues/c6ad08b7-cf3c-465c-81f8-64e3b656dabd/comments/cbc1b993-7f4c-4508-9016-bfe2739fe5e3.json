@@ -1,8 +1,0 @@
-{
-  "uuid": "cbc1b993-7f4c-4508-9016-bfe2739fe5e3",
-  "issue_uuid": "c6ad08b7-cf3c-465c-81f8-64e3b656dabd",
-  "author": "GOqH",
-  "content": "Result: cargo clippy --workspace --all-targets -- -W clippy::pedantic -D warnings exits 0; cargo test --workspace shows 92 passed / 0 failed (parity with baseline); cargo fmt --check is clean. Specific-lint allows added with one-line justifications: cast_possible_truncation in framing (bounded by MAX_FRAME_SIZE), unused_async on run_fake_supervisor, similar_names labels_a/labels_b and repo_a_dir/repo_b_dir, too_many_lines on round_trip narrative test. No blanket allows. No public API or wire protocol changes.",
-  "created_at": "2026-05-08T15:17:55.078330383Z",
-  "kind": "result"
-}
