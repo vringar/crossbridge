@@ -51,3 +51,11 @@ crossbridge.toml
 
 # Review artifacts
 HATER.md
+
+# direnv
+.envrc
+.direnv/
+
+# Worktree dirs (kickoff agents)
+.worktrees/
+.claude/worktrees/

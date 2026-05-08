@@ -20,5 +20,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 ### Changed
+- Quality pass: clippy pedantic cleanup in crossbridge (v1 bin) (#24)
 - Convert to Cargo workspace, implement shared protocol crate with postcard message types and framing helpers (#3)
 - Package crossbridge as systemd service for vringar/nixos-setup (#2)
