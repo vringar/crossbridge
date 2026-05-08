@@ -1,8 +1,8 @@
 //! End-to-end style integration test:
 //! - Stand up a fake supervisor on a tempdir Unix socket.
 //! - Drive `crossbridge_server::run::run` against it.
-//! - Verify peer listener creation, SubmitIssue handling (round-trip Ok),
-//!   PeerLeft listener teardown, and graceful exit on supervisor EOF.
+//! - Verify peer listener creation, `SubmitIssue` handling (round-trip Ok),
+//!   `PeerLeft` listener teardown, and graceful exit on supervisor EOF.
 //!
 //! The server itself runs in this test task (rather than `tokio::spawn`-ed)
 //! because it owns a `crosslink::db::Database`, which is `!Send`.
@@ -136,7 +136,7 @@ async fn submit_issue_round_trip_via_supervisor_topology() {
     // Run the server inline (it owns a !Send Database) and race the driver.
     tokio::select! {
         _ = run::run(cfg) => panic!("server exited unexpectedly"),
-        _ = driver => {}
+        () = driver => {}
     }
 
     supervisor_task.abort();

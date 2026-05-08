@@ -30,11 +30,11 @@ impl Config {
             anyhow::bail!("config has no repos defined");
         }
 
-        config.validate()?;
+        config.validate();
         Ok(config)
     }
 
-    fn validate(&self) -> Result<()> {
+    fn validate(&self) {
         for (slug, repo) in &self.repos {
             if !repo.path.exists() {
                 tracing::warn!(repo = slug, path = %repo.path.display(), "repo path does not exist, skipping");
@@ -42,7 +42,6 @@ impl Config {
                 tracing::warn!(repo = slug, path = %repo.db_path().display(), "crosslink DB not found, skipping");
             }
         }
-        Ok(())
     }
 
     pub fn repo_slugs(&self) -> Vec<&str> {

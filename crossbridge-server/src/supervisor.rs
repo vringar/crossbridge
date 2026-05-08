@@ -36,6 +36,11 @@ impl std::fmt::Debug for Registration {
 /// On success, returns the open stream and the peer list reported by the
 /// supervisor. On `Nack` or any I/O / protocol error, returns `Err` — the
 /// caller is expected to retry with backoff (see [`connect_and_register_with_backoff`]).
+///
+/// # Errors
+/// Returns an error if the connection cannot be established, the `Register`
+/// frame cannot be sent, the response frame cannot be read, the supervisor
+/// returns `Nack`, or the first frame is not a `RegisterResponse`.
 pub async fn connect_and_register(
     socket_path: &Path,
     slug: &str,
@@ -57,13 +62,13 @@ pub async fn connect_and_register(
         },
     )
     .await
-    .map_err(|e| anyhow!("sending Register frame: {}", e))?;
+    .map_err(|e| anyhow!("sending Register frame: {e}"))?;
 
     // The supervisor sends a SupervisorMessage envelope; for the first frame
     // we expect RegisterResponse.
     let first: SupervisorMessage = read_message(&mut stream)
         .await
-        .map_err(|e| anyhow!("reading RegisterResponse frame: {}", e))?;
+        .map_err(|e| anyhow!("reading RegisterResponse frame: {e}"))?;
 
     match first {
         SupervisorMessage::RegisterResponse(RegisterResponse::Ack { peers }) => {
@@ -76,11 +81,10 @@ pub async fn connect_and_register(
             Ok(Registration { stream, peers })
         }
         SupervisorMessage::RegisterResponse(RegisterResponse::Nack { reason }) => {
-            Err(anyhow!("supervisor rejected registration: {}", reason))
+            Err(anyhow!("supervisor rejected registration: {reason}"))
         }
         SupervisorMessage::Notification(n) => Err(anyhow!(
-            "expected RegisterResponse from supervisor, got Notification: {:?}",
-            n
+            "expected RegisterResponse from supervisor, got Notification: {n:?}"
         )),
     }
 }
@@ -90,6 +94,10 @@ pub async fn connect_and_register(
 ///
 /// `Nack` is *not* retried — a slug collision will not resolve itself, and
 /// silent looping would mask a config error from the operator.
+///
+/// # Errors
+/// Returns an error if the supervisor sends `Nack`. Other I/O / protocol
+/// failures are retried indefinitely.
 pub async fn connect_and_register_with_backoff(
     socket_path: &Path,
     slug: &str,
@@ -122,19 +130,22 @@ pub async fn connect_and_register_with_backoff(
 /// Returns `Ok(None)` on a clean EOF, `Ok(Some(...))` on a notification, and
 /// `Err` on any other I/O or protocol failure. `RegisterResponse` frames are
 /// rejected — they should never arrive after the initial handshake.
+///
+/// # Errors
+/// Returns an error if the supervisor sends a `RegisterResponse` mid-stream
+/// or if any non-EOF I/O / protocol failure occurs.
 pub async fn read_notification(stream: &mut UnixStream) -> Result<Option<Notification>> {
     match read_message::<_, SupervisorMessage>(stream).await {
         Ok(SupervisorMessage::Notification(n)) => Ok(Some(n)),
         Ok(SupervisorMessage::RegisterResponse(r)) => Err(anyhow!(
-            "supervisor sent unexpected RegisterResponse mid-stream: {:?}",
-            r
+            "supervisor sent unexpected RegisterResponse mid-stream: {r:?}"
         )),
         Err(crossbridge_protocol::Error::Io(e))
             if e.kind() == std::io::ErrorKind::UnexpectedEof =>
         {
             Ok(None)
         }
-        Err(e) => Err(anyhow!("reading notification: {}", e)),
+        Err(e) => Err(anyhow!("reading notification: {e}")),
     }
 }
 
@@ -143,8 +154,7 @@ pub async fn read_notification(stream: &mut UnixStream) -> Result<Option<Notific
 pub fn runtime_root_from_socket(register_socket: &Path) -> PathBuf {
     register_socket
         .parent()
-        .map(Path::to_path_buf)
-        .unwrap_or_else(|| PathBuf::from("/run/crossbridge"))
+        .map_or_else(|| PathBuf::from("/run/crossbridge"), Path::to_path_buf)
 }
 
 #[cfg(test)]
@@ -156,6 +166,9 @@ mod tests {
     };
     use tokio::net::UnixListener;
 
+    // `async` here is intentional: callers `.await` this fixture, and the
+    // sync `UnixListener::bind` must run on the tokio runtime.
+    #[allow(clippy::unused_async)]
     async fn run_fake_supervisor(
         socket: PathBuf,
         response: SupervisorMessage,

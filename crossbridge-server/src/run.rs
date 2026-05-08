@@ -25,6 +25,7 @@ pub struct ServerConfig {
 }
 
 impl ServerConfig {
+    #[must_use]
     pub fn db_path(&self) -> PathBuf {
         self.repo_path.join(".crosslink").join("issues.db")
     }
@@ -32,6 +33,10 @@ impl ServerConfig {
 
 /// Run the server forever. Returns `Ok(())` only on a clean Ctrl+C; any other
 /// exit is an error.
+///
+/// # Errors
+/// Returns an error if the crosslink DB cannot be located/opened or if the
+/// supervisor session fails fatally before a Ctrl+C is observed.
 pub async fn run(cfg: ServerConfig) -> Result<()> {
     if !cfg.db_path().exists() {
         return Err(anyhow!(

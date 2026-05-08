@@ -42,7 +42,8 @@ async fn oversized_frame_returns_error_response() {
     let server_fut = handler::handle_connection(&mut conn, "peer-a", &db, &repo_path);
     let client_fut = async {
         // Send a length prefix that exceeds MAX_FRAME_SIZE; the framing layer
-        // rejects this before reading any payload.
+        // rejects this before reading any payload. MAX_FRAME_SIZE = 16 MiB, fits in u32.
+        #[allow(clippy::cast_possible_truncation)]
         let oversize = (MAX_FRAME_SIZE as u32) + 1;
         client.write_all(&oversize.to_be_bytes()).await.unwrap();
         let response: ServerResponse = read_message(&mut client).await.unwrap();
@@ -59,6 +60,8 @@ async fn oversized_frame_returns_error_response() {
                 "unexpected error message: {message}"
             );
         }
-        other => panic!("expected ServerResponse::Error, got {other:?}"),
+        ServerResponse::Ok { issue_id } => {
+            panic!("expected ServerResponse::Error, got Ok {{ issue_id: {issue_id} }}")
+        }
     }
 }

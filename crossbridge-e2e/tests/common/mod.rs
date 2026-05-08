@@ -173,9 +173,10 @@ pub fn wait_until<F: FnMut() -> bool>(
         if predicate() {
             return;
         }
-        if Instant::now() >= deadline {
-            panic!("timeout waiting for {msg} (after {timeout:?})");
-        }
+        assert!(
+            Instant::now() < deadline,
+            "timeout waiting for {msg} (after {timeout:?})"
+        );
         std::thread::sleep(interval);
     }
 }

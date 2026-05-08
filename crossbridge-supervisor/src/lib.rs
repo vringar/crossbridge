@@ -54,6 +54,10 @@ where
 /// its contents are wiped on startup and slug subdirectories are created
 /// there for each registered peer. The function loops indefinitely; cancel
 /// the calling task to stop it.
+///
+/// # Errors
+/// Returns an error if `socket_path` has no parent directory, if the base
+/// directory cannot be prepared, or if the register socket cannot be bound.
 pub async fn run(socket_path: impl AsRef<Path>) -> Result<()> {
     let socket_path = socket_path.as_ref().to_path_buf();
     let base_dir = socket_path

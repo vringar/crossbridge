@@ -47,15 +47,18 @@ impl SocketLayout {
     }
 
     /// Default layout rooted at `/run/crossbridge`.
+    #[must_use]
     pub fn default_root() -> Self {
         Self::new(DEFAULT_RUNTIME_ROOT)
     }
 
+    #[must_use]
     pub fn root(&self) -> &Path {
         &self.root
     }
 
     /// Path to the supervisor's register socket: `<root>/register.socket`.
+    #[must_use]
     pub fn register_socket(&self) -> PathBuf {
         self.root.join(REGISTER_SOCKET_NAME)
     }
@@ -63,6 +66,7 @@ impl SocketLayout {
     /// Path to the directory holding listening sockets that target `peer_slug`:
     /// `<root>/<peer_slug>/`. Each repo server in `peer_slug`'s peer group puts
     /// one listening socket in this directory.
+    #[must_use]
     pub fn peer_dir(&self, peer_slug: &str) -> PathBuf {
         self.root.join(peer_slug)
     }
@@ -70,6 +74,7 @@ impl SocketLayout {
     /// Path to *our* listening socket inside `peer_slug`'s directory:
     /// `<root>/<peer_slug>/<own_slug>.socket`. Clients in `peer_slug` connect
     /// here to submit work to us.
+    #[must_use]
     pub fn listener_socket(&self, peer_slug: &str, own_slug: &str) -> PathBuf {
         self.peer_dir(peer_slug).join(format!("{own_slug}.socket"))
     }

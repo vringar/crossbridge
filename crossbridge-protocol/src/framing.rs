@@ -34,12 +34,19 @@ fn check_incoming_len(len: usize) -> Result<()> {
 }
 
 /// Synchronously write a length-prefixed postcard frame.
+///
+/// # Errors
+/// Returns [`Error::Postcard`] if `msg` cannot be serialized,
+/// [`Error::FrameTooLarge`] if the encoded payload exceeds [`MAX_FRAME_SIZE`],
+/// or [`Error::Io`] if the underlying writer fails.
 pub fn write_message_sync<W, T>(w: &mut W, msg: &T) -> Result<()>
 where
     W: std::io::Write,
     T: Serialize,
 {
     let payload = encode(msg)?;
+    // `encode` enforces `payload.len() <= MAX_FRAME_SIZE` (16 MiB), well within u32 range.
+    #[allow(clippy::cast_possible_truncation)]
     let len = (payload.len() as u32).to_be_bytes();
     w.write_all(&len)?;
     w.write_all(&payload)?;
@@ -47,6 +54,11 @@ where
 }
 
 /// Synchronously read a length-prefixed postcard frame.
+///
+/// # Errors
+/// Returns [`Error::Io`] if the reader fails or returns insufficient bytes,
+/// [`Error::FrameTooLarge`] if the announced length exceeds [`MAX_FRAME_SIZE`],
+/// or [`Error::Postcard`] if the payload cannot be deserialized into `T`.
 pub fn read_message_sync<R, T>(r: &mut R) -> Result<T>
 where
     R: std::io::Read,
@@ -62,12 +74,19 @@ where
 }
 
 /// Asynchronously write a length-prefixed postcard frame.
+///
+/// # Errors
+/// Returns [`Error::Postcard`] if `msg` cannot be serialized,
+/// [`Error::FrameTooLarge`] if the encoded payload exceeds [`MAX_FRAME_SIZE`],
+/// or [`Error::Io`] if the underlying writer fails.
 pub async fn write_message<W, T>(w: &mut W, msg: &T) -> Result<()>
 where
     W: AsyncWrite + Unpin,
     T: Serialize,
 {
     let payload = encode(msg)?;
+    // `encode` enforces `payload.len() <= MAX_FRAME_SIZE` (16 MiB), well within u32 range.
+    #[allow(clippy::cast_possible_truncation)]
     let len = (payload.len() as u32).to_be_bytes();
     w.write_all(&len).await?;
     w.write_all(&payload).await?;
@@ -75,6 +94,11 @@ where
 }
 
 /// Asynchronously read a length-prefixed postcard frame.
+///
+/// # Errors
+/// Returns [`Error::Io`] if the reader fails or returns insufficient bytes,
+/// [`Error::FrameTooLarge`] if the announced length exceeds [`MAX_FRAME_SIZE`],
+/// or [`Error::Postcard`] if the payload cannot be deserialized into `T`.
 pub async fn read_message<R, T>(r: &mut R) -> Result<T>
 where
     R: AsyncRead + Unpin,

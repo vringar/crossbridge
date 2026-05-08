@@ -36,7 +36,7 @@ fn socket_path(tmp: &TempDir) -> PathBuf {
 struct Supervisor {
     handle: JoinHandle<anyhow::Result<()>>,
     path: PathBuf,
-    _tmp: TempDir,
+    tmp: TempDir,
 }
 
 impl Supervisor {
@@ -50,11 +50,7 @@ impl Supervisor {
         let p = path.clone();
         let handle = tokio::spawn(async move { crossbridge_supervisor::run(&p).await });
         wait_until_listening(&path).await;
-        Supervisor {
-            handle,
-            path,
-            _tmp: tmp,
-        }
+        Supervisor { handle, path, tmp }
     }
 
     fn base_dir(&self) -> &Path {
@@ -73,14 +69,13 @@ async fn wait_until_listening(path: &Path) {
         match UnixStream::connect(path).await {
             Ok(_) => return,
             Err(e) => {
-                if tokio::time::Instant::now() >= deadline {
-                    panic!(
-                        "supervisor did not start listening at {} within {:?}: last err={}",
-                        path.display(),
-                        RECV_TIMEOUT,
-                        e
-                    );
-                }
+                assert!(
+                    tokio::time::Instant::now() < deadline,
+                    "supervisor did not start listening at {} within {:?}: last err={}",
+                    path.display(),
+                    RECV_TIMEOUT,
+                    e
+                );
                 tokio::time::sleep(Duration::from_millis(10)).await;
             }
         }
@@ -97,7 +92,9 @@ async fn register(path: &Path, slug: &str, group: &str) -> (UnixStream, Register
     let resp = read_supervisor_message(&mut stream).await;
     match resp {
         SupervisorMessage::RegisterResponse(r) => (stream, r),
-        other => panic!("expected RegisterResponse, got {other:?}"),
+        SupervisorMessage::Notification(n) => {
+            panic!("expected RegisterResponse, got Notification({n:?})")
+        }
     }
 }
 
@@ -111,7 +108,9 @@ async fn read_supervisor_message(stream: &mut UnixStream) -> SupervisorMessage {
 async fn read_notification(stream: &mut UnixStream) -> Notification {
     match read_supervisor_message(stream).await {
         SupervisorMessage::Notification(n) => n,
-        other => panic!("expected Notification, got {other:?}"),
+        SupervisorMessage::RegisterResponse(r) => {
+            panic!("expected Notification, got RegisterResponse({r:?})")
+        }
     }
 }
 
@@ -130,7 +129,7 @@ async fn register_ack_with_empty_peers() {
     let (_alpha, ack) = register(&sup.path, "alpha", "g1").await;
     match ack {
         RegisterResponse::Ack { peers } => {
-            assert!(peers.is_empty(), "expected empty, got {peers:?}")
+            assert!(peers.is_empty(), "expected empty, got {peers:?}");
         }
         RegisterResponse::Nack { reason } => panic!("expected Ack, got Nack: {reason}"),
     }
@@ -185,10 +184,12 @@ async fn duplicate_slug_in_group_is_nacked_and_first_unaffected() {
     let mut buf = [0u8; 16];
     let read_result = timeout(RECV_TIMEOUT, dup.read(&mut buf)).await;
     match read_result {
-        Ok(Ok(0)) => {} // EOF: good
+        // EOF or connection-level error both indicate the supervisor closed the dup.
+        Ok(Ok(0) | Err(_)) => {}
         Ok(Ok(n)) => panic!("expected EOF on duplicate, read {n} bytes"),
-        Ok(Err(_)) => {} // connection errors are also fine
-        Err(_) => panic!("supervisor did not close duplicate connection within {RECV_TIMEOUT:?}"),
+        Err(elapsed) => panic!(
+            "supervisor did not close duplicate connection within {RECV_TIMEOUT:?}: {elapsed}"
+        ),
     }
 
     // The original alpha connection must remain usable: a new same-group join
@@ -302,7 +303,7 @@ async fn supervisor_restart_wipes_base_dir() {
 
     // Take ownership of the tempdir before shutting down so it survives.
     let base_dir = sup1.base_dir().to_path_buf();
-    let recovered_tmp = sup1._tmp;
+    let recovered_tmp = sup1.tmp;
     sup1.handle.abort();
     let _ = sup1.handle.await;
     drop(alpha); // alpha sees EOF on the dead supervisor; its slug dir may

@@ -129,6 +129,8 @@ fn sync_framing_back_to_back() {
 #[test]
 fn sync_read_rejects_oversize_frame() {
     let mut buf: Vec<u8> = Vec::new();
+    // MAX_FRAME_SIZE = 16 MiB, fits in u32 by construction.
+    #[allow(clippy::cast_possible_truncation)]
     let oversize = (MAX_FRAME_SIZE as u32 + 1).to_be_bytes();
     buf.extend_from_slice(&oversize);
     let mut cursor = Cursor::new(buf);
@@ -186,7 +188,10 @@ async fn async_framing_back_to_back() {
 #[tokio::test(flavor = "current_thread")]
 async fn async_read_rejects_oversize_frame() {
     let mut buf: Vec<u8> = Vec::new();
-    buf.extend_from_slice(&(MAX_FRAME_SIZE as u32 + 1).to_be_bytes());
+    // MAX_FRAME_SIZE = 16 MiB, fits in u32 by construction.
+    #[allow(clippy::cast_possible_truncation)]
+    let oversize = (MAX_FRAME_SIZE as u32 + 1).to_be_bytes();
+    buf.extend_from_slice(&oversize);
     let mut cursor = Cursor::new(buf);
     let err = read_message::<_, Register>(&mut cursor).await.unwrap_err();
     assert!(matches!(err, Error::FrameTooLarge { .. }));

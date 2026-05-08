@@ -29,6 +29,11 @@ pub struct MaterializedAttachment {
 
 /// Materialize `attachments` as one commit in the jj repo at `repo_path`.
 /// Returns the new commit id (full git SHA) and the filenames written.
+///
+/// # Errors
+/// Returns an error if `attachments` is empty, `repo_path` is not a jj/git
+/// repo, the temp workspace cannot be created, any filename is empty or
+/// contains path separators, or any of the underlying `jj` invocations fail.
 pub fn materialize(repo_path: &Path, attachments: &[Attachment]) -> Result<MaterializedAttachment> {
     if attachments.is_empty() {
         return Err(anyhow!("no attachments to materialize"));
@@ -113,6 +118,7 @@ pub fn materialize(repo_path: &Path, attachments: &[Attachment]) -> Result<Mater
 
 /// Render the comment that the handler attaches to the issue after a
 /// successful [`materialize`].
+#[must_use]
 pub fn format_comment(rec: &MaterializedAttachment) -> String {
     let files = rec.filenames.join(", ");
     format!(
@@ -164,6 +170,7 @@ fn jj_stdout(cwd: &Path, args: &[&str]) -> Result<String> {
 }
 
 /// Best-effort path used by tests to confirm leftover workspaces don't survive.
+#[must_use]
 pub fn tmp_root(repo_path: &Path) -> PathBuf {
     repo_path.join(".crossbridge-tmp")
 }

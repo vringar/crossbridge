@@ -29,7 +29,7 @@ fn main() -> Result<()> {
 
     tracing::info!(repos = config.repos.len(), "crossbridge starting cycle");
 
-    route::run_cycle(&config)?;
+    route::run_cycle(&config);
 
     tracing::info!("crossbridge cycle complete");
     Ok(())

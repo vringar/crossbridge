@@ -26,7 +26,8 @@ pub use crossbridge_protocol::SOCKET_ROOT_ENV;
 /// default [`SOCKET_ROOT`].
 #[must_use]
 pub fn socket_root() -> std::path::PathBuf {
-    std::env::var_os(SOCKET_ROOT_ENV)
-        .map(std::path::PathBuf::from)
-        .unwrap_or_else(|| std::path::PathBuf::from(SOCKET_ROOT))
+    std::env::var_os(SOCKET_ROOT_ENV).map_or_else(
+        || std::path::PathBuf::from(SOCKET_ROOT),
+        std::path::PathBuf::from,
+    )
 }

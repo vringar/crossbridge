@@ -112,10 +112,10 @@ fn git(dir: &Path, args: &[&str]) {
 /// Spawn a one-shot server thread on `socket_path`. Returns a handle and a
 /// channel that delivers the captured request once the server responds.
 fn spawn_server(
-    socket_path: PathBuf,
+    socket_path: &PathBuf,
     response: ServerResponse,
 ) -> (JoinHandle<()>, mpsc::Receiver<ClientRequest>) {
-    let listener = UnixListener::bind(&socket_path).expect("bind mock socket");
+    let listener = UnixListener::bind(socket_path).expect("bind mock socket");
     let (tx, rx) = mpsc::channel();
     let handle = std::thread::spawn(move || {
         let (mut stream, _) = listener.accept().expect("accept");
@@ -176,7 +176,7 @@ fn submit_round_trips_and_labels_local_issue() {
         .create_issue("question", Some("body"), "medium")
         .unwrap();
 
-    let (server, rx) = spawn_server(socket, ServerResponse::Ok { issue_id: 4242 });
+    let (server, rx) = spawn_server(&socket, ServerResponse::Ok { issue_id: 4242 });
     let out = f.run(&[
         "submit",
         "--issue",
@@ -284,7 +284,7 @@ fn answer_sends_result_comments_and_closes() {
         db.add_comment(local_id, "ignored note", "note").unwrap();
     }
 
-    let (server, rx) = spawn_server(socket, ServerResponse::Ok { issue_id: 77 });
+    let (server, rx) = spawn_server(&socket, ServerResponse::Ok { issue_id: 77 });
     let out = f.run(&["answer", "--issue", &local_id.to_string()]);
     assert!(
         out.status.success(),
