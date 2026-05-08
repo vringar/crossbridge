@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 ### Changed
+- Quality pass: clippy pedantic clean workspace-wide (#33)
 - Quality pass: clippy pedantic cleanup in crossbridge-e2e (#32)
 - Quality pass: clippy pedantic cleanup in crossbridge-client (#31)
 - Quality pass: clippy pedantic cleanup in crossbridge-server (#30)
