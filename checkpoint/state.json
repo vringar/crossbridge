@@ -4,8 +4,8 @@
   "display_id_map": {},
   "locks": {
     "-5": {
-      "agent_id": "9UbB",
-      "claimed_at": "2026-05-05T23:09:53.094523663Z"
+      "agent_id": "2ZD1",
+      "claimed_at": "2026-05-08T14:58:22.549049189Z"
     },
     "-4": {
       "agent_id": "2ZD1",
@@ -189,11 +189,16 @@
       "agent_id": "2ZD1",
       "agent_seq": 17,
       "timestamp": "2026-05-08T14:58:22.026580306Z"
+    },
+    {
+      "agent_id": "2ZD1",
+      "agent_seq": 18,
+      "timestamp": "2026-05-08T14:58:22.549049189Z"
     }
   ],
   "watermark": {
-    "timestamp": "2026-05-08T14:58:22.026580306Z",
+    "timestamp": "2026-05-08T14:58:22.549049189Z",
     "agent_id": "2ZD1",
-    "agent_seq": 17
+    "agent_seq": 18
   }
 }
