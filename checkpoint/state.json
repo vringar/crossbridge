@@ -14,10 +14,6 @@
     "-3": {
       "agent_id": "2ZD1",
       "claimed_at": "2026-05-08T14:58:21.508826883Z"
-    },
-    "-2": {
-      "agent_id": "2ZD1",
-      "claimed_at": "2026-05-08T14:58:20.978438793Z"
     }
   },
   "issues": {},
@@ -196,11 +192,16 @@
       "agent_id": "2ZD1",
       "agent_seq": 20,
       "timestamp": "2026-05-08T14:58:26.744261053Z"
+    },
+    {
+      "agent_id": "2ZD1",
+      "agent_seq": 21,
+      "timestamp": "2026-05-08T14:58:27.273558284Z"
     }
   ],
   "watermark": {
-    "timestamp": "2026-05-08T14:58:26.744261053Z",
+    "timestamp": "2026-05-08T14:58:27.273558284Z",
     "agent_id": "2ZD1",
-    "agent_seq": 20
+    "agent_seq": 21
   }
 }
