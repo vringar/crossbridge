@@ -1,1 +1,2 @@
 {"agent_id":"GOqH","agent_seq":1,"timestamp":"2026-05-08T15:02:18.171703047Z","event":{"type":"LockClaimed","issue_display_id":33}}
+{"agent_id":"GOqH","agent_seq":2,"timestamp":"2026-05-08T15:18:54.375937654Z","event":{"type":"LockReleased","issue_display_id":33}}
