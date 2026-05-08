@@ -1,8 +1,0 @@
-{
-  "uuid": "3f23731e-10aa-4f34-90aa-2f37a983d944",
-  "issue_uuid": "248b66ed-426d-4d68-97f3-74328bcc5a6a",
-  "author": "tEc5",
-  "content": "Plan: 1) Add SOCKET_ROOT_ENV constant to crossbridge-protocol. 2) Migrate crossbridge-client to re-export protocol constant. 3) Add CROSSBRIDGE_SOCKET_ROOT env support to supervisor (CLI --socket > env > default). 4) Add CROSSBRIDGE_SOCKET_ROOT env support to server (CLI --runtime-root > env > default). 5) Unit tests for precedence in each binary. 6) Create crossbridge-e2e crate with ShortTempDir/child guard/fixture in tests/common/mod.rs. 7) Implement submit_then_answer_round_trip in tests/round_trip.rs invoking real binaries via CARGO_BIN_EXE_*. 8) cargo test --workspace, clippy -D warnings, fmt --check. NOTE: existing supervisor flag is --socket per .design/supervisor.md, not --register-socket as e2e doc states; keeping --socket since the test can use env var only.",
-  "created_at": "2026-05-07T22:06:53.085033620Z",
-  "kind": "plan"
-}

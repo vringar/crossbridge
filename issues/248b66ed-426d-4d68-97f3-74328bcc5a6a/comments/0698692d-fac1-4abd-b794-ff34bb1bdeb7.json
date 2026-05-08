@@ -1,8 +1,0 @@
-{
-  "uuid": "0698692d-fac1-4abd-b794-ff34bb1bdeb7",
-  "issue_uuid": "248b66ed-426d-4d68-97f3-74328bcc5a6a",
-  "author": "tEc5",
-  "content": "Found: e2e test surfaces pre-existing bug — client labels outbound issue with xb-ref:<target_id_i64> at crossbridge-client/src/main.rs:123, but the answer round-trip on the source side expects xb-ref:<source_uuid>. Per kickoff constraint 'FILE A SEPARATE ISSUE rather than fixing it in-band', filed as #18. Will mark the e2e test #[ignore] with a pointer to #18 so cargo test --workspace stays green; AC-8 (test passes) cannot be satisfied without fixing #18 — flagged in the kickoff report.",
-  "created_at": "2026-05-07T22:19:35.244909152Z",
-  "kind": "observation"
-}

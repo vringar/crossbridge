@@ -1,8 +1,0 @@
-{
-  "uuid": "e1cda1ad-7f36-47ca-9bf6-d2720d0f39f6",
-  "issue_uuid": "248b66ed-426d-4d68-97f3-74328bcc5a6a",
-  "author": "tEc5",
-  "content": "Result: Committed 588ca1a. Env-var unification complete: SOCKET_ROOT_ENV/DEFAULT_SOCKET_ROOT exported from crossbridge-protocol; supervisor (resolve_register_socket) and server (resolve_runtime_root) both honor CROSSBRIDGE_SOCKET_ROOT with precedence flag > env > default; client re-exports the protocol constants. New crossbridge-e2e crate added to workspace with submit_then_answer_round_trip in tests/round_trip.rs and ShortTempDir/ChildGuard/RepoFixture helpers in tests/common/mod.rs. cargo test --workspace: 91 pass / 0 fail / 1 ignored. cargo clippy --workspace --all-targets -- -D warnings clean. cargo fmt --check clean. Caveat: test is #[ignore]'d pending #18 (pre-existing client xb-ref labeling bug surfaced by the test); per kickoff constraint, not fixed in-band.",
-  "created_at": "2026-05-07T22:24:41.557053703Z",
-  "kind": "result"
-}

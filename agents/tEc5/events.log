@@ -1,2 +1,0 @@
-{"agent_id":"tEc5","agent_seq":1,"timestamp":"2026-05-07T22:04:20.256155884Z","event":{"type":"LockClaimed","issue_display_id":17}}
-{"agent_id":"tEc5","agent_seq":2,"timestamp":"2026-05-07T22:24:55.802158585Z","event":{"type":"LockReleased","issue_display_id":17}}
