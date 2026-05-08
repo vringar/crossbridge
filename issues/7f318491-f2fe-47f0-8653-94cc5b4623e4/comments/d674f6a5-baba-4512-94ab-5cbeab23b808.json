@@ -1,0 +1,8 @@
+{
+  "uuid": "d674f6a5-baba-4512-94ab-5cbeab23b808",
+  "issue_uuid": "7f318491-f2fe-47f0-8653-94cc5b4623e4",
+  "author": "poDf",
+  "content": "Result: crossbridge-e2e is clean under -W clippy::pedantic. Fixes: (a) replaced if-then-panic with assert! in tests/common/mod.rs::wait_until (manual_assert), (b) added targeted #[allow(clippy::similar_names)] and #[allow(clippy::too_many_lines)] with one-line justifications above submit_then_answer_round_trip in tests/round_trip.rs. Tests pass (1/1), cargo fmt --check clean, cargo clippy -p crossbridge-e2e --all-targets -- -D warnings exits 0. Caveat: the literal command 'cargo clippy -p crossbridge-e2e --all-targets -- -W clippy::pedantic -D warnings' still fails because pedantic warnings remain in workspace dev-deps (crossbridge-protocol/server/client/supervisor) — those are sister issues #18-22 and are out of scope here.",
+  "created_at": "2026-05-08T14:09:18.448233069Z",
+  "kind": "result"
+}
