@@ -1,5 +1,7 @@
 # Crossbridge
 
+[![CI](https://github.com/vringar/crossbridge/actions/workflows/ci.yml/badge.svg)](https://github.com/vringar/crossbridge/actions/workflows/ci.yml)
+
 Cross-project coordination bridge for [crosslink](https://github.com/forecast-bio/crosslink) repositories.
 
 Crossbridge is a one-shot CLI that routes labeled issues between crosslink-managed repos on the same machine. It enables agents working in different repositories to ask questions of each other without shared state or network services.
