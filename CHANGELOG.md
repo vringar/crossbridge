@@ -7,6 +7,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- Force-timeout repro: agent should be killed by timeout(1) before completing. Task: read every .rs file in the repo and report a count, then run cargo test --workspace, then call session end (#16)
+- Debug repro v2: kickoff from repo root for worktree teardown observation (#15)
+- Debug repro: minimal kickoff agent for worktree teardown observation (#14)
+- Debug repro: minimal kickoff agent for worktree teardown observation (#13)
 - End-to-end integration test + unify CROSSBRIDGE_SOCKET_ROOT across all three binaries (#17)
 - crossbridge-client: Implement the per-agent CLI. See .design/client.md for full spec. SYNCHRONOUS (no tokio). Derives repo slug from git/jj origin remote (strip .git, take last path component). Three subcommands: (1) peers - list *.socket files in /run/crossbridge/<own-slug>/, (2) submit --issue <id> --target <slug> - read issue from local crosslink DB, connect to peer socket, send ClientRequest::Submit, on success update local labels (xb:outbound, xb-status:pending, xb-ref:<target-uuid>), (3) answer --issue <id> - read inbound issue, extract xb-source and xb-ref labels, collect result comments, send ClientRequest::Answer, on success mark xb-status:answered and close. Uses std::os::unix::net::UnixStream with sync framing helpers from crossbridge-protocol. Dependencies: crossbridge-protocol, crosslink, clap, anyhow. NO tokio. (#8)
 - crossbridge-server: Implement the per-repo server. See .design/server.md for full spec. Registers with supervisor (sends Register, receives RegisterAck with peer list), creates listening sockets at /run/crossbridge/<peer-slug>/<own-slug>.socket for each peer. Handles PeerJoined/PeerLeft notifications. Accepts ClientRequest (Submit/Answer) from agents on those sockets. SubmitIssue: creates issue in local crosslink DB with proper labels, handles attachments via jj worktree materialization, idempotent via xb-ref check. SubmitAnswer: finds source issue by UUID, copies comments, swaps status to resolved, closes. Single-threaded tokio. Supervisor reconnection with exponential backoff. CLI: crossbridge-server --group <group> [--slug <slug>] [--repo-path <path>]. Dependencies: tokio, crossbridge-protocol, crosslink, tracing, tracing-subscriber, anyhow, clap. (#7)
@@ -18,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Convert to Cargo workspace, implement shared protocol crate with postcard message types and framing helpers (#4)
 
 ### Fixed
+- Debug: half-cleaned kickoff worktrees (admin dir vanishes, files survive) (#12)
 
 ### Changed
 - Quality pass: clippy pedantic clean workspace-wide (#33)
