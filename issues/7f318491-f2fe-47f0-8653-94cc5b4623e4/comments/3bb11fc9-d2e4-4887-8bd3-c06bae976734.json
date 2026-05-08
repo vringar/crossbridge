@@ -1,0 +1,8 @@
+{
+  "uuid": "3bb11fc9-d2e4-4887-8bd3-c06bae976734",
+  "issue_uuid": "7f318491-f2fe-47f0-8653-94cc5b4623e4",
+  "author": "poDf",
+  "content": "Found: only 3 pedantic warnings actually remain in crossbridge-e2e (issue text says 57; appears stale relative to current state). The 3 are: similar_names labels_a_after vs labels_b_after at round_trip.rs:237, manual_assert in tests/common/mod.rs:176 (wait_until), too_many_lines on submit_then_answer_round_trip. Other warnings shown by clippy come from sister crates (#18-22) and are out of scope for this issue.",
+  "created_at": "2026-05-08T14:06:36.849585993Z",
+  "kind": "observation"
+}
