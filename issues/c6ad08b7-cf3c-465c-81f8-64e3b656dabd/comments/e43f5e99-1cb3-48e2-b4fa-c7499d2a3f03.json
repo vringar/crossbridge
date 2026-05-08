@@ -1,0 +1,8 @@
+{
+  "uuid": "e43f5e99-1cb3-48e2-b4fa-c7499d2a3f03",
+  "issue_uuid": "c6ad08b7-cf3c-465c-81f8-64e3b656dabd",
+  "author": "GOqH",
+  "content": "Plan: Fix all 94 pedantic warnings per crate. Strategy: (1) missing_errors_doc — add concise # Errors sections to public Result-returning fns; (2) cast_possible_truncation — u32::try_from at I/O boundaries (frame headers), allow with comment when bounds are static; (3) uninlined_format_args — inline; (4) must_use_candidate — add #[must_use]; (5) similar_names labels_a/labels_b — allow with reason; (6) too_many_lines round_trip — allow with reason; (7) unused_async run_fake_supervisor — allow with reason. No blanket allows. Order: protocol -> supervisor -> server -> client -> bin -> e2e -> verify.",
+  "created_at": "2026-05-08T15:04:35.955479640Z",
+  "kind": "plan"
+}
