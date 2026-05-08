@@ -1,0 +1,11 @@
+{
+  "uuid": "53d00b7b-9953-491c-8a26-e0ea988a2ca8",
+  "display_id": 25,
+  "title": "Quality pass: clippy pedantic clean workspace-wide",
+  "description": "Current state: \n\nDesired state: \n\nReason: \n\nResolve every pedantic warning across the entire workspace in one coherent pass.\n\nWhy workspace-wide and not per-crate: `cargo clippy -p <X> -- -W clippy::pedantic -D warnings` lints the entire dep graph, so a per-crate AC isn't independently verifiable until every upstream is also clean. The previous attempt (issues #18-#23, now closed as superseded) coordinated badly across six parallel kickoffs and was abandoned.\n\nAcceptance criteria:\n- `cargo clippy --workspace --all-targets -- -W clippy::pedantic -D warnings` exits 0.\n- No blanket #[allow(clippy::pedantic)] over whole modules. Specific-lint allows must have a one-line justification comment when the pedantic suggestion is genuinely worse (e.g. similar_names on test variables that are intentionally parallel; too_many_lines on a deliberately linear narrative test; unused_async on a helper that hosts a future without a direct .await).\n- All existing tests still pass: `cargo test --workspace` (currently 92 passed, 0 ignored, 0 failed).\n- `cargo fmt --check` clean.\n- Wire protocol behavior, public APIs, and observable test outcomes are unchanged. This is a quality pass, not a refactor — do not change message types, label schemes, or observable behavior.\n- For cast-truncation lints (cast_possible_truncation, cast_sign_loss): prefer u32::try_from(...)? at boundaries; allow only where bounds are statically guaranteed (with a comment).\n\nReference categories from the orchestrator's pre-cleanup run:\n- doc_markdown (~25 sites: missing backticks around type names in doc comments)\n- cast_possible_truncation (~16)\n- missing_errors_doc (~10)\n- map_unwrap_or, manual_map (~5)\n- unnecessary_wraps (jj_origin_url returns Result<Option<String>> but never Errs)\n- needless_pass_by_value, too_many_lines, similar_names, manual_assert (a handful each)\n\nTotal roughly 168 pedantic warnings across the workspace as of the last clean main.",
+  "status": "open",
+  "priority": "low",
+  "created_by": "2ZD1",
+  "created_at": "2026-05-08T14:35:22.781558717Z",
+  "updated_at": "2026-05-08T14:35:22.781558717Z"
+}
