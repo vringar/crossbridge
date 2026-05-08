@@ -1,6 +1,6 @@
 {
   "uuid": "24cc274c-4e6a-464a-a181-4b3b550a6bc4",
-  "display_id": null,
+  "display_id": 31,
   "title": "Quality pass: clippy pedantic cleanup in crossbridge-client",
   "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun cargo clippy -p crossbridge-client with -W clippy::pedantic and resolve all 13 warnings. Top categories: cast_possible_truncation, unnecessary_wraps (jj_origin_url returns Result<Option<String>> but never Errs — collapse to Option<String>), needless_pass_by_value, missing_errors_doc, map_unwrap_or.\n\nAcceptance criteria:\n- cargo clippy -p crossbridge-client --all-targets -- -W clippy::pedantic -D warnings exits 0.\n- No blanket #[allow] over whole modules — fix the underlying issues; only allow specific lints with a one-line justification.\n- All existing tests still pass (cargo test -p crossbridge-client), including the end_to_end integration test.\n- cargo fmt --check clean.",
   "status": "open",

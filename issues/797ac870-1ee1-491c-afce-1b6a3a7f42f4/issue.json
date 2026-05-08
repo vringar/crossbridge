@@ -1,6 +1,6 @@
 {
   "uuid": "797ac870-1ee1-491c-afce-1b6a3a7f42f4",
-  "display_id": null,
+  "display_id": 29,
   "title": "Quality pass: clippy pedantic cleanup in crossbridge-supervisor",
   "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun cargo clippy -p crossbridge-supervisor with -W clippy::pedantic and resolve all 18 warnings. Top categories: cast_possible_truncation, missing_errors_doc, semicolon_if_nothing_returned, match_wild_err_arm, used_underscore_binding.\n\nAcceptance criteria:\n- cargo clippy -p crossbridge-supervisor --all-targets -- -W clippy::pedantic -D warnings exits 0.\n- No blanket #[allow] over whole modules — fix the underlying issues; only allow specific lints with a one-line justification.\n- All existing tests still pass (cargo test -p crossbridge-supervisor).\n- cargo fmt --check clean.",
   "status": "open",

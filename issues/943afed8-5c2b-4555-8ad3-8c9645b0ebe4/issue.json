@@ -1,6 +1,6 @@
 {
   "uuid": "943afed8-5c2b-4555-8ad3-8c9645b0ebe4",
-  "display_id": null,
+  "display_id": 28,
   "title": "Quality pass: clippy pedantic cleanup in crossbridge-protocol",
   "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun cargo clippy -p crossbridge-protocol with -W clippy::pedantic and resolve all 10 warnings. Top categories: cast_possible_truncation, missing_errors_doc.\n\nAcceptance criteria:\n- cargo clippy -p crossbridge-protocol --all-targets -- -W clippy::pedantic -D warnings exits 0.\n- No blanket #[allow] over whole modules — fix the underlying issues; only allow specific lints with a one-line justification.\n- All existing tests still pass (cargo test -p crossbridge-protocol).\n- cargo fmt --check clean.\n- Cast-truncation warnings: prefer u32::try_from(...)? at wire-protocol boundaries; allow cast_possible_truncation only where bounds are statically guaranteed (with a comment).",
   "status": "open",
