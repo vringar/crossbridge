@@ -1,0 +1,11 @@
+{
+  "uuid": "1bfe6fbb-416e-4431-843d-d2bf75b4138c",
+  "display_id": null,
+  "title": "Add GitHub Actions CI for tests, clippy pedantic, and fmt",
+  "description": "Goal: \n\nAcceptance criteria:\n- \n\nNo CI runs against this repo today. Local enforcement happens via .crosslink/hook-config.json during kickoffs but humans pushing directly bypass it. Pedantic-clean state and 92 passing tests will silently rot.\n\nAdd .github/workflows/ci.yml that runs on push to main and on every pull_request.\n\nAcceptance criteria:\n- File exists at .github/workflows/ci.yml.\n- Three jobs (or one job with three steps; matrix not required): test, clippy, fmt.\n- test: cargo test --workspace exits 0.\n- clippy: cargo clippy --workspace --all-targets -- -W clippy::pedantic -D warnings exits 0. (Match the AC we just landed for #33.)\n- fmt: cargo fmt --check exits 0.\n- Toolchain version matches workspace rust-version (1.87) — pin via dtolnay/rust-toolchain@stable with toolchain: '1.87' or via rust-toolchain.toml file.\n- Cargo registry + target dir cached for speed (Swatinem/rust-cache@v2 is the standard).\n- ubuntu-latest runner.\n- Triggers: pull_request (any branch), push (main only).\n- Workflow name in GitHub UI is 'CI'.\n- README gets a CI badge linking to the workflow runs page.\n- The first run of the workflow on this branch must pass — verify after pushing the branch.\n\nOut of scope:\n- nix-build / nixos test integration (separate concern).\n- Coverage / codecov.\n- Release automation, crate publishing.\n- Cross-platform matrix.\n- Caching beyond rust-cache.",
+  "status": "open",
+  "priority": "medium",
+  "created_by": "2ZD1",
+  "created_at": "2026-05-08T20:03:46.704784475Z",
+  "updated_at": "2026-05-08T20:03:46.704784475Z"
+}
