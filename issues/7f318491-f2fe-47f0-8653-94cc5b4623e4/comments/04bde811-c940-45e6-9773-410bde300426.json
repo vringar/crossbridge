@@ -1,0 +1,8 @@
+{
+  "uuid": "04bde811-c940-45e6-9773-410bde300426",
+  "issue_uuid": "7f318491-f2fe-47f0-8653-94cc5b4623e4",
+  "author": "poDf",
+  "content": "Plan: read the 4 source files in crossbridge-e2e, run cargo clippy -p crossbridge-e2e --all-targets -- -W clippy::pedantic, fix each warning. For lints called out in the issue (similar_names on labels_a/labels_b_after, too_many_lines on submit_then_answer_round_trip), use targeted #[allow(...)] with one-line justification. Avoid blanket allows. Verify cargo test, cargo clippy -- -D warnings, cargo fmt --check at the end.",
+  "created_at": "2026-05-08T14:03:44.089562892Z",
+  "kind": "plan"
+}
