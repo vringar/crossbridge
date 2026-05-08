@@ -1,8 +1,0 @@
-{
-  "uuid": "3c01ba15-e14c-4f11-bdd5-f88b34c42e9f",
-  "issue_uuid": "7f318491-f2fe-47f0-8653-94cc5b4623e4",
-  "author": "poDf",
-  "content": "Completed: crossbridge-e2e clippy pedantic cleanup. Fixed manual_assert (assert! instead of if-panic), added targeted #[allow(clippy::similar_names)] and #[allow(clippy::too_many_lines)] with one-line justifications on submit_then_answer_round_trip. Tests pass, fmt clean, cargo clippy -p crossbridge-e2e --all-targets -- -D warnings exits 0. Note: -W clippy::pedantic -D warnings still fails workspace-wide due to dev-dep crates handled by sister issues #18-22.",
-  "created_at": "2026-05-08T14:10:09.697682925Z",
-  "kind": "handoff"
-}
