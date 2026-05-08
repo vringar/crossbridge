@@ -11,6 +11,41 @@
       "issue_id": 5,
       "started_at": "2026-05-06T18:21:32.166417064+00:00",
       "status": "running"
+    },
+    {
+      "agent_id": "pending",
+      "worktree": "pending",
+      "issue_id": 5,
+      "started_at": "2026-05-06T18:51:43.939698941+00:00",
+      "status": "running"
+    },
+    {
+      "agent_id": "pending",
+      "worktree": "pending",
+      "issue_id": 5,
+      "started_at": "2026-05-06T20:04:28.068873063+00:00",
+      "status": "running"
+    },
+    {
+      "agent_id": "pending",
+      "worktree": "pending",
+      "issue_id": 5,
+      "started_at": "2026-05-06T21:30:44.787424503+00:00",
+      "status": "running"
+    },
+    {
+      "agent_id": "pending",
+      "worktree": "pending",
+      "issue_id": 5,
+      "started_at": "2026-05-07T11:35:32.955385588+00:00",
+      "status": "running"
+    },
+    {
+      "agent_id": "pending",
+      "worktree": "pending",
+      "issue_id": 5,
+      "started_at": "2026-05-07T12:04:22.589385942+00:00",
+      "status": "running"
     }
   ]
 }

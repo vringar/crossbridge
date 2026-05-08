@@ -1,8 +1,0 @@
-# Crossbridge configuration
-# Copy to crossbridge.toml and adjust paths for your machine.
-
-[repos.example-a]
-path = "/home/user/projects/repo-a"
-
-[repos.example-b]
-path = "/home/user/projects/repo-b"

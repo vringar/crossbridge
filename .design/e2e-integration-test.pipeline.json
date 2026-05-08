@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "design_doc": ".design/e2e-integration-test.md",
+  "doc_hash": "sha256:f4e3ba1bfe83a339bf09bbc49f802f081f1f0f2fdbfbd54a9a011df496d24a95",
+  "stage": "running",
+  "plans": [],
+  "runs": [
+    {
+      "agent_id": "pending",
+      "worktree": "pending",
+      "issue_id": 17,
+      "started_at": "2026-05-07T22:02:55.720912738+00:00",
+      "status": "running"
+    }
+  ]
+}

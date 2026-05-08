@@ -20,6 +20,27 @@
       "issue_id": 7,
       "started_at": "2026-05-06T18:28:23.819764099+00:00",
       "status": "running"
+    },
+    {
+      "agent_id": "pending",
+      "worktree": "pending",
+      "issue_id": 7,
+      "started_at": "2026-05-06T23:02:54.699343091+00:00",
+      "status": "running"
+    },
+    {
+      "agent_id": "pending",
+      "worktree": "pending",
+      "issue_id": 7,
+      "started_at": "2026-05-07T13:00:02.791958603+00:00",
+      "status": "running"
+    },
+    {
+      "agent_id": "pending",
+      "worktree": "pending",
+      "issue_id": 7,
+      "started_at": "2026-05-07T13:03:05.157012803+00:00",
+      "status": "running"
     }
   ]
 }

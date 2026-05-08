@@ -20,6 +20,20 @@
       "issue_id": 6,
       "started_at": "2026-05-06T18:28:23.781751251+00:00",
       "status": "running"
+    },
+    {
+      "agent_id": "pending",
+      "worktree": "pending",
+      "issue_id": 6,
+      "started_at": "2026-05-06T23:02:52.800180076+00:00",
+      "status": "running"
+    },
+    {
+      "agent_id": "pending",
+      "worktree": "pending",
+      "issue_id": 6,
+      "started_at": "2026-05-07T12:59:59.085728239+00:00",
+      "status": "running"
     }
   ]
 }
