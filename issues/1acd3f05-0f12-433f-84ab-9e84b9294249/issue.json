@@ -2,11 +2,12 @@
   "uuid": "1acd3f05-0f12-433f-84ab-9e84b9294249",
   "display_id": 12,
   "title": "Debug: half-cleaned kickoff worktrees (admin dir vanishes, files survive)",
-  "status": "open",
+  "status": "closed",
   "priority": "high",
   "created_by": "Kklh",
   "created_at": "2026-05-07T10:03:32.779317043Z",
-  "updated_at": "2026-05-07T10:03:34.684586997Z",
+  "updated_at": "2026-05-08T16:06:44.262207215Z",
+  "closed_at": "2026-05-08T16:06:44.262207215Z",
   "labels": [
     "bug"
   ]
