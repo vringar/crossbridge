@@ -1,0 +1,8 @@
+{
+  "uuid": "740b86b5-5c6f-4f2f-8ad4-3993ca34db65",
+  "issue_uuid": "1bfe6fbb-416e-4431-843d-d2bf75b4138c",
+  "author": "O22C",
+  "content": "Completed: Added .github/workflows/ci.yml with three jobs (test, clippy, fmt) on ubuntu-latest pinned to Rust 1.87 via dtolnay/rust-toolchain@stable. Used Swatinem/rust-cache@v2 on test/clippy. Triggers: push to main, pull_request. README CI badge added. All three commands verified to pass locally before committing. Commit 08252c7. Hook-config.json had unrelated kickoff-tooling config normalizations (auto_steal_stale_locks string->bool, removed flat-namespace duplicate keys); left uncommitted as out of scope for #34.",
+  "created_at": "2026-05-08T20:10:48.763540854Z",
+  "kind": "handoff"
+}
