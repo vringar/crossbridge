@@ -1,1 +1,2 @@
 {"agent_id":"poDf","agent_seq":1,"timestamp":"2026-05-08T14:02:37.067864150Z","event":{"type":"LockClaimed","issue_display_id":23}}
+{"agent_id":"poDf","agent_seq":2,"timestamp":"2026-05-08T14:10:07.302200861Z","event":{"type":"LockReleased","issue_display_id":23}}

@@ -26,10 +26,6 @@
     "12": {
       "agent_id": "Kklh",
       "claimed_at": "2026-05-07T10:03:40.434697481Z"
-    },
-    "23": {
-      "agent_id": "poDf",
-      "claimed_at": "2026-05-08T14:02:37.067864150Z"
     }
   },
   "issues": {},
@@ -173,11 +169,16 @@
       "agent_id": "poDf",
       "agent_seq": 1,
       "timestamp": "2026-05-08T14:02:37.067864150Z"
+    },
+    {
+      "agent_id": "poDf",
+      "agent_seq": 2,
+      "timestamp": "2026-05-08T14:10:07.302200861Z"
     }
   ],
   "watermark": {
-    "timestamp": "2026-05-08T14:02:37.067864150Z",
+    "timestamp": "2026-05-08T14:10:07.302200861Z",
     "agent_id": "poDf",
-    "agent_seq": 1
+    "agent_seq": 2
   }
 }
