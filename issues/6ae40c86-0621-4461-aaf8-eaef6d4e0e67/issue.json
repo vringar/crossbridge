@@ -3,9 +3,10 @@
   "display_id": 21,
   "title": "Quality pass: clippy pedantic cleanup in crossbridge-server",
   "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun `cargo clippy -p crossbridge-server --all-targets -- -W clippy::pedantic` and resolve every warning (currently 57 — by far the largest count in the workspace). Top categories: cast_possible_truncation, missing_errors_doc, must_use_candidate, uninlined_format_args, unused_async (note: `unused_async` on `run_fake_supervisor` is a false positive — the helper hosts a future even though no `.await` is in its body; allow that one with a comment).\n\nAcceptance criteria:\n- `cargo clippy -p crossbridge-server --all-targets -- -W clippy::pedantic -D warnings` exits 0.\n- No blanket `#[allow(clippy::pedantic)]` or `#[allow(...)]` over whole modules — fix the underlying issues, only allow specific lints with a one-line justification comment when the pedantic suggestion is genuinely worse.\n- All existing tests still pass (`cargo test -p crossbridge-server`), including the `end_to_end` and `oversized_frame` integration tests.\n- `cargo fmt --check` clean.",
-  "status": "open",
+  "status": "closed",
   "priority": "low",
   "created_by": "2ZD1",
   "created_at": "2026-05-08T13:54:27.498492315Z",
-  "updated_at": "2026-05-08T13:54:27.498492315Z"
+  "updated_at": "2026-05-08T14:36:11.679007012Z",
+  "closed_at": "2026-05-08T14:36:11.679007012Z"
 }
