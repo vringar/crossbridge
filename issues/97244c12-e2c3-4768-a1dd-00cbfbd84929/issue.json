@@ -1,6 +1,6 @@
 {
   "uuid": "97244c12-e2c3-4768-a1dd-00cbfbd84929",
-  "display_id": null,
+  "display_id": 40,
   "title": "Bump actions/checkout v4 -> v5 in CI",
   "description": "Current state: \n\nDesired state: \n\nReason: \n\nGitHub deprecation annotation flagged actions/checkout@v4 running on Node 20 (deprecated June 2026). v5 runs on Node 24. AC: .github/workflows/ci.yml uses actions/checkout@v5 in all three jobs; resulting CI run passes.",
   "status": "open",
