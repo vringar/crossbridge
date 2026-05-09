@@ -78,6 +78,8 @@ nix-build
 nix-shell --run "cargo build --release"
 ```
 
+The Rust toolchain is pinned via [`npins`](https://github.com/andir/npins) — `npins/sources.json` locks a specific `nixpkgs` revision so local dev and CI both use the same `rustc` and `clippy`. Bump the pin with `npins update nixpkgs`.
+
 The package installs three binaries:
 - `crossbridge` -- the bridge CLI
 - `crossbridge-request` -- helper script for agents to create outbound requests

@@ -1,0 +1,11 @@
+{
+  "pins": {
+    "nixpkgs": {
+      "type": "Channel",
+      "name": "nixpkgs-unstable",
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre993588.68a8af93ff42/nixexprs.tar.xz",
+      "hash": "sha256-Z5mLDoR8p0d7psIY4LnyaHHRykXngMcWXTZ9JWvtvPc="
+    }
+  },
+  "version": 7
+}
