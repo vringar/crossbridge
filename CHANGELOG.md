@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- Add GitHub Actions CI for tests, clippy pedantic, and fmt (#34)
 - Force-timeout repro: agent should be killed by timeout(1) before completing. Task: read every .rs file in the repo and report a count, then run cargo test --workspace, then call session end (#16)
 - Debug repro v2: kickoff from repo root for worktree teardown observation (#15)
 - Debug repro: minimal kickoff agent for worktree teardown observation (#14)
