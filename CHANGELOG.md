@@ -24,10 +24,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Convert to Cargo workspace, implement shared protocol crate with postcard message types and framing helpers (#4)
 
 ### Fixed
+- Move agent skill to `skill/crossbridge/SKILL.md` with frontmatter so Claude Code discovers it (L1, #1)
 - Fix CI: rust 1.87 too old for transitive deps (#36)
 - Debug: half-cleaned kickoff worktrees (admin dir vanishes, files survive) (#12)
 
 ### Changed
+- Bump actions/checkout v4 -> v5 in CI (#40)
 - Drop Determinate Systems magic-nix-cache from CI (#39)
 - Drop rust-version from workspace Cargo.toml (#37)
 - Fix CI: rust 1.87 too old for transitive deps (#35)
