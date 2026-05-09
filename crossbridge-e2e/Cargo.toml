@@ -2,7 +2,6 @@
 name = "crossbridge-e2e"
 version.workspace = true
 edition.workspace = true
-rust-version.workspace = true
 license.workspace = true
 description = "Workspace-level end-to-end integration tests exercising real supervisor + server + client binaries"
 publish = false

@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Convert to Cargo workspace, implement shared protocol crate with postcard message types and framing helpers (#4)
 
 ### Fixed
+- Fix CI: rust 1.87 too old for transitive deps (#36)
 - Debug: half-cleaned kickoff worktrees (admin dir vanishes, files survive) (#12)
 
 ### Changed
