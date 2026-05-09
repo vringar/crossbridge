@@ -87,7 +87,7 @@ The package installs three binaries:
 
 ## Agent integration
 
-Agents use the `/crossbridge` skill (see `skill/crossbridge.md`) which covers:
+Agents use the `/crossbridge` skill (see `skill/crossbridge/SKILL.md`) which covers:
 - **ask** -- send a question to another repo's agent
 - **answer** -- respond to an inbound request
 - **check** -- list pending inbound/outbound requests

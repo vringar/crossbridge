@@ -1,3 +1,8 @@
+---
+name: crossbridge
+description: Use when sending or answering cross-project requests via crossbridge — the xb:* labeled-issue transport between crosslink repos. Covers ask, answer, and check.
+---
+
 ## Crossbridge — cross-project requests
 
 Crossbridge lets you ask questions of agents in other repos, answer
