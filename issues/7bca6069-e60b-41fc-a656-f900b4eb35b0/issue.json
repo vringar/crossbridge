@@ -1,0 +1,11 @@
+{
+  "uuid": "7bca6069-e60b-41fc-a656-f900b4eb35b0",
+  "display_id": null,
+  "title": "Use npins to pin nixpkgs (and rustc) for deterministic local + CI builds",
+  "description": "Goal: \n\nAcceptance criteria:\n- \n\nToday shell.nix uses bare `<nixpkgs>` which resolves to whatever the user's NIX_PATH points to (currently rustc 1.94). CI uses dtolnay/rust-toolchain@stable which is the GitHub-hosted current stable (different rustc, different clippy, different pedantic lint set). The two diverge silently — the run on #37 fails on clippy::map_unwrap_or warnings that local 1.94 didn't flag.\n\nFix: introduce npins to lock a specific nixpkgs commit, refactor shell.nix to import that pin, and have CI install Nix + run cargo via nix-shell against the same shell.nix. Then pedantic-clean state is reproducible: every machine compiling this repo uses the same rustc, the same clippy, and sees the same lint set. New pedantic warnings only land when the pin is bumped, which is a deliberate act.\n\nAC:\n- npins/ directory at repo root with a nixpkgs pin (current stable channel, e.g. nixos-25.05 or unstable, whichever the user prefers).\n- shell.nix imports the pinned nixpkgs instead of <nixpkgs>.\n- .github/workflows/ci.yml installs Nix (cachix/install-nix-action@v27 or similar) and runs cargo test / cargo clippy --workspace --all-targets -- -W clippy::pedantic -D warnings / cargo fmt --check inside nix-shell.\n- README documents the pin: 'rustc version is whatever nixpkgs in npins/ ships'.\n- The new CI run on the resulting commit passes all three jobs green.\n- Local cargo build via direnv/nix-shell continues to work without manual intervention.",
+  "status": "open",
+  "priority": "high",
+  "created_by": "2ZD1",
+  "created_at": "2026-05-09T13:14:20.468003036Z",
+  "updated_at": "2026-05-09T13:14:20.468003036Z"
+}
