@@ -3,11 +3,12 @@
   "display_id": 37,
   "title": "Drop rust-version from workspace Cargo.toml",
   "description": "Current state: \n\nDesired state: \n\nReason: \n\nrust-version was set to 1.87 in the initial skeleton commit (3cd5721) and not revisited. None of the crates are published to crates.io, and the project is only ever built from this machine's nix shell (rustc 1.94+). Each time crosslink's transitive deps bump their MSRV, CI breaks while local dev keeps working silently (run 25601663135 was today's instance, fixed by #36 by bumping to 1.88).\n\nDrop rust-version entirely from [workspace.package] in Cargo.toml. No need for an MSRV contract on a binary-only personal project that's locked to one toolchain.\n\nAC:\n- Cargo.toml workspace.package no longer has a rust-version line.\n- cargo build --workspace passes.\n- CI run on the resulting commit passes (test + clippy + fmt all green).",
-  "status": "open",
+  "status": "closed",
   "priority": "low",
   "created_by": "2ZD1",
   "created_at": "2026-05-09T13:10:47.817797221Z",
-  "updated_at": "2026-05-09T13:10:47.882788903Z",
+  "updated_at": "2026-05-09T13:11:23.099655432Z",
+  "closed_at": "2026-05-09T13:11:23.099655432Z",
   "labels": [
     "refactor"
   ]
