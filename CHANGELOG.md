@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Debug: half-cleaned kickoff worktrees (admin dir vanishes, files survive) (#12)
 
 ### Changed
+- Fix CI: rust 1.87 too old for transitive deps (#35)
 - Quality pass: clippy pedantic clean workspace-wide (#33)
 - Quality pass: clippy pedantic cleanup in crossbridge-e2e (#32)
 - Quality pass: clippy pedantic cleanup in crossbridge-client (#31)
