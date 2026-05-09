@@ -1,6 +1,6 @@
 {
   "uuid": "1b7bc2e1-2f14-4c9b-bdd6-4efe04a88ad6",
-  "display_id": null,
+  "display_id": 39,
   "title": "Drop Determinate Systems magic-nix-cache from CI",
   "description": "Current state: \n\nDesired state: \n\nReason: \n\nMagic Nix Cache is deprecated (stops working Feb 2026), and the successor FlakeHub Cache requires Determinate Systems auth — overkill for a personal project. cache.nixos.org is already a fast binary cache, and Swatinem/rust-cache covers cargo target. Drop the magic-nix-cache step. Cost: ~30-60s extra per job pulling rustc/clippy/etc. fresh from cache.nixos.org. Acceptable for a personal project.\n\nAC:\n- .github/workflows/ci.yml no longer references DeterminateSystems/magic-nix-cache-action.\n- Resulting CI run on main passes all three jobs (test, clippy, fmt).",
   "status": "open",
