@@ -5,7 +5,8 @@ use std::io;
 use std::path::Path;
 
 /// Enumerate currently-registered peers by listing `*.socket` files in
-/// `socket_dir` (which is `/run/crossbridge/<own-slug>/` in production).
+/// `socket_dir` (which is `<socket_root>/<own-slug>/` in production; see
+/// [`crate::socket_root`]).
 ///
 /// Returns the peer slugs sorted alphabetically with the `.socket` suffix
 /// stripped. An existing-but-empty directory yields an empty Vec.

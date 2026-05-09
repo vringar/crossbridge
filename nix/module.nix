@@ -1,72 +1,63 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.services.crossbridge;
+  cfg = config.services.crossbridge-supervisor;
 in
 {
-  options.services.crossbridge = {
-    enable = lib.mkEnableOption "crossbridge cross-project coordination bridge";
+  options.services.crossbridge-supervisor = {
+    enable = lib.mkEnableOption "crossbridge per-user supervisor (peer-group socket coordinator)";
 
     package = lib.mkOption {
       type = lib.types.package;
       default = pkgs.callPackage ../default.nix { };
       defaultText = lib.literalExpression "pkgs.callPackage ../default.nix { }";
-      description = "The crossbridge package to use.";
+      description = "The crossbridge package providing the crossbridge-supervisor binary.";
     };
 
-    configFile = lib.mkOption {
-      type = lib.types.path;
-      description = "Path to the crossbridge.toml configuration file.";
-    };
-
-    interval = lib.mkOption {
+    socketRoot = lib.mkOption {
       type = lib.types.str;
-      default = "30s";
-      description = "How often to run the crossbridge polling cycle (systemd OnUnitActiveSec format).";
+      default = "%t/crossbridge";
+      description = ''
+        Runtime directory under which the supervisor binds its register socket
+        (`''${socketRoot}/register.socket`) and creates per-peer slug
+        subdirectories. The supervisor wipes this directory on startup.
+
+        The default uses the systemd specifier `%t`, which expands to
+        `$XDG_RUNTIME_DIR` (typically `/run/user/$UID`) for user units. The
+        module also configures `RuntimeDirectory = "crossbridge"` so systemd
+        creates and tears the directory down with the unit.
+
+        Exposed to the supervisor via `CROSSBRIDGE_SOCKET_ROOT`. Repo servers
+        and clients run by the same user must use the same value to find the
+        register socket.
+      '';
     };
 
     logLevel = lib.mkOption {
       type = lib.types.str;
-      default = "crossbridge=info";
-      description = "RUST_LOG filter string for crossbridge.";
+      default = "crossbridge_supervisor=info";
+      description = "RUST_LOG filter string for the supervisor.";
     };
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.services.crossbridge = {
-      description = "Crossbridge coordination cycle";
-      after = [ "network.target" ];
+    systemd.user.services.crossbridge-supervisor = {
+      description = "Crossbridge per-user supervisor";
+      wantedBy = [ "default.target" ];
 
       serviceConfig = {
-        Type = "oneshot";
-        ExecStart = "${cfg.package}/bin/crossbridge -c ${cfg.configFile}";
-        DynamicUser = true;
+        Type = "simple";
+        ExecStart = "${cfg.package}/bin/crossbridge-supervisor";
+        Restart = "on-failure";
+        RestartSec = "5s";
 
-        # Read access to repo paths referenced in the config.
-        # The user must ensure the crossbridge user can read the crosslink
-        # database directories (e.g. via group permissions or SupplementaryGroups).
-        ReadOnlyPaths = [ cfg.configFile ];
-
-        # Hardening
-        ProtectSystem = "strict";
-        ProtectHome = "read-only";
-        PrivateTmp = true;
-        NoNewPrivileges = true;
+        RuntimeDirectory = "crossbridge";
+        RuntimeDirectoryMode = "0700";
       };
 
       environment = {
         RUST_LOG = cfg.logLevel;
-      };
-    };
-
-    systemd.timers.crossbridge = {
-      description = "Run crossbridge on a regular interval";
-      wantedBy = [ "timers.target" ];
-
-      timerConfig = {
-        OnBootSec = cfg.interval;
-        OnUnitActiveSec = cfg.interval;
-        Unit = "crossbridge.service";
+        CROSSBRIDGE_SOCKET_ROOT = cfg.socketRoot;
       };
     };
   };

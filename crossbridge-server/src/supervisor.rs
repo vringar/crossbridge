@@ -152,9 +152,10 @@ pub async fn read_notification(stream: &mut UnixStream) -> Result<Option<Notific
 /// Convenience wrapper used by the main loop: returns the `(register_socket,
 /// runtime_root)` pair for cleanup paths derived from the supervisor's socket.
 pub fn runtime_root_from_socket(register_socket: &Path) -> PathBuf {
-    register_socket
-        .parent()
-        .map_or_else(|| PathBuf::from("/run/crossbridge"), Path::to_path_buf)
+    register_socket.parent().map_or_else(
+        || PathBuf::from(crossbridge_protocol::DEFAULT_SOCKET_ROOT),
+        Path::to_path_buf,
+    )
 }
 
 #[cfg(test)]

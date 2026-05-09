@@ -1,22 +1,22 @@
-//! Per-host supervisor for crossbridge.
+//! Per-user supervisor for crossbridge.
 //!
 //! Coordinates peer-group socket topology under a base directory (typically
-//! `/run/crossbridge/`). Repo servers connect to the register socket, send
-//! `Register { slug, group }`, and stay attached to a persistent stream over
-//! which the supervisor delivers `PeerJoined` / `PeerLeft` notifications for
-//! the same group.
+//! `$XDG_RUNTIME_DIR/crossbridge`). Repo servers connect to the register
+//! socket, send `Register { slug, group }`, and stay attached to a persistent
+//! stream over which the supervisor delivers `PeerJoined` / `PeerLeft`
+//! notifications for the same group.
 //!
 //! See `.design/supervisor.md` for the full specification.
 
 use std::collections::HashMap;
-use std::ffi::{OsStr, OsString};
+use std::ffi::OsString;
 use std::io;
 use std::path::{Path, PathBuf};
 
 use anyhow::{anyhow, Context, Result};
 use crossbridge_protocol::{
-    read_message, write_message, Notification, Register, RegisterResponse, SupervisorMessage,
-    DEFAULT_SOCKET_ROOT, SOCKET_ROOT_ENV,
+    default_socket_root, read_message, write_message, Notification, Register, RegisterResponse,
+    SupervisorMessage,
 };
 use tokio::io::AsyncReadExt;
 use tokio::net::unix::{OwnedReadHalf, OwnedWriteHalf};
@@ -28,24 +28,21 @@ use tracing::{debug, error, info, warn};
 type ConnId = u64;
 
 /// Resolve the register socket path with this precedence:
-/// 1. `flag` (e.g. `--socket /custom/register.socket`)
-/// 2. `$CROSSBRIDGE_SOCKET_ROOT/register.socket` if the env var is set
-/// 3. compiled-in default `/run/crossbridge/register.socket`
+/// 1. `flag` (e.g. `--socket /custom/register.socket`) — taken verbatim
+/// 2. otherwise `<root>/register.socket`, where `<root>` comes from
+///    [`default_socket_root`] (`$CROSSBRIDGE_SOCKET_ROOT` >
+///    `$XDG_RUNTIME_DIR/crossbridge` > compiled-in `/run/crossbridge`)
 ///
 /// `env_lookup` is parameterized so tests can inject env values without
 /// touching the global process environment.
 pub fn resolve_register_socket<F>(flag: Option<&Path>, env_lookup: F) -> PathBuf
 where
-    F: FnOnce(&str) -> Option<OsString>,
+    F: Fn(&str) -> Option<OsString>,
 {
     if let Some(p) = flag {
         return p.to_path_buf();
     }
-    if let Some(root) = env_lookup(SOCKET_ROOT_ENV) {
-        let root: &OsStr = &root;
-        return PathBuf::from(root).join("register.socket");
-    }
-    PathBuf::from(DEFAULT_SOCKET_ROOT).join("register.socket")
+    default_socket_root(env_lookup).join("register.socket")
 }
 
 /// Run the supervisor against the given register socket path.
@@ -351,6 +348,7 @@ fn spawn_eof_watcher(
 #[cfg(test)]
 mod resolve_register_socket_tests {
     use super::*;
+    use crossbridge_protocol::{DEFAULT_SOCKET_ROOT, SOCKET_ROOT_ENV, XDG_RUNTIME_DIR_ENV};
 
     #[test]
     fn flag_only_wins() {
@@ -360,9 +358,30 @@ mod resolve_register_socket_tests {
     }
 
     #[test]
-    fn env_only_used_when_no_flag() {
+    fn crossbridge_env_used_when_no_flag() {
         let resolved =
             resolve_register_socket(None, |k| (k == SOCKET_ROOT_ENV).then(|| "/srv/run".into()));
+        assert_eq!(resolved, PathBuf::from("/srv/run/register.socket"));
+    }
+
+    #[test]
+    fn xdg_runtime_dir_used_when_no_crossbridge_env() {
+        let resolved = resolve_register_socket(None, |k| {
+            (k == XDG_RUNTIME_DIR_ENV).then(|| "/run/user/1000".into())
+        });
+        assert_eq!(
+            resolved,
+            PathBuf::from("/run/user/1000/crossbridge/register.socket")
+        );
+    }
+
+    #[test]
+    fn crossbridge_env_overrides_xdg() {
+        let resolved = resolve_register_socket(None, |k| match k {
+            SOCKET_ROOT_ENV => Some("/srv/run".into()),
+            XDG_RUNTIME_DIR_ENV => Some("/run/user/1000".into()),
+            _ => None,
+        });
         assert_eq!(resolved, PathBuf::from("/srv/run/register.socket"));
     }
 
@@ -376,6 +395,9 @@ mod resolve_register_socket_tests {
     #[test]
     fn neither_falls_back_to_default() {
         let resolved = resolve_register_socket(None, |_| None);
-        assert_eq!(resolved, PathBuf::from("/run/crossbridge/register.socket"));
+        assert_eq!(
+            resolved,
+            PathBuf::from(DEFAULT_SOCKET_ROOT).join("register.socket")
+        );
     }
 }

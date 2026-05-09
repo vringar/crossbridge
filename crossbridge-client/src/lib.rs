@@ -7,27 +7,11 @@ pub mod labels;
 pub mod peers;
 pub mod slug;
 
-/// Default supervisor socket root. Per-peer sockets live at
-/// `<SOCKET_ROOT>/<own-slug>/<peer-slug>.socket`.
-///
-/// Re-exported from `crossbridge-protocol` so all three binaries share a
-/// single source of truth.
-pub use crossbridge_protocol::DEFAULT_SOCKET_ROOT as SOCKET_ROOT;
-
-/// Environment variable that overrides [`SOCKET_ROOT`]. The supervisor
-/// spec hard-codes `/run/crossbridge`; the override exists so integration
-/// tests can stand up a sandbox socket tree without root.
-///
-/// Re-exported from `crossbridge-protocol` so all three binaries share a
-/// single source of truth.
-pub use crossbridge_protocol::SOCKET_ROOT_ENV;
-
-/// Resolve the active socket root: the env override if set, otherwise the
-/// default [`SOCKET_ROOT`].
+/// Resolve the active socket root using the shared crossbridge precedence:
+/// `$CROSSBRIDGE_SOCKET_ROOT` > `$XDG_RUNTIME_DIR/crossbridge` > compiled-in
+/// `/run/crossbridge`. Per-peer sockets live at
+/// `<root>/<own-slug>/<peer-slug>.socket`.
 #[must_use]
 pub fn socket_root() -> std::path::PathBuf {
-    std::env::var_os(SOCKET_ROOT_ENV).map_or_else(
-        || std::path::PathBuf::from(SOCKET_ROOT),
-        std::path::PathBuf::from,
-    )
+    crossbridge_protocol::default_socket_root(|k| std::env::var_os(k))
 }

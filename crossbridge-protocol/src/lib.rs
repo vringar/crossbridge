@@ -4,6 +4,9 @@
 //! clients, plus length-prefixed framing helpers (sync `std::io` and async
 //! `tokio::io`). See `.design/protocol.md` for the full specification.
 
+use std::ffi::OsString;
+use std::path::PathBuf;
+
 use serde::{Deserialize, Serialize};
 
 mod framing;
@@ -12,15 +15,47 @@ pub use framing::{
     read_message, read_message_sync, write_message, write_message_sync, MAX_FRAME_SIZE,
 };
 
-/// Default runtime root for crossbridge sockets (supervisor register socket
-/// and per-peer listener sockets).
+/// Last-resort fallback runtime root, used when neither
+/// [`SOCKET_ROOT_ENV`] nor [`XDG_RUNTIME_DIR_ENV`] is set in the environment.
+/// In normal per-user deployments crossbridge runs under
+/// `$XDG_RUNTIME_DIR/crossbridge`; this constant exists so the binaries still
+/// have a defined location in degenerate environments (no logind session,
+/// minimal sandboxes, etc.).
 pub const DEFAULT_SOCKET_ROOT: &str = "/run/crossbridge";
 
-/// Environment variable that overrides [`DEFAULT_SOCKET_ROOT`] for all three
+/// Environment variable that overrides the resolved socket root for all three
 /// crossbridge binaries (supervisor, server, client). When set and no
 /// binary-specific CLI flag is provided, the binary uses this directory as
 /// its runtime root.
 pub const SOCKET_ROOT_ENV: &str = "CROSSBRIDGE_SOCKET_ROOT";
+
+/// Standard XDG environment variable pointing at the per-user runtime
+/// directory (typically `/run/user/$UID`). Crossbridge uses
+/// `$XDG_RUNTIME_DIR/crossbridge` as the default socket root.
+pub const XDG_RUNTIME_DIR_ENV: &str = "XDG_RUNTIME_DIR";
+
+/// Resolve the default crossbridge socket root, ignoring any per-binary CLI
+/// flag.
+///
+/// Precedence:
+/// 1. `$CROSSBRIDGE_SOCKET_ROOT` ([`SOCKET_ROOT_ENV`]) if set
+/// 2. `$XDG_RUNTIME_DIR/crossbridge` ([`XDG_RUNTIME_DIR_ENV`]) if set
+/// 3. Compiled-in fallback [`DEFAULT_SOCKET_ROOT`]
+///
+/// `env_lookup` is parameterized so tests can inject env values without
+/// touching the global process environment.
+pub fn default_socket_root<F>(env_lookup: F) -> PathBuf
+where
+    F: Fn(&str) -> Option<OsString>,
+{
+    if let Some(root) = env_lookup(SOCKET_ROOT_ENV) {
+        return PathBuf::from(root);
+    }
+    if let Some(xdg) = env_lookup(XDG_RUNTIME_DIR_ENV) {
+        return PathBuf::from(xdg).join("crossbridge");
+    }
+    PathBuf::from(DEFAULT_SOCKET_ROOT)
+}
 
 /// Errors produced by framing helpers and message (de)serialization.
 #[derive(Debug, thiserror::Error)]
@@ -41,7 +76,8 @@ pub type Result<T> = std::result::Result<T, Error>;
 
 /// Repo server → supervisor: identifies the server on the persistent stream.
 ///
-/// Sent once immediately after connecting to `/run/crossbridge/register.socket`.
+/// Sent once immediately after connecting to `<socket_root>/register.socket`
+/// (see [`default_socket_root`]).
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Register {
     pub slug: String,

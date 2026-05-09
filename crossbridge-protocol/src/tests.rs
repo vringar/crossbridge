@@ -1,4 +1,5 @@
 use super::*;
+use std::ffi::OsString;
 use std::io::Cursor;
 
 fn sample_register() -> Register {
@@ -213,4 +214,29 @@ fn sync_and_async_wire_compatible() {
         read_message(&mut cursor).await.unwrap()
     });
     assert_eq!(decoded, msg);
+}
+
+#[test]
+fn default_socket_root_prefers_crossbridge_env() {
+    let resolved = default_socket_root(|k| match k {
+        SOCKET_ROOT_ENV => Some(OsString::from("/srv/run")),
+        XDG_RUNTIME_DIR_ENV => Some(OsString::from("/run/user/1000")),
+        _ => None,
+    });
+    assert_eq!(resolved, PathBuf::from("/srv/run"));
+}
+
+#[test]
+fn default_socket_root_falls_back_to_xdg() {
+    let resolved = default_socket_root(|k| match k {
+        XDG_RUNTIME_DIR_ENV => Some(OsString::from("/run/user/1000")),
+        _ => None,
+    });
+    assert_eq!(resolved, PathBuf::from("/run/user/1000/crossbridge"));
+}
+
+#[test]
+fn default_socket_root_falls_back_to_compiled_in_default() {
+    let resolved = default_socket_root(|_| None);
+    assert_eq!(resolved, PathBuf::from(DEFAULT_SOCKET_ROOT));
 }

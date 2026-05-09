@@ -31,12 +31,11 @@ struct Cli {
     #[arg(long, default_value = ".")]
     repo_path: PathBuf,
 
-    /// Override the runtime socket root (default `/run/crossbridge`). Mainly
-    /// useful for tests and dev environments where `/run/crossbridge` is not
-    /// writable.
+    /// Override the runtime socket root. Mainly useful for tests and dev
+    /// environments that need an isolated socket tree.
     ///
-    /// Resolution precedence: this flag > `CROSSBRIDGE_SOCKET_ROOT` env var
-    /// > compiled-in default (`/run/crossbridge`).
+    /// Resolution precedence: this flag > `$CROSSBRIDGE_SOCKET_ROOT` >
+    /// `$XDG_RUNTIME_DIR/crossbridge` > compiled-in `/run/crossbridge`.
     #[arg(long)]
     runtime_root: Option<PathBuf>,
 }

@@ -15,9 +15,9 @@ struct Cli {
     /// Path to the register socket. The parent directory is used as the base
     /// directory for slug subdirectories and is wiped on startup.
     ///
-    /// Resolution precedence: this flag > `CROSSBRIDGE_SOCKET_ROOT` env var
-    /// (`<root>/register.socket`) > compiled-in default
-    /// (`/run/crossbridge/register.socket`).
+    /// Resolution precedence: this flag > `<root>/register.socket` where
+    /// `<root>` comes from `$CROSSBRIDGE_SOCKET_ROOT` >
+    /// `$XDG_RUNTIME_DIR/crossbridge` > compiled-in `/run/crossbridge`.
     #[arg(long)]
     socket: Option<PathBuf>,
 }
