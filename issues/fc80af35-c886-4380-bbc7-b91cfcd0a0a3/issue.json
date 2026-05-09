@@ -1,6 +1,6 @@
 {
   "uuid": "fc80af35-c886-4380-bbc7-b91cfcd0a0a3",
-  "display_id": null,
+  "display_id": 41,
   "title": "Skill file skill/crossbridge.md is not discoverable by Claude Code",
   "description": "Steps to reproduce:\n1. \n\nExpected: \nActual: \n\nMirror of GitHub issue: https://github.com/vringar/crossbridge/issues/1\n\nThe repo ships a Claude Code skill at skill/crossbridge.md, but in its current shape Claude Code will not pick it up. Two issues:\n\n1. **Filename.** Claude Code skill discovery looks for SKILL.md inside a directory named after the skill, not <skill>.md at the top level of skill/. The current path needs to be skill/crossbridge/SKILL.md.\n2. **Frontmatter.** Skills are technically loadable without frontmatter — Claude Code falls back to the first paragraph as the description — but in that mode the skill has no name and gets a description that wasn't written for invocation hints, so it won't be triggered reliably for relevant user messages. Skills are expected to declare YAML frontmatter with at least name and description. The current file has none.\n\n## Suggested fix\n\nMove skill/crossbridge.md → skill/crossbridge/SKILL.md and prepend YAML frontmatter:\n\n```yaml\n---\nname: crossbridge\ndescription: Use when sending or answering cross-project requests via crossbridge — the xb:* labeled-issue transport between crosslink repos. Covers ask, answer, and check.\n---\n```\n\nSee GH #1 for full discussion and rationale.",
   "status": "closed",
