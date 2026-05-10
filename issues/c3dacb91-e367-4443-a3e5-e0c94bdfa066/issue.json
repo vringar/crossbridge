@@ -3,11 +3,12 @@
   "display_id": 42,
   "title": "Update agent skill to v2 socket protocol",
   "description": "Steps to reproduce:\n1. \n\nExpected: \nActual: \n\n## Problem\n\n`skill/crossbridge/SKILL.md` documents the v1 polling-bridge workflow, not the\nshipped v2 socket-based architecture.\n\nConcrete drift:\n\n- Tells agents to label issues with `xb-target:<slug>` / `xb-status:open` and\n  wait for \"the bridge daemon\" to copy them. That label-driven flow is only\n  consumed by the legacy polling binary in `crossbridge/`. The v2 server does\n  not poll labels — clients must call `crossbridge-client submit/answer`.\n- Recommends `crossbridge-request` / `crossbridge-answer` shell helpers as the\n  primary entry points. Those scripts (in `script/`) only write the v1 labels;\n  under v2 they are inert.\n- \"Manual fallback\" sections write the same v1 labels — also inert under v2.\n- Footer says \"the bridge runs every ~30s\", which is v1 polling-cycle language.\n  v2 is event-driven via Unix sockets.\n- Never mentions `crossbridge-client` despite that being the only v2 entry\n  point an agent can use today.\n\nNet effect: an agent following this skill will appear to send a request but\nnothing on the v2 transport will fire.\n\n## What v2 actually wants the agent to do\n\n- ask: `crossbridge-client submit --issue <id> --target <slug>` (after\n  creating the issue with `crosslink issue create`).\n- answer: `crossbridge-client answer --issue <id>` once a `result` comment\n  has been added.\n- check: list inbound/outbound issues by `xb:inbound` / `xb:outbound` label.\n- The server appends a footer to every inbound issue's body telling the agent\n  to run `crossbridge-client answer --issue <id>` (see\n  `ANSWER_INSTRUCTION_FOOTER` in `crossbridge-server/src/handler.rs:23`).\n\n## Acceptance\n\n- `skill/crossbridge/SKILL.md` only references the v2 client commands.\n- All `xb-target:` / `xb-status:open` instructions removed.\n- \"Manual fallback\" sections either deleted or rewritten to invoke\n  `crossbridge-client` directly.\n- Polling-language (\"every ~30s\") replaced with the event-driven reality.\n- Cross-check against `.design/client.md`, `.design/server.md`, and\n  `crossbridge-server/src/handler.rs` so the skill matches real behavior.\n\n## Related\n\n- See companion issue for removal of the v1 `crossbridge/` crate; once removed,\n  `script/crossbridge-request` / `script/crossbridge-answer` and any remaining\n  references should be deleted as part of that work.",
-  "status": "open",
+  "status": "closed",
   "priority": "high",
   "created_by": "2ZD1",
   "created_at": "2026-05-09T21:38:06.012969625Z",
-  "updated_at": "2026-05-09T21:38:09.438881263Z",
+  "updated_at": "2026-05-10T00:29:27.548873411Z",
+  "closed_at": "2026-05-10T00:29:27.548873411Z",
   "labels": [
     "bug",
     "type:docs"
