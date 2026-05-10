@@ -1,0 +1,8 @@
+{
+  "uuid": "7534eed0-a72f-46c1-8b03-84655f9d6d34",
+  "issue_uuid": "c3dacb91-e367-4443-a3e5-e0c94bdfa066",
+  "author": "DiI0",
+  "content": "Result: rewrote skill/crossbridge/SKILL.md to v2 socket protocol. Replaced crossbridge-request/crossbridge-answer with crossbridge-client submit/answer/peers; removed xb-target:<slug> instruction and the 'Manual fallback' label-driven blocks; replaced the 'every ~30s' polling sentence with event-driven semantics; documented the live status-label set (open/pending/answered/resolved) sourced from crossbridge-server/src/handler.rs and crossbridge-client/src/labels.rs. cargo fmt --check, cargo clippy -D warnings and cargo test all green.",
+  "created_at": "2026-05-10T00:19:09.909437737Z",
+  "kind": "result"
+}
