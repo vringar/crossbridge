@@ -1,0 +1,8 @@
+{
+  "uuid": "067cf029-c1e4-46f0-84be-12fc42823125",
+  "issue_uuid": "c3dacb91-e367-4443-a3e5-e0c94bdfa066",
+  "author": "DiI0",
+  "content": "Plan: Rewrite skill/crossbridge/SKILL.md to v2 socket protocol. Replace v1 label-driven flow (xb-target/xb-status:open + crossbridge-request/crossbridge-answer scripts) with crossbridge-client subcommands (peers/submit/answer). Drop polling-cycle language, replace 'Manual fallback' sections, and reference the answer-instruction footer that the v2 server appends. Cross-checked against .design/client.md, .design/server.md, and crossbridge-server/src/handler.rs:23.",
+  "created_at": "2026-05-10T00:16:22.668594864Z",
+  "kind": "plan"
+}
