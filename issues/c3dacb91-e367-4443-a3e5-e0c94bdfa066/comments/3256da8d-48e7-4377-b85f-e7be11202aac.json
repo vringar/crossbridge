@@ -1,0 +1,10 @@
+{
+  "uuid": "3256da8d-48e7-4377-b85f-e7be11202aac",
+  "issue_uuid": "c3dacb91-e367-4443-a3e5-e0c94bdfa066",
+  "author": "2ZD1",
+  "content": "Landed via cherry-pick onto main as f13006f. Used the dedicated agent's SKILL.md rewrite (kept all four xb-status states and the Unix-socket transport description) over #43's bundled version which had dropped open/resolved and reverted the frontmatter description to v1 wording.",
+  "created_at": "2026-05-10T00:29:20.121773890Z",
+  "kind": "note",
+  "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+  "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAqW1n9Mi9IP0jgmAUq0LFoiRy7zMUVu7k8zufOLyJ+b6sFKgNMGEuiTIds+C7slneAjP/9cIkfBrthW8+DZNeAg=="
+}
