@@ -1,0 +1,10 @@
+{
+  "uuid": "1bcfa79a-874f-4d7e-a3df-b8a23eebcc34",
+  "issue_uuid": "63e37641-f3e2-43e3-8e8a-8a55fab810f4",
+  "author": "2ZD1",
+  "content": "Landed via cherry-pick onto main as 868e65c. Took the v1 crate removal, default.nix mainProgram fix, README/CHANGELOG cleanup, and script/ deletion as-is; SKILL.md hunks dropped (resolved with -X ours) in favor of #42's better rewrite. cargo test --workspace and cargo clippy --workspace -- -D warnings both pass.",
+  "created_at": "2026-05-10T00:29:29.743849908Z",
+  "kind": "note",
+  "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+  "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAqyZDuq1h9zj+pfcRKVY7zVUNPIZJwJNXDXkKyoCbP+9vePprOTcCxFVEUm/VwMBJCzVJNVVH4eMdA2uqsmIEAA=="
+}
