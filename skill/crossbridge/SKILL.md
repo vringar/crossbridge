@@ -1,61 +1,69 @@
 ---
 name: crossbridge
-description: Use when sending or answering cross-project requests via crossbridge — the xb:* labeled-issue transport between crosslink repos. Covers ask, answer, and check.
+description: Use when sending or answering cross-project requests via crossbridge — the Unix-socket transport between crosslink repos. Covers ask, answer, and check.
 ---
 
 ## Crossbridge — cross-project requests
 
 Crossbridge lets you ask questions of agents in other repos, answer
-requests from them, and check status. All operations use crosslink issues
-with `xb:` labels as the transport.
+requests from them, and check status. Transport is event-driven over
+per-repo Unix sockets; agents drive it with the `crossbridge-client` CLI.
+Local issues still carry `xb:*` labels so you can find requests with
+`crosslink issue list`, but the labels are bookkeeping — not the
+delivery mechanism.
 
 ### Lifecycle (30-second summary)
 
-1. You **ask** → creates an outbound issue with `xb:outbound` + `xb-target:<slug>`
-2. The bridge daemon copies it to the target repo as an inbound issue
-3. Target agent **answers** → posts a `result` comment, marks `xb-status:answered`
-4. The bridge copies the answer back, marks `xb-status:resolved`, closes both issues
+1. You **ask** → `crossbridge-client submit` opens the socket to the
+   target repo's server, which creates an inbound issue there. On
+   success the client labels your local issue `xb:outbound` /
+   `xb-status:pending` / `xb-ref:<target-uuid>`.
+2. The target agent works on the inbound issue (labeled `xb:inbound`)
+   and posts a `result` comment.
+3. They run `crossbridge-client answer` → the answer is delivered back
+   over the socket; the server marks your local issue
+   `xb-status:resolved` and closes it.
+
+There is no daemon polling labels, and no scheduled sync interval —
+every step is a single one-shot socket round-trip.
 
 ---
 
 ### ask — send a request to another repo
 
-```sh
-crossbridge-request "Your question or request" <target-slug>
-```
-
-If the script is not on PATH, do it manually:
+First create the local issue, then submit it:
 
 ```sh
 id=$(crosslink issue create "Your question or request" -p high --quiet)
-crosslink issue label "$id" type:request
-crosslink issue label "$id" xb:outbound
-crosslink issue label "$id" xb-status:open
-crosslink issue label "$id" "xb-target:<slug>"
+crossbridge-client submit --issue "$id" --target <slug>
 ```
 
-If you use an unknown target slug, the bridge will comment on your issue
-with the list of available targets.
+To see which targets are reachable right now:
+
+```sh
+crossbridge-client peers
+```
+
+If the target socket is not present, `submit` exits non-zero with
+`peer '<slug>' not available (not connected)` and leaves your local
+issue's labels unchanged — re-run after the peer's server is up.
 
 ---
 
 ### answer — respond to an inbound request
 
-First find inbound requests (see **check** below), then answer:
-
-```sh
-crossbridge-answer <issue-id> "your detailed answer"
-```
-
-Manual fallback:
+The inbound issue's body ends with a footer telling you exactly what to
+run. After posting your `result` comment:
 
 ```sh
 crosslink issue comment <id> "your detailed answer" --kind result
-crosslink issue unlabel <id> xb-status:open
-crosslink issue label <id> xb-status:answered
+crossbridge-client answer --issue <id>
 ```
 
-Inbound requests block another agent's work — treat them as high priority.
+`answer` reads every `kind=result` comment on the issue, ships them to
+the source repo over its socket, then marks the local issue
+`xb-status:answered` and closes it. Inbound requests block another
+agent's work — treat them as high priority.
 
 ---
 
@@ -73,9 +81,12 @@ crosslink issue list -l xb:inbound -s open
 crosslink issue list -l xb:outbound
 ```
 
-Filter further by status label: `xb-status:open` (not yet picked up),
-`xb-status:pending` (delivered, awaiting answer), `xb-status:resolved`
-(answer received), `xb-status:error` (routing failed).
+Status labels reflect where each issue sits in the round-trip:
+`xb-status:open` (inbound just arrived, no one has answered yet),
+`xb-status:pending` (outbound delivered, awaiting peer answer),
+`xb-status:answered` (you have answered an inbound),
+`xb-status:resolved` (an outbound's answer has been received and the
+issue closed).
 
 ---
 
@@ -83,4 +94,7 @@ Filter further by status label: `xb-status:open` (not yet picked up),
 
 - At session start
 - Periodically during idle moments
-- After sending a request, poll until resolved (bridge runs every ~30s)
+- After sending a request — but there is no fixed bridge interval to
+  wait for; the answer arrives the moment the peer agent runs
+  `crossbridge-client answer`. Re-run the check commands when you want
+  a fresh view.
