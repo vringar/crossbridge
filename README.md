@@ -98,11 +98,7 @@ nix-shell --run "cargo build --release"     # via cargo (sqlite + pkg-config)
 
 The Rust toolchain is pinned via [`npins`](https://github.com/andir/npins) — `npins/sources.json` locks a specific `nixpkgs` revision so local dev and CI use the same `rustc` and `clippy`. Bump with `npins update nixpkgs`.
 
-The package installs:
-
-- `crossbridge-supervisor`, `crossbridge-server`, `crossbridge-client` — the three v2 binaries
-- `crossbridge` — **legacy** one-shot polling binary; kept for now but not part of the new architecture (see [`crossbridge/README.md`](crossbridge/README.md))
-- `crossbridge-request`, `crossbridge-answer` — helper scripts used by the agent skill
+The package installs `crossbridge-supervisor`, `crossbridge-server`, and `crossbridge-client` — the three v2 binaries.
 
 ## Repo layout
 
@@ -113,10 +109,8 @@ The package installs:
 | `crossbridge-server/` | Per-repo server |
 | `crossbridge-client/` | Per-agent CLI |
 | `crossbridge-e2e/` | Workspace integration tests (real binaries) |
-| `crossbridge/` | Legacy polling binary (predates v2) |
 | `.design/` | Architecture + per-component specs (source of truth) |
 | `nix/module.nix` | NixOS user-mode systemd module |
-| `script/` | Helper shell scripts shipped in the package |
 | `skill/crossbridge/SKILL.md` | Agent-facing skill: ask / answer / check |
 
 Each crate has its own `README.md` with a thumbnail and a pointer to the relevant design doc.

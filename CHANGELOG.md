@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Removed
+- Legacy v1 polling crate (`crossbridge/`) and its `crossbridge-request` / `crossbridge-answer` helper scripts. The v2 supervisor + server + client architecture is now the only shipped path; `nix-build` no longer installs the v1 binary or scripts (#43)
+- v1 instructions from `skill/crossbridge/SKILL.md`; the skill now references `crossbridge-client submit/answer` and the v2 `xb:*` labels exclusively (#42)
+
 ### Added
 - Use npins to pin nixpkgs (and rustc) for deterministic local + CI builds (#38)
 - Add GitHub Actions CI for tests, clippy pedantic, and fmt (#34)

@@ -1,7 +1,6 @@
 [workspace]
 resolver = "2"
 members = [
-    "crossbridge",
     "crossbridge-client",
     "crossbridge-e2e",
     "crossbridge-protocol",

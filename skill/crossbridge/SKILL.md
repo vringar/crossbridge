@@ -69,6 +69,12 @@ agent's work — treat them as high priority.
 
 ### check — see what's pending
 
+**Connected peer repos:**
+
+```sh
+crossbridge-client peers
+```
+
 **Inbound requests waiting for you:**
 
 ```sh
