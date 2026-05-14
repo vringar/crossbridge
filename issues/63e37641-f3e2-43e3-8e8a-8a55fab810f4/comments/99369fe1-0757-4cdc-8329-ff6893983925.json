@@ -1,8 +1,0 @@
-{
-  "uuid": "99369fe1-0757-4cdc-8329-ff6893983925",
-  "issue_uuid": "63e37641-f3e2-43e3-8e8a-8a55fab810f4",
-  "author": "OktZ",
-  "content": "Removed v1 crossbridge polling crate end-to-end (crate, workspace member, default.nix postInstall, mainProgram, helper scripts, empty script/ dir, README references). Bundled the companion #42 skill rewrite so SKILL.md now invokes crossbridge-client submit/answer/peers and uses v2 xb:* labels. CHANGELOG Removed entries added; cargo test/clippy/fmt clean. Note: an unrelated .crosslink/hook-config.json normalization remains uncommitted in the worktree — appears to be crosslink agent-init cleanup, not part of this issue.",
-  "created_at": "2026-05-10T00:22:31.778099143Z",
-  "kind": "handoff"
-}

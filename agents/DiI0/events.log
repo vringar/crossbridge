@@ -1,2 +1,0 @@
-{"agent_id":"DiI0","agent_seq":1,"timestamp":"2026-05-10T00:15:01.661332521Z","event":{"type":"LockClaimed","issue_display_id":42}}
-{"agent_id":"DiI0","agent_seq":2,"timestamp":"2026-05-10T00:19:57.790637465Z","event":{"type":"LockReleased","issue_display_id":42}}
