@@ -1,0 +1,10 @@
+{
+  "uuid": "5bf7102e-8ec9-4154-8480-b78d49bfe85a",
+  "issue_uuid": "e52c6819-b984-4b99-a1d3-fb91671747d0",
+  "author": "desktop",
+  "content": "Duplicate of #45 — that one carries the active kickoff worker (IS4n-lzPH-...-7653). This issue was an orphan from a failed hub-cache commit during the original `crosslink issue create`; the local index recorded it before the retry created #45.",
+  "created_at": "2026-05-14T15:07:59.952922680Z",
+  "kind": "note",
+  "signed_by": "SHA256:Z3rEXNb3m5pTVbDpOH0aQthjH5DQ6uSjv1qxawrtDOk",
+  "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAg52EZBzRO5K78vCSchgL2iLRuIldPW0wLMoBoA/5K3CoAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABA2uHZVzTuvuUQlCblb7h3sqDdoVnGV+PMHM7qEHjYIB0aOD4ePs/A2xg1Hv7ZmsZUNNWVRCUDdj0FAqXaEvxtBQ=="
+}
