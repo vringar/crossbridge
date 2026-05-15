@@ -12,8 +12,8 @@ that depends on `crosslink`.
 
 ## Requirements
 
-- CLI: `crossbridge-server --group <group> [--slug <slug>] [--repo-path <path>]`. `--repo-path` defaults to current directory; `--slug` defaults to slug derived from `git`/`jj` origin remote.
-- Slug derivation: take `git remote get-url origin` (or `jj git remote list` if `.jj/` exists), strip optional `.git`, take the last path segment. Fail with a clear error if no origin remote is configured.
+- CLI: `crossbridge-server --group <group> [--slug <slug>] [--repo-path <path>]`. `--repo-path` defaults to current directory.
+- Slug resolution (precedence): `--slug <slug>` flag > `$CROSSBRIDGE_OWN_SLUG` env var > derive from the `origin` remote of `--repo-path` (`git remote get-url origin`, or `jj git remote list` if `.jj/` exists; strip optional `.git`, take the last path segment). When all three fail, error with a clear `deriving slug from <path>` chain. The flag and env hooks exist for repos with no `origin` remote (fresh local clones, ephemeral worktrees). An empty/whitespace `--slug` value is rejected with `--slug must be a non-empty string`; an empty/whitespace or non-UTF-8 `$CROSSBRIDGE_OWN_SLUG` is silently ignored. The env var name (`CROSSBRIDGE_OWN_SLUG`) and the lookup helper are exported from `crossbridge-protocol` so server and client agree.
 - On startup, verify the crosslink DB exists at `<repo-path>/.crosslink/issues.db` before connecting to the supervisor.
 - Connect to the supervisor at `/run/crossbridge/register.socket` and send `Register { slug, group }` exactly once.
 - After `RegisterResponse::Ack { peers }`, create a Unix listening socket at `/run/crossbridge/<peer-slug>/<own-slug>.socket` for each peer (idempotent mkdir of the parent directory; remove and recreate the socket file if it already exists).
@@ -62,7 +62,7 @@ crossbridge-server --group <group> [--slug <slug>] [--repo-path <path>]
 ```
 
 - `--group`: the peer group (e.g. "amd-psp"). Required.
-- `--slug`: repo slug. If omitted, derived from git/jj origin remote.
+- `--slug`: repo slug. Precedence: flag > `$CROSSBRIDGE_OWN_SLUG` env var > derived from git/jj origin remote.
 - `--repo-path`: path to the repo root. Defaults to current directory.
   The crosslink DB is at `<repo-path>/.crosslink/issues.db`.
 
@@ -179,22 +179,33 @@ When the supervisor stream hits EOF or error:
 4. On successful reconnect: re-register, receive fresh peer list, recreate
    listener sockets
 
-## Slug Derivation
+## Slug Resolution
 
-When `--slug` is not provided, derive from the git/jj origin remote:
+Precedence (matching `crossbridge-client`):
 
-```
-git remote get-url origin
-```
+1. **`--slug <slug>` flag** — explicit override. Trimmed; empty/whitespace
+   rejected with `--slug must be a non-empty string`.
+2. **`$CROSSBRIDGE_OWN_SLUG` env var** — set once in the environment.
+   Trimmed; empty/whitespace or non-UTF-8 values are silently ignored so
+   resolution falls through.
+3. **Derive from `--repo-path`'s `origin` remote**:
 
-Parse the URL to extract the repo name:
-- `git@github.com:AMD-PSP/firmware.git` → `firmware`
-- `https://github.com/AMD-PSP/firmware` → `firmware`
-- `https://github.com/AMD-PSP/firmware.git` → `firmware`
+   ```
+   git remote get-url origin
+   # → git@github.com:AMD-PSP/firmware.git → firmware
+   # → https://github.com/AMD-PSP/firmware  → firmware
+   # → https://github.com/AMD-PSP/firmware.git → firmware
+   ```
 
-Strip trailing `.git`, take the last path component.
+   Strip trailing `.git`, take the last path component. If `.jj/` exists,
+   use `jj git remote list` and parse the `origin` entry instead.
 
-The same logic is used by `crossbridge-client`.
+The constant `OWN_SLUG_ENV` and the helper `own_slug_from_env` live in
+`crossbridge-protocol` so all three binaries (supervisor, server, client)
+agree on the env var name. The flag-vs-env-vs-derive composition itself
+is duplicated per binary (`crossbridge-server::slug::resolve_slug` and
+`crossbridge-client::slug::resolve_own_slug`) because each binary's
+derive entry point has a slightly different name and signature.
 
 ## Dependencies
 

@@ -11,8 +11,8 @@ and exits.
 
 ## Requirements
 
-- Subcommands: `peers`, `submit --issue <id> --target <slug>`, `answer --issue <id>`.
-- Slug derivation (own slug): `git remote get-url origin` (or `jj git remote list` if `.jj/` exists), strip optional `.git`, take last path segment. Fail with `cannot determine repo slug from git remote` if it cannot be derived.
+- Subcommands: `peers`, `submit --issue <id> --target <slug>`, `answer --issue <id>`. A global `--slug <slug>` flag overrides own-slug derivation for any subcommand.
+- Own-slug resolution (precedence): `--slug <slug>` flag > `$CROSSBRIDGE_OWN_SLUG` env var > derive from the `origin` remote of the current repo (`git remote get-url origin`, or `jj git remote list` if `.jj/` exists; strip optional `.git`, take last path segment). When all three fail (no flag, env unset, no parseable origin URL), error with `cannot determine repo slug from git remote`. The flag and env hooks exist so the client works in repos with no `origin` remote (fresh local clones, ephemeral worktrees). Both inputs are trimmed; an empty/whitespace-only `--slug` value is rejected with `--slug must be a non-empty string`, an empty/whitespace-only or non-UTF-8 `$CROSSBRIDGE_OWN_SLUG` is silently ignored and resolution falls through to derivation.
 - `peers`: list `*.socket` files in `/run/crossbridge/<own-slug>/`, strip the `.socket` suffix, print one slug per line. Empty output if the directory is empty. If the directory does not exist, error with `not registered with crossbridge (no socket dir)`.
 - `submit --issue <id> --target <slug>`:
   - Open `<repo-root>/.crosslink/issues.db` and read issue `<id>`; if missing, error with `issue #<id> not found`.
@@ -58,10 +58,14 @@ created by peer repo servers.
 ## CLI
 
 ```
-crossbridge-client peers
-crossbridge-client submit --issue <id> --target <slug>
-crossbridge-client answer --issue <id>
+crossbridge-client [--slug <slug>] peers
+crossbridge-client [--slug <slug>] submit --issue <id> --target <slug>
+crossbridge-client [--slug <slug>] answer --issue <id>
 ```
+
+The optional `--slug <slug>` flag is global (accepted by every subcommand)
+and overrides own-slug derivation. See [Slug Derivation](#slug-derivation)
+below.
 
 ### `peers`
 
@@ -82,7 +86,7 @@ print nothing (no peers registered).
 
 Submit a local issue to a peer repo:
 
-1. Derive own slug from git/jj origin remote
+1. Resolve own slug (flag > env > git/jj origin remote — see below)
 2. Open local crosslink DB at `.crosslink/issues.db`
 3. Read issue by ID — verify it exists, get title, body, labels, UUID
 4. Verify target socket exists at `/run/crossbridge/<own-slug>/<target>.socket`
@@ -102,7 +106,7 @@ ensuring labels reflect actual delivery state.
 
 Send an answer back to the issue's source repo:
 
-1. Derive own slug from git/jj origin remote
+1. Resolve own slug (flag > env > git/jj origin remote — see below)
 2. Open local crosslink DB
 3. Read issue by ID — verify it exists and has `xb:inbound` label
 4. Extract `xb-source:<slug>` label to determine the source repo
@@ -116,24 +120,38 @@ Send an answer back to the issue's source repo:
 
 ## Slug Derivation
 
-Same logic as the repo server:
+Own-slug resolution precedence:
 
-```sh
-git remote get-url origin
-# git@github.com:AMD-PSP/firmware.git → firmware
-# https://github.com/AMD-PSP/firmware  → firmware
-```
+1. **`--slug <slug>` flag** — explicit per-invocation override. Trimmed; an
+   empty/whitespace value is rejected with
+   `--slug must be a non-empty string`.
+2. **`$CROSSBRIDGE_OWN_SLUG` env var** — set once in the shell or per-agent
+   environment. Trimmed; empty/whitespace or non-UTF-8 values are ignored
+   (resolution falls through to derivation rather than erroring, so a stray
+   `export CROSSBRIDGE_OWN_SLUG=` does not block clients in repos that *do*
+   have an origin remote).
+3. **Derive from origin remote** — same logic as the repo server:
 
-Parse URL, strip `.git`, take last path component.
+   ```sh
+   git remote get-url origin
+   # git@github.com:AMD-PSP/firmware.git → firmware
+   # https://github.com/AMD-PSP/firmware  → firmware
+   ```
 
-The CLI runs this on every invocation (no cached state). The cost is
-negligible — one `git` subprocess.
+   Parse URL, strip `.git`, take last path component. If `.jj/` exists,
+   use `jj git remote list` and parse the origin entry instead.
 
-If jj is detected (`.jj/` directory exists), use:
-```sh
-jj git remote list
-```
-and parse the origin entry.
+The flag and env hooks exist for repos with no `origin` remote (fresh
+local clones, ephemeral worktrees) where derivation would fail with
+`cannot determine repo slug from git remote`. The constant
+`OWN_SLUG_ENV` and the env-lookup helper `own_slug_from_env` are exported
+from `crossbridge-protocol` so the supervisor / server / client agree on
+the env var name; the flag-vs-env-vs-derive composition lives in each
+binary's own `slug.rs`.
+
+The CLI runs the chosen resolution on every invocation (no cached state).
+The cost is negligible — at most one `git` subprocess in the derive
+fallback.
 
 ## Synchronous Design
 
@@ -162,7 +180,8 @@ helpers from `crossbridge-protocol`.
 | Server returns error | Print server's error message, exit non-zero |
 | Issue missing required labels | Error: "issue #N is not an inbound crossbridge issue" |
 | No result comments to send | Send answer with empty comments list (server handles) |
-| Can't determine own slug | Error: "cannot determine repo slug from git remote" |
+| Can't determine own slug (no flag, no env, no parseable origin) | Error: "cannot determine repo slug from git remote" |
+| `--slug` value is empty or whitespace-only | Error: "--slug must be a non-empty string" |
 | Own socket directory doesn't exist | Error: "not registered with crossbridge (no socket dir)" |
 
 ## Agent Integration
