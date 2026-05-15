@@ -1,8 +1,0 @@
-{
-  "uuid": "3763f769-2d7e-4d54-83c6-b0533812e29f",
-  "issue_uuid": "740c91b6-a927-4bac-89a3-26d0104e9f17",
-  "author": "ChG1",
-  "content": "Result: derive_from_repo now emits an actionable error when no `origin` remote is found. First line: 'pass `--slug <NAME>` explicitly: cannot auto-derive repo slug for <path> (no `origin` remote configured)' followed by an example invocation. main.rs drops the redundant .with_context() so the actionable line stays on top. Refactored jj_origin_url/git_origin_url to return Result<Option<String>>; Ok(None) signals 'no origin remote' (non-success exit or missing 'origin' entry). Errors are reserved for spawn failures. Added unit test derive_from_repo_no_origin_is_actionable that git-inits a tempdir and asserts the error message names --slug on the first line, mentions 'origin', and contains neither 'git remote get-url origin' nor 'jj git remote list'. cargo test (9 slug tests + 8 integration), clippy -D warnings, fmt --check all green. Verified manually by running crossbridge-server in an empty git repo.",
-  "created_at": "2026-05-14T15:03:00.259279014Z",
-  "kind": "result"
-}

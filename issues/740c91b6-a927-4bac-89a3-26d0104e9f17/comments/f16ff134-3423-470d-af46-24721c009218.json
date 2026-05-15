@@ -1,8 +1,0 @@
-{
-  "uuid": "f16ff134-3423-470d-af46-24721c009218",
-  "issue_uuid": "740c91b6-a927-4bac-89a3-26d0104e9f17",
-  "author": "ChG1",
-  "content": "Fixed #45: crossbridge-server now emits an actionable error when slug auto-derivation fails — first line names --slug as the fix and cites 'no origin remote configured' without leaking the literal jj/git command strings. slug.rs origin readers refactored to Result<Option<String>>; main.rs drops the .with_context wrap so the actionable line stays on top. Unit test derive_from_repo_no_origin_is_actionable added. cargo test (9 slug + 8 integration), cargo clippy -D warnings, cargo fmt --check all clean; verified by running the binary against an empty git init dir. Caveat: 'crosslink issue comment' failed to log progress comments because the configured signing key /home/vringar/projects/AMD-PSP/crossbridge/.crosslink/keys/desktop_ed25519 is not present on this machine; the code work is unaffected. The pre-existing .crosslink/hook-config.json modifications in the worktree were NOT committed (out of scope).",
-  "created_at": "2026-05-14T15:04:19.063047538Z",
-  "kind": "handoff"
-}

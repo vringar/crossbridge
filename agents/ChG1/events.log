@@ -1,2 +1,0 @@
-{"agent_id":"ChG1","agent_seq":1,"timestamp":"2026-05-14T14:57:46.153405212Z","event":{"type":"LockClaimed","issue_display_id":45}}
-{"agent_id":"ChG1","agent_seq":2,"timestamp":"2026-05-14T15:04:18.519462641Z","event":{"type":"LockReleased","issue_display_id":45}}

@@ -1,8 +1,0 @@
-{
-  "uuid": "0a7c8828-a913-455a-b2c8-5c82b6d37024",
-  "issue_uuid": "740c91b6-a927-4bac-89a3-26d0104e9f17",
-  "author": "ChG1",
-  "content": "Plan: Change jj_origin_url/git_origin_url to return Result<Option<String>> — Ok(None) when no origin remote is configured (non-success exit). derive_from_repo wraps that None with the actionable error: first line names --slug as the fix, cites the cause (no origin remote), and omits the literal jj/git command strings. Drop the .with_context() wrapper in main.rs so the actionable line stays at the top. Add unit test: git-init a tempdir without a remote and assert the error names --slug and does not leak command strings.",
-  "created_at": "2026-05-14T15:00:20.183303297Z",
-  "kind": "plan"
-}
