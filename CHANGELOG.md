@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Convert to Cargo workspace, implement shared protocol crate with postcard message types and framing helpers (#4)
 
 ### Fixed
+- crossbridge-server: actionable error when slug derivation fails — point user at --slug (#45)
 - Update agent skill to v2 socket protocol (#42)
 - Move agent skill to `skill/crossbridge/SKILL.md` with frontmatter so Claude Code discovers it (L1, #1)
 - Fix CI: rust 1.87 too old for transitive deps (#36)
