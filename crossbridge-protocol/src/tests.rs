@@ -240,3 +240,41 @@ fn default_socket_root_falls_back_to_compiled_in_default() {
     let resolved = default_socket_root(|_| None);
     assert_eq!(resolved, PathBuf::from(DEFAULT_SOCKET_ROOT));
 }
+
+#[test]
+fn own_slug_from_env_returns_set_value() {
+    let resolved = own_slug_from_env(|k| (k == OWN_SLUG_ENV).then(|| OsString::from("firmware")));
+    assert_eq!(resolved.as_deref(), Some("firmware"));
+}
+
+#[test]
+fn own_slug_from_env_trims_whitespace() {
+    let resolved =
+        own_slug_from_env(|k| (k == OWN_SLUG_ENV).then(|| OsString::from("  firmware\n")));
+    assert_eq!(resolved.as_deref(), Some("firmware"));
+}
+
+#[test]
+fn own_slug_from_env_none_when_unset() {
+    assert_eq!(own_slug_from_env(|_| None), None);
+}
+
+#[test]
+fn own_slug_from_env_none_when_empty() {
+    let resolved = own_slug_from_env(|k| (k == OWN_SLUG_ENV).then(OsString::new));
+    assert_eq!(resolved, None);
+}
+
+#[test]
+fn own_slug_from_env_none_when_whitespace_only() {
+    let resolved = own_slug_from_env(|k| (k == OWN_SLUG_ENV).then(|| OsString::from("   \t")));
+    assert_eq!(resolved, None);
+}
+
+#[test]
+fn own_slug_from_env_none_when_non_utf8() {
+    use std::os::unix::ffi::OsStringExt;
+    let bad = OsString::from_vec(vec![0xFF, 0xFE]);
+    let resolved = own_slug_from_env(|k| (k == OWN_SLUG_ENV).then(|| bad.clone()));
+    assert_eq!(resolved, None);
+}

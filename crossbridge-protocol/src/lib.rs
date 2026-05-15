@@ -34,6 +34,32 @@ pub const SOCKET_ROOT_ENV: &str = "CROSSBRIDGE_SOCKET_ROOT";
 /// `$XDG_RUNTIME_DIR/crossbridge` as the default socket root.
 pub const XDG_RUNTIME_DIR_ENV: &str = "XDG_RUNTIME_DIR";
 
+/// Environment variable that overrides the binary's own slug derivation when
+/// no `--slug` CLI flag is provided. Useful in repos with no `origin` remote
+/// (fresh local clones, ephemeral worktrees) where deriving from the git/jj
+/// remote would fail. When set to a non-UTF-8 value the env is ignored and
+/// the binary falls through to the next resolution step.
+pub const OWN_SLUG_ENV: &str = "CROSSBRIDGE_OWN_SLUG";
+
+/// Read [`OWN_SLUG_ENV`] from `env_lookup` and return its UTF-8 value, or
+/// `None` if the variable is unset, empty, or non-UTF-8.
+///
+/// `env_lookup` is parameterized so tests can inject env values without
+/// touching the global process environment.
+pub fn own_slug_from_env<F>(env_lookup: F) -> Option<String>
+where
+    F: Fn(&str) -> Option<OsString>,
+{
+    let raw = env_lookup(OWN_SLUG_ENV)?;
+    let s = raw.into_string().ok()?;
+    let trimmed = s.trim();
+    if trimmed.is_empty() {
+        None
+    } else {
+        Some(trimmed.to_string())
+    }
+}
+
 /// Resolve the default crossbridge socket root, ignoring any per-binary CLI
 /// flag.
 ///

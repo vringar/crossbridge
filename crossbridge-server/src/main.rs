@@ -11,7 +11,7 @@ use clap::Parser;
 
 use crossbridge_server::paths::{resolve_runtime_root, SocketLayout};
 use crossbridge_server::run::{self, ServerConfig};
-use crossbridge_server::slug;
+use crossbridge_server::slug::resolve_slug;
 
 #[derive(Debug, Parser)]
 #[command(
@@ -23,7 +23,12 @@ struct Cli {
     #[arg(long)]
     group: String,
 
-    /// Repo slug. If omitted, derived from the origin remote of `--repo-path`.
+    /// Repo slug.
+    ///
+    /// Resolution precedence: this flag > `$CROSSBRIDGE_OWN_SLUG` > derived
+    /// from the `origin` remote of `--repo-path`. Pass this (or set the env
+    /// var) in a repo with no `origin` remote (fresh local clones, ephemeral
+    /// worktrees) where derivation would fail.
     #[arg(long)]
     slug: Option<String>,
 
@@ -54,11 +59,7 @@ fn main() -> Result<()> {
         .canonicalize()
         .with_context(|| format!("resolving --repo-path {}", cli.repo_path.display()))?;
 
-    let slug = match cli.slug {
-        Some(s) => s,
-        None => slug::derive_from_repo(&repo_path)
-            .with_context(|| format!("deriving slug from {}", repo_path.display()))?,
-    };
+    let slug = resolve_slug(cli.slug.as_deref(), |k| std::env::var_os(k), &repo_path)?;
 
     let runtime_root = resolve_runtime_root(cli.runtime_root.as_deref(), |k| std::env::var_os(k));
 
