@@ -1,0 +1,10 @@
+{
+  "uuid": "c1cc1008-92d0-48e6-8af8-43c26faccb35",
+  "issue_uuid": "740c91b6-a927-4bac-89a3-26d0104e9f17",
+  "author": "desktop",
+  "content": "Resolved on main by commit 878c47c1. derive_from_repo now returns an actionable error pointing the user at --slug <NAME> when no origin remote is configured; resolve_slug surfaces it unwrapped. Also reachable via the new CROSSBRIDGE_OWN_SLUG env override.",
+  "created_at": "2026-05-15T22:15:07.663877066Z",
+  "kind": "note",
+  "signed_by": "SHA256:Z3rEXNb3m5pTVbDpOH0aQthjH5DQ6uSjv1qxawrtDOk",
+  "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAg52EZBzRO5K78vCSchgL2iLRuIldPW0wLMoBoA/5K3CoAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABA2oQt8BeVSr4bsoMIEalGwo4CXyEp6bH96Mf8WiQrhZuUZ5+/lSeD7HCs39raMLGUuWAh1iaPHT8wK1d+6nosBQ=="
+}
