@@ -5,8 +5,11 @@
 //! so a client and its peer server agree on what to call the repo.
 
 use anyhow::{anyhow, Context, Result};
+use std::ffi::OsString;
 use std::path::Path;
 use std::process::Command;
+
+use crossbridge_protocol::own_slug_from_env;
 
 /// Parse a slug out of an origin URL like `git@github.com:org/repo.git` or
 /// `https://example.com/org/repo`.
@@ -29,6 +32,42 @@ pub fn parse_origin_url(url: &str) -> Option<String> {
     } else {
         Some(stripped.to_string())
     }
+}
+
+/// Resolve the client's own slug with this precedence:
+/// 1. `flag` (e.g. `--slug firmware`)
+/// 2. `$CROSSBRIDGE_OWN_SLUG`, via the supplied `env_lookup`
+/// 3. derive from the repo's `origin` remote ([`derive_own_slug`])
+///
+/// Step (3) is the historical behaviour. The flag and env hooks exist for
+/// repos with no `origin` remote (fresh local clones, ephemeral worktrees)
+/// where derivation would fail with `cannot determine repo slug from git
+/// remote`.
+///
+/// `env_lookup` is parameterized so tests can inject env values without
+/// touching the global process environment.
+///
+/// # Errors
+/// Returns an error only when all three steps fail to produce a slug.
+pub fn resolve_own_slug<F>(
+    flag: Option<&str>,
+    env_lookup: F,
+    repo_root: &Path,
+) -> Result<String>
+where
+    F: Fn(&str) -> Option<OsString>,
+{
+    if let Some(s) = flag {
+        let trimmed = s.trim();
+        if trimmed.is_empty() {
+            return Err(anyhow!("--slug must be a non-empty string"));
+        }
+        return Ok(trimmed.to_string());
+    }
+    if let Some(s) = own_slug_from_env(env_lookup) {
+        return Ok(s);
+    }
+    derive_own_slug(repo_root)
 }
 
 /// Run `git remote get-url origin` (or `jj git remote list` if a `.jj`
@@ -92,7 +131,55 @@ fn jj_origin_url(repo_root: &Path) -> Option<String> {
 
 #[cfg(test)]
 mod tests {
-    use super::parse_origin_url;
+    use super::{parse_origin_url, resolve_own_slug};
+    use crossbridge_protocol::OWN_SLUG_ENV;
+    use std::ffi::OsString;
+    use std::path::Path;
+
+    #[test]
+    fn resolve_flag_wins_over_env_and_derive() {
+        let resolved = resolve_own_slug(
+            Some("from-flag"),
+            |_| Some(OsString::from("from-env")),
+            Path::new("/does/not/exist"),
+        )
+        .expect("flag value should resolve");
+        assert_eq!(resolved, "from-flag");
+    }
+
+    #[test]
+    fn resolve_flag_trims_whitespace() {
+        let resolved =
+            resolve_own_slug(Some("  firmware\n"), |_| None, Path::new("/does/not/exist"))
+                .expect("trimmed flag should resolve");
+        assert_eq!(resolved, "firmware");
+    }
+
+    #[test]
+    fn resolve_flag_empty_errors() {
+        let err = resolve_own_slug(Some("   "), |_| None, Path::new("/does/not/exist"))
+            .expect_err("empty flag should fail");
+        assert!(err.to_string().contains("--slug"));
+    }
+
+    #[test]
+    fn resolve_env_used_when_flag_absent() {
+        let resolved = resolve_own_slug(
+            None,
+            |k| (k == OWN_SLUG_ENV).then(|| OsString::from("from-env")),
+            Path::new("/does/not/exist"),
+        )
+        .expect("env value should resolve");
+        assert_eq!(resolved, "from-env");
+    }
+
+    #[test]
+    fn resolve_falls_through_to_derive_when_neither_set() {
+        let err = resolve_own_slug(None, |_| None, Path::new("/does/not/exist"))
+            .expect_err("derivation should fail in a path with no git/jj repo");
+        assert!(err.to_string().contains("cannot determine repo slug"));
+    }
+
 
     #[test]
     fn ssh_url_with_dot_git() {

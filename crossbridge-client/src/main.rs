@@ -13,7 +13,7 @@ use std::path::{Path, PathBuf};
 
 use crossbridge_client::labels;
 use crossbridge_client::peers::list_peers;
-use crossbridge_client::slug::derive_own_slug;
+use crossbridge_client::slug::resolve_own_slug;
 use crossbridge_client::socket_root;
 use crossbridge_protocol::{
     read_message_sync, write_message_sync, AnswerComment, ClientRequest, ServerResponse,
@@ -24,6 +24,14 @@ use crosslink::db::Database;
 #[derive(Parser)]
 #[command(version, about = "Per-agent client for crossbridge")]
 struct Cli {
+    /// Override the repo slug used to locate our own socket directory.
+    ///
+    /// If omitted, the slug is resolved from `$CROSSBRIDGE_OWN_SLUG` and then
+    /// derived from the `origin` remote of the current repo. Use this in a
+    /// repo with no `origin` remote (fresh local clones, ephemeral worktrees).
+    #[arg(long, global = true)]
+    slug: Option<String>,
+
     #[command(subcommand)]
     cmd: Cmd,
 }
@@ -56,20 +64,20 @@ fn main() {
 
 fn run() -> Result<()> {
     let cli = Cli::parse();
+    let cwd = std::env::current_dir().context("could not read current directory")?;
+    let repo_root = repo_root_from(&cwd)?;
+    let own = resolve_own_slug(cli.slug.as_deref(), |k| std::env::var_os(k), &repo_root)?;
     match cli.cmd {
-        Cmd::Peers => peers_cmd(),
-        Cmd::Submit { issue, target } => submit_cmd(issue, &target),
-        Cmd::Answer { issue } => answer_cmd(issue),
+        Cmd::Peers => peers_cmd(&own),
+        Cmd::Submit { issue, target } => submit_cmd(&repo_root, own, issue, &target),
+        Cmd::Answer { issue } => answer_cmd(&repo_root, &own, issue),
     }
 }
 
 // ---- peers -----------------------------------------------------------------
 
-fn peers_cmd() -> Result<()> {
-    let cwd = std::env::current_dir().context("could not read current directory")?;
-    let repo_root = repo_root_from(&cwd)?;
-    let own = derive_own_slug(&repo_root)?;
-    let dir = socket_dir(&own);
+fn peers_cmd(own: &str) -> Result<()> {
+    let dir = socket_dir(own);
     let peers = list_peers(&dir)?;
     for p in peers {
         println!("{p}");
@@ -79,10 +87,7 @@ fn peers_cmd() -> Result<()> {
 
 // ---- submit ----------------------------------------------------------------
 
-fn submit_cmd(issue_id: i64, target: &str) -> Result<()> {
-    let cwd = std::env::current_dir().context("could not read current directory")?;
-    let repo_root = repo_root_from(&cwd)?;
-    let own = derive_own_slug(&repo_root)?;
+fn submit_cmd(repo_root: &Path, own: String, issue_id: i64, target: &str) -> Result<()> {
     let db_path = repo_root.join(".crosslink").join("issues.db");
     let db = Database::open(&db_path)
         .with_context(|| format!("failed to open crosslink DB at {}", db_path.display()))?;
@@ -131,10 +136,7 @@ fn submit_cmd(issue_id: i64, target: &str) -> Result<()> {
 
 // ---- answer ----------------------------------------------------------------
 
-fn answer_cmd(issue_id: i64) -> Result<()> {
-    let cwd = std::env::current_dir().context("could not read current directory")?;
-    let repo_root = repo_root_from(&cwd)?;
-    let own = derive_own_slug(&repo_root)?;
+fn answer_cmd(repo_root: &Path, own: &str, issue_id: i64) -> Result<()> {
     let db_path = repo_root.join(".crosslink").join("issues.db");
     let db = Database::open(&db_path)
         .with_context(|| format!("failed to open crosslink DB at {}", db_path.display()))?;
