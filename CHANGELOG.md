@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - v1 instructions from `skill/crossbridge/SKILL.md`; the skill now references `crossbridge-client submit/answer` and the v2 `xb:*` labels exclusively (#42)
 
 ### Added
+- direnv integration helper (`nix/direnvrc.sh`): `crossbridge_up <group> [slug]` checks whether a `crossbridge-server` is running for the repo on directory entry, starts one detached if not, and exports `CROSSBRIDGE_OWN_SLUG` so every client in the repo is pinned to the server's slug
 - Use npins to pin nixpkgs (and rustc) for deterministic local + CI builds (#38)
 - Add GitHub Actions CI for tests, clippy pedantic, and fmt (#34)
 - Force-timeout repro: agent should be killed by timeout(1) before completing. Task: read every .rs file in the repo and report a count, then run cargo test --workspace, then call session end (#16)

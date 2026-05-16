@@ -111,6 +111,7 @@ The package installs `crossbridge-supervisor`, `crossbridge-server`, and `crossb
 | `crossbridge-e2e/` | Workspace integration tests (real binaries) |
 | `.design/` | Architecture + per-component specs (source of truth) |
 | `nix/module.nix` | NixOS user-mode systemd module |
+| `nix/direnvrc.sh` | direnv helper: `crossbridge_up` auto-starts a per-repo server, pins the slug |
 | `skill/crossbridge/SKILL.md` | Agent-facing skill: ask / answer / check |
 
 Each crate has its own `README.md` with a thumbnail and a pointer to the relevant design doc.
