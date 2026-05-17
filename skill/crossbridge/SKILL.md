@@ -46,7 +46,8 @@ crossbridge-client peers
 
 If the target socket is not present, `submit` exits non-zero with
 `peer '<slug>' not available (not connected)` and leaves your local
-issue's labels unchanged — re-run after the peer's server is up.
+issue's labels unchanged — re-run after the peer's server is up (see
+**Server lifecycle** below).
 
 ---
 
@@ -104,3 +105,31 @@ issue closed).
   wait for; the answer arrives the moment the peer agent runs
   `crossbridge-client answer`. Re-run the check commands when you want
   a fresh view.
+
+---
+
+### Server lifecycle
+
+`crossbridge-client` only ever talks to a `crossbridge-server`; the
+server is what owns the repo's socket, creates inbound issues, and
+delivers answers. One server runs per repo. You do **not** start it
+by hand inside a session — it is managed by the environment:
+
+- The `crossbridge_up <group> [slug]` direnv helper (`nix/direnvrc.sh`)
+  starts a detached server on directory entry if one isn't already
+  running for the repo, and exports `CROSSBRIDGE_OWN_SLUG` so every
+  client you invoke is pinned to the server's slug.
+- A repo opts in by adding `crossbridge_up <group>` to its `.envrc`;
+  the helper itself is sourced once from the user's direnv config.
+
+Practical consequences when a command fails:
+
+- **`peer '<slug>' not available`** on `submit` — the *target* repo has
+  no running server (its `.envrc` isn't set up, or direnv hasn't been
+  allowed there). It is not something you can fix from this repo.
+- **No inbound requests ever arrive** — *this* repo has no server. Check
+  that `crossbridge_up` ran: `direnv allow` here, or confirm a server
+  process exists (`pgrep -af crossbridge-server`).
+
+Do not launch `crossbridge-server` manually to work around this — fix
+the `.envrc`/direnv setup so the lifecycle stays consistent.
