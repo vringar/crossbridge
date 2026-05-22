@@ -115,14 +115,18 @@ crossbridge_up() {
     mkdir -p "$logdir"
     local logfile="$logdir/${slug}.${group}.log"
 
+    # Detach fully: 0/1/2 go to the log, and fd 3 is closed. direnv evaluates
+    # .envrc with fd 3 wired to a pipe it reads until EOF. If the long-lived
+    # server inherits that write end it is never closed, direnv never sees EOF,
+    # and the shell that triggered .envrc hangs until the server exits.
     if has setsid; then
         setsid crossbridge-server \
             --group "$group" --slug "$slug" --repo-path "$root" \
-            >>"$logfile" 2>&1 </dev/null &
+            >>"$logfile" 2>&1 </dev/null 3>&- &
     else
         nohup crossbridge-server \
             --group "$group" --slug "$slug" --repo-path "$root" \
-            >>"$logfile" 2>&1 </dev/null &
+            >>"$logfile" 2>&1 </dev/null 3>&- &
     fi
     disown 2>/dev/null || true
 
