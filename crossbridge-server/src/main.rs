@@ -8,6 +8,8 @@ use std::path::PathBuf;
 
 use anyhow::{Context, Result};
 use clap::Parser;
+use tokio::signal;
+use tokio_util::sync::CancellationToken;
 
 use crossbridge_server::paths::{resolve_runtime_root, SocketLayout};
 use crossbridge_server::run::{self, ServerConfig};
@@ -83,5 +85,19 @@ fn main() -> Result<()> {
         .build()
         .context("building tokio runtime")?;
 
-    runtime.block_on(run::run(cfg))
+    runtime.block_on(async move {
+        let shutdown = CancellationToken::new();
+        // Translate the binary's SIGINT/Ctrl-C into a cancellation of the
+        // server's shutdown token. The library itself never installs signal
+        // handlers — this lives here so library embedders own their own
+        // shutdown plumbing.
+        let signal_token = shutdown.clone();
+        tokio::spawn(async move {
+            if signal::ctrl_c().await.is_ok() {
+                tracing::info!("ctrl-c received, requesting shutdown");
+                signal_token.cancel();
+            }
+        });
+        run::run(cfg, shutdown).await
+    })
 }

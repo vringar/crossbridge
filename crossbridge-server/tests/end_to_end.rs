@@ -18,6 +18,7 @@ use crossbridge_server::paths::SocketLayout;
 use crossbridge_server::run::{self, ServerConfig};
 use crosslink::db::Database;
 use tokio::net::{UnixListener, UnixStream};
+use tokio_util::sync::CancellationToken;
 
 mod common;
 use common::ShortTempDir;
@@ -75,6 +76,8 @@ async fn submit_issue_round_trip_via_supervisor_topology() {
     };
     let layout_for_client = layout.clone();
     let repo_path_for_client = repo_path.clone();
+    let shutdown = CancellationToken::new();
+    let driver_shutdown = shutdown.clone();
 
     let driver = async move {
         // Wait for the listener at /<root>/repo-b/repo-a.socket to appear.
@@ -131,13 +134,17 @@ async fn submit_issue_round_trip_via_supervisor_topology() {
             "listener never removed at {}",
             listener_path.display()
         );
+
+        // Final assertion for the new shutdown plumbing: cancelling the
+        // token must drive `run` to return Ok cleanly.
+        driver_shutdown.cancel();
     };
 
     // Run the server inline (it owns a !Send Database) and race the driver.
-    tokio::select! {
-        _ = run::run(cfg) => panic!("server exited unexpectedly"),
-        () = driver => {}
-    }
+    // After the driver finishes (and cancels `shutdown`), `run` must return
+    // Ok(()) — this exercises the new programmatic-shutdown path.
+    let (server_result, ()) = tokio::join!(run::run(cfg, shutdown), driver);
+    server_result.expect("server exited cleanly on shutdown.cancel()");
 
     supervisor_task.abort();
     let _ = supervisor_task.await;

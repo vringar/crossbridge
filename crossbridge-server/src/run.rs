@@ -7,8 +7,8 @@ use std::path::PathBuf;
 use anyhow::{anyhow, Context, Result};
 use crossbridge_protocol::Notification;
 use crosslink::db::Database;
-use tokio::signal;
 use tokio::sync::mpsc;
+use tokio_util::sync::CancellationToken;
 
 use crate::handler;
 use crate::listeners::ListenerSet;
@@ -31,13 +31,19 @@ impl ServerConfig {
     }
 }
 
-/// Run the server forever. Returns `Ok(())` only on a clean Ctrl+C; any other
-/// exit is an error.
+/// Run the server until `shutdown` is cancelled. Returns `Ok(())` on clean
+/// shutdown; any other exit is an error.
+///
+/// `run` itself never installs a `SIGINT`/Ctrl-C handler or calls
+/// [`std::process::exit`]; the caller owns process lifetime. The
+/// `crossbridge-server` binary wires `signal::ctrl_c()` to `shutdown.cancel()`
+/// in `main.rs`; library embedders can drive `shutdown` from their own
+/// shutdown plumbing.
 ///
 /// # Errors
 /// Returns an error if the crosslink DB cannot be located/opened or if the
-/// supervisor session fails fatally before a Ctrl+C is observed.
-pub async fn run(cfg: ServerConfig) -> Result<()> {
+/// supervisor session fails fatally before `shutdown` fires.
+pub async fn run(cfg: ServerConfig, shutdown: CancellationToken) -> Result<()> {
     if !cfg.db_path().exists() {
         return Err(anyhow!(
             "crosslink DB not found at {} (run `crosslink init` in {} first)",
@@ -57,8 +63,8 @@ pub async fn run(cfg: ServerConfig) -> Result<()> {
     loop {
         tokio::select! {
             biased;
-            _ = signal::ctrl_c() => {
-                tracing::info!("ctrl-c received, shutting down");
+            () = shutdown.cancelled() => {
+                tracing::info!("shutdown requested, exiting");
                 listeners.clear();
                 return Ok(());
             }
@@ -74,10 +80,13 @@ pub async fn run(cfg: ServerConfig) -> Result<()> {
                     &mut listeners,
                     &mut accepted_rx,
                     registration,
+                    &shutdown,
                 ).await {
                     tracing::warn!("supervisor session ended: {e:#}");
                 }
-                // Session ended: drop all peer listeners and reconnect.
+                // Session ended: drop all peer listeners and reconnect. If
+                // shutdown was the cause, the next iteration's `biased` select
+                // will take the cancelled branch immediately.
                 listeners.clear();
             }
         }
@@ -86,15 +95,18 @@ pub async fn run(cfg: ServerConfig) -> Result<()> {
 
 /// Drive one supervisor session: install the initial peer listeners from the
 /// `RegisterAck`, then loop on supervisor notifications and client connections
-/// until either the supervisor stream dies or the user hits Ctrl-C.
+/// until either the supervisor stream dies or `shutdown` is cancelled.
 ///
-/// On Ctrl-C, returns `Ok(())` and the caller is expected to *not* reconnect.
+/// On `shutdown`, returns `Ok(())` and the caller is expected to *not*
+/// reconnect (the outer loop in [`run`] re-checks `shutdown` before
+/// reconnecting).
 async fn serve_one_session(
     cfg: &ServerConfig,
     db: &Database,
     listeners: &mut ListenerSet,
     accepted_rx: &mut mpsc::UnboundedReceiver<crate::listeners::Accepted>,
     registration: Registration,
+    shutdown: &CancellationToken,
 ) -> Result<()> {
     let Registration { mut stream, peers } = registration;
     for peer in &peers {
@@ -110,13 +122,13 @@ async fn serve_one_session(
     loop {
         tokio::select! {
             biased;
-            _ = signal::ctrl_c() => {
-                tracing::info!("ctrl-c received, shutting down");
+            () = shutdown.cancelled() => {
+                tracing::info!("shutdown requested, exiting session");
                 listeners.clear();
                 // Closing the supervisor stream signals our departure; the
                 // supervisor will fan out PeerLeft to surviving peers.
                 drop(stream);
-                std::process::exit(0);
+                return Ok(());
             }
             notif = read_notification(&mut stream) => {
                 match notif {

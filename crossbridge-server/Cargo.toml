@@ -15,9 +15,11 @@ crosslink.workspace = true
 anyhow.workspace = true
 clap.workspace = true
 tokio = { workspace = true, features = ["rt", "net", "io-util", "macros", "signal", "time", "sync"] }
+tokio-util.workspace = true
 tracing.workspace = true
 tracing-subscriber.workspace = true
 
 [dev-dependencies]
 tempfile.workspace = true
 tokio = { workspace = true, features = ["rt", "net", "io-util", "macros", "signal", "time", "sync"] }
+tokio-util.workspace = true
