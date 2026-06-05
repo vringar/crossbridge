@@ -184,9 +184,8 @@ mod tests {
 
     #[test]
     fn resolve_flag_trims_whitespace() {
-        let resolved =
-            resolve_slug(Some("  firmware\n"), |_| None, Path::new("/does/not/exist"))
-                .expect("trimmed flag should resolve");
+        let resolved = resolve_slug(Some("  firmware\n"), |_| None, Path::new("/does/not/exist"))
+            .expect("trimmed flag should resolve");
         assert_eq!(resolved, "firmware");
     }
 

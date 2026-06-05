@@ -174,7 +174,7 @@ fn answer_cmd(repo_root: &Path, own: &str, issue_id: i64) -> Result<()> {
         })
         .collect();
 
-    let socket_path = socket_dir(&own).join(format!("{source_slug}.socket"));
+    let socket_path = socket_dir(own).join(format!("{source_slug}.socket"));
     if !socket_path.exists() {
         bail!("peer '{source_slug}' not available (not connected)");
     }

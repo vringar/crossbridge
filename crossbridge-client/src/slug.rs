@@ -49,11 +49,7 @@ pub fn parse_origin_url(url: &str) -> Option<String> {
 ///
 /// # Errors
 /// Returns an error only when all three steps fail to produce a slug.
-pub fn resolve_own_slug<F>(
-    flag: Option<&str>,
-    env_lookup: F,
-    repo_root: &Path,
-) -> Result<String>
+pub fn resolve_own_slug<F>(flag: Option<&str>, env_lookup: F, repo_root: &Path) -> Result<String>
 where
     F: Fn(&str) -> Option<OsString>,
 {
@@ -179,7 +175,6 @@ mod tests {
             .expect_err("derivation should fail in a path with no git/jj repo");
         assert!(err.to_string().contains("cannot determine repo slug"));
     }
-
 
     #[test]
     fn ssh_url_with_dot_git() {
