@@ -25,4 +25,4 @@ tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 clap = { version = "4", features = ["derive"] }
 tempfile = "3"
-crosslink = { git = "https://github.com/forecast-bio/crosslink.git", rev = "12eb7b917e9ef726f40eb2f9b36cf87fa38efa4d" }
+crosslink = { git = "https://github.com/dollspace-gay/crosslink.git", rev = "85691369d1576c6e9eaa1f9bb281637d36c88538" }

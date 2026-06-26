@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/vringar/crossbridge/actions/workflows/ci.yml/badge.svg)](https://github.com/vringar/crossbridge/actions/workflows/ci.yml)
 
-Cross-project coordination bridge for [crosslink](https://github.com/forecast-bio/crosslink) repositories.
+Cross-project coordination bridge for [crosslink](https://github.com/dollspace-gay/crosslink) repositories.
 
 Crossbridge lets agents working in different crosslink-managed repos on the same machine ask questions of each other and exchange answers, without shared state, network services, or shared filesystem access to each other's databases.
 
