@@ -94,11 +94,31 @@ crossbridge_up() {
     # or backing off waiting for the supervisor.
     export CROSSBRIDGE_OWN_SLUG="$slug"
 
+    local logdir=${XDG_STATE_HOME:-$HOME/.local/state}/crossbridge
+    mkdir -p "$logdir"
+    local logfile="$logdir/${slug}.${group}.log"
+
+    # --- serialize check-and-start (flock) ----------------------------------
+    # Two shells entering the repo at once would both pgrep, both see nothing,
+    # and both spawn a server. flock makes check-then-start atomic: the second
+    # contender blocks on the same lock until the first has started AND made its
+    # server observable (the readiness poll below), then takes the lock and hits
+    # the "already running" path. fd 200 is the conventional flock fd; we never
+    # leak it to the detached server (200>&- on the spawn line). If flock is
+    # missing we degrade to the original best-effort check — better than nothing.
+    if has flock; then
+        exec 200>"$logdir/${slug}.${group}.lock"
+        # -w guards against a wedged holder; on timeout we proceed unlocked.
+        flock -w 30 200 \
+            || log_status "crossbridge: flock timed out; proceeding without start lock"
+    fi
+
     # --- already running for THIS repo? -------------------------------------
     # A lone server (no same-group peers yet) creates no socket files, so the
     # only reliable key is the canonical --repo-path we always pass below.
     if pgrep -af crossbridge-server 2>/dev/null | grep -qF -- "--repo-path $root"; then
         log_status "crossbridge: server already running for '$slug' ($root)"
+        exec 200>&-
         return 0
     fi
 
@@ -111,24 +131,32 @@ crossbridge_up() {
     fi
 
     # --- start detached -----------------------------------------------------
-    local logdir=${XDG_STATE_HOME:-$HOME/.local/state}/crossbridge
-    mkdir -p "$logdir"
-    local logfile="$logdir/${slug}.${group}.log"
-
-    # Detach fully: 0/1/2 go to the log, and fd 3 is closed. direnv evaluates
-    # .envrc with fd 3 wired to a pipe it reads until EOF. If the long-lived
-    # server inherits that write end it is never closed, direnv never sees EOF,
-    # and the shell that triggered .envrc hangs until the server exits.
+    # Detach fully: 0/1/2 go to the log, fd 3 is closed, and fd 200 (the start
+    # lock) is closed so the long-lived server never inherits and pins it.
+    # direnv evaluates .envrc with fd 3 wired to a pipe it reads until EOF. If
+    # the server inherits that write end it is never closed, direnv never sees
+    # EOF, and the shell that triggered .envrc hangs until the server exits.
     if has setsid; then
         setsid crossbridge-server \
             --group "$group" --slug "$slug" --repo-path "$root" \
-            >>"$logfile" 2>&1 </dev/null 3>&- &
+            >>"$logfile" 2>&1 </dev/null 3>&- 200>&- &
     else
         nohup crossbridge-server \
             --group "$group" --slug "$slug" --repo-path "$root" \
-            >>"$logfile" 2>&1 </dev/null 3>&- &
+            >>"$logfile" 2>&1 </dev/null 3>&- 200>&- &
     fi
     disown 2>/dev/null || true
 
+    # --- readiness: hold the lock until the server is observable ------------
+    # The spawn above forks immediately; the process only matches the pgrep key
+    # once the child has exec'd the binary. Releasing the lock before then would
+    # let the next contender re-detect "absent" and start a duplicate. Poll
+    # (bounded) until it appears, so the lock we drop guards a visible server.
+    for _ in $(seq 60); do
+        pgrep -af crossbridge-server 2>/dev/null | grep -qF -- "--repo-path $root" && break
+        sleep 0.05
+    done
+
+    exec 200>&-
     log_status "crossbridge: started server for '$slug' (group '$group'); logs: $logfile"
 }
