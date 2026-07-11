@@ -1,6 +1,6 @@
 {
   "next_display_id": 47,
-  "next_comment_id": 41,
+  "next_comment_id": 42,
   "display_id_map": {
     "0ca05888-bfd1-4d7c-a708-bb54edb58ff6": 11,
     "120b5168-4b2c-441d-ac0b-dae4abee30ff": 32,
@@ -243,10 +243,21 @@
       "priority": "medium",
       "created_by": "desktop",
       "created_at": "2026-05-22T20:44:48.073697555Z",
-      "updated_at": "2026-05-22T20:44:49.794828693Z",
+      "updated_at": "2026-07-11T13:15:53.634469219Z",
       "labels": [
         "feature"
-      ]
+      ],
+      "comments": {
+        "8bfccf3b-1b7f-42fd-a74b-3cde8a7e887f": {
+          "display_id": 41,
+          "author": "desktop",
+          "content": "probe",
+          "created_at": "2026-07-11T13:15:53.620997531Z",
+          "kind": "result",
+          "signed_by": "SHA256:Z3rEXNb3m5pTVbDpOH0aQthjH5DQ6uSjv1qxawrtDOk",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAg52EZBzRO5K78vCSchgL2iLRuIldPW0wLMoBoA/5K3CoAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAge1PcshNbJxhQWnz32io4rvlsSw+5pIC9YBvqx86U+0Wmii9D4T4H9iGVoptBFt8PbL1FyPpjfrZc6RlIpmMBg=="
+        }
+      }
     },
     "427dd451-cf9d-48a7-a3b7-93c0565ad214": {
       "uuid": "427dd451-cf9d-48a7-a3b7-93c0565ad214",
@@ -1014,9 +1025,16 @@
     }
   },
   "next_milestone_id": 1,
+  "unsigned_event_warnings": [
+    {
+      "agent_id": "desktop",
+      "agent_seq": 1,
+      "timestamp": "2026-07-11T13:15:53.634469219Z"
+    }
+  ],
   "watermark": {
-    "timestamp": "2026-05-08T14:58:28.879292167Z",
-    "agent_id": "2ZD1",
-    "agent_seq": 24
+    "timestamp": "2026-07-11T13:15:53.634469219Z",
+    "agent_id": "desktop",
+    "agent_seq": 1
   }
 }
