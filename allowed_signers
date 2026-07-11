@@ -1,0 +1,4 @@
+# Crosslink trusted signers
+# Format: <principal> <key-type> <base64-key> [comment]
+# self-registered as workspace signing key at 2026-05-22 20:44:58 UTC
+IS4n-NjYw-close-inherited-file-descriptors-fd-3-at-crossbridge@crosslink ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFHmWQF2sVkhFtbtLrTbmlkBTGUvRfvszdP4Nufg3dyx crosslink-agent:IS4n-NjYw-close-inherited-file-descriptors-fd-3-at-crossbridge@sz1
