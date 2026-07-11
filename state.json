@@ -1,0 +1,1022 @@
+{
+  "next_display_id": 47,
+  "next_comment_id": 41,
+  "display_id_map": {
+    "0ca05888-bfd1-4d7c-a708-bb54edb58ff6": 11,
+    "120b5168-4b2c-441d-ac0b-dae4abee30ff": 32,
+    "1a45becd-585d-415f-adf4-77efca7a9dd4": 15,
+    "1acd3f05-0f12-433f-84ab-9e84b9294249": 12,
+    "1ad3368f-d913-4ec0-9a63-c938204e217f": 19,
+    "1b7bc2e1-2f14-4c9b-bdd6-4efe04a88ad6": 39,
+    "1bfe6fbb-416e-4431-843d-d2bf75b4138c": 34,
+    "248b66ed-426d-4d68-97f3-74328bcc5a6a": 17,
+    "24cc274c-4e6a-464a-a181-4b3b550a6bc4": 31,
+    "27a6b90c-d8c2-4117-b450-1615b18f4a28": 10,
+    "2cb00705-b1b3-4929-9722-d8bbf56bbe09": 2,
+    "3fda75ff-7247-4989-b69d-06ecf0bbbc74": 46,
+    "427dd451-cf9d-48a7-a3b7-93c0565ad214": 4,
+    "462c823f-5dda-4cee-ba77-5f126fb36c48": 16,
+    "53d00b7b-9953-491c-8a26-e0ea988a2ca8": 25,
+    "56efbadd-65ee-4dd1-9729-d503ce639cba": 1,
+    "5a6329c6-a9b7-424f-b45a-217984a55832": 3,
+    "5e7ba92f-f72e-440b-a9f3-eb3ee122ba2b": 36,
+    "63e37641-f3e2-43e3-8e8a-8a55fab810f4": 43,
+    "6ae40c86-0621-4461-aaf8-eaef6d4e0e67": 21,
+    "740c91b6-a927-4bac-89a3-26d0104e9f17": 45,
+    "7957ce48-31b8-4a13-9664-6a5d1de8a4e5": 24,
+    "797ac870-1ee1-491c-afce-1b6a3a7f42f4": 29,
+    "7ace7a00-8e76-4e35-a032-9c829cec1c9f": 27,
+    "7bca6069-e60b-41fc-a656-f900b4eb35b0": 38,
+    "7f318491-f2fe-47f0-8653-94cc5b4623e4": 23,
+    "8a515bec-3b0e-4cac-935a-a889c8c40b52": 35,
+    "943afed8-5c2b-4555-8ad3-8c9645b0ebe4": 28,
+    "97244c12-e2c3-4768-a1dd-00cbfbd84929": 40,
+    "9c3350cb-4fbf-4f2b-910c-f78718a97d98": 6,
+    "9c3cc507-f4df-4180-904b-0f6167228f00": 37,
+    "a83c1fb3-70de-4710-9527-e19aaafc490d": 8,
+    "b31a00cd-e0d4-46bf-a7a1-c192aba39d05": 14,
+    "b986c5ae-6aca-48a6-9cb1-53cbf1e02066": 18,
+    "bfe3c775-e495-4235-a00f-542da03a5cb3": 26,
+    "c326e492-c0ad-4577-b092-86adbe2e3cbb": 7,
+    "c3dacb91-e367-4443-a3e5-e0c94bdfa066": 42,
+    "c6ad08b7-cf3c-465c-81f8-64e3b656dabd": 33,
+    "c7e7fa6b-7ac1-4f30-9785-323fb35260c0": 5,
+    "cca6b353-8177-4667-a558-572dde253fd4": 9,
+    "ce1cc28c-59e5-400e-a3b3-a8c8925d3e19": 20,
+    "cf5d466a-817f-43dc-8a87-8e222033649a": 30,
+    "d1501151-4bb6-456e-b07c-59a7b5eddf47": 22,
+    "e52c6819-b984-4b99-a1d3-fb91671747d0": 44,
+    "fc80af35-c886-4380-bbc7-b91cfcd0a0a3": 41,
+    "fd2940b5-1fd3-4a7c-aa4b-9c612025ba88": 13
+  },
+  "locks": {},
+  "issues": {
+    "0ca05888-bfd1-4d7c-a708-bb54edb58ff6": {
+      "uuid": "0ca05888-bfd1-4d7c-a708-bb54edb58ff6",
+      "display_id": 11,
+      "title": "test sandbox config 3",
+      "description": "Created by crosslink kickoff",
+      "status": "closed",
+      "priority": "medium",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-06T17:49:27.568900094Z",
+      "updated_at": "2026-05-06T17:49:48.219681710Z",
+      "closed_at": "2026-05-06T17:49:48.219681710Z",
+      "labels": [
+        "feature"
+      ]
+    },
+    "120b5168-4b2c-441d-ac0b-dae4abee30ff": {
+      "uuid": "120b5168-4b2c-441d-ac0b-dae4abee30ff",
+      "display_id": 32,
+      "title": "Quality pass: clippy pedantic cleanup in crossbridge-e2e",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun cargo clippy -p crossbridge-e2e with -W clippy::pedantic and resolve all 57 warnings. Top categories: missing_errors_doc, cast_possible_truncation, map_unwrap_or, similar_names (labels_a_after vs labels_b_after — keep them, allow similar_names for the e2e test specifically), too_many_lines (the round_trip test is intentionally a single linear narrative — allow too_many_lines on that fn with a comment), manual_assert.\n\nAcceptance criteria:\n- cargo clippy -p crossbridge-e2e --all-targets -- -W clippy::pedantic -D warnings exits 0.\n- No blanket #[allow] over whole modules — fix the underlying issues; only allow specific lints with a one-line justification.\n- The submit_then_answer_round_trip integration test must still run unconditionally (no #[ignore]) and pass.\n- cargo fmt --check clean.",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T13:55:21.131712053Z",
+      "updated_at": "2026-05-08T14:57:23.805898915Z",
+      "closed_at": "2026-05-08T14:57:23.805898915Z",
+      "labels": [
+        "refactor"
+      ]
+    },
+    "1a45becd-585d-415f-adf4-77efca7a9dd4": {
+      "uuid": "1a45becd-585d-415f-adf4-77efca7a9dd4",
+      "display_id": 15,
+      "title": "Debug repro v2: kickoff from repo root for worktree teardown observation",
+      "description": "Created by crosslink kickoff",
+      "status": "closed",
+      "priority": "medium",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-07T10:15:02.110246756Z",
+      "updated_at": "2026-05-08T16:06:48.500033897Z",
+      "closed_at": "2026-05-08T16:06:48.500033897Z",
+      "labels": [
+        "feature"
+      ]
+    },
+    "1acd3f05-0f12-433f-84ab-9e84b9294249": {
+      "uuid": "1acd3f05-0f12-433f-84ab-9e84b9294249",
+      "display_id": 12,
+      "title": "Debug: half-cleaned kickoff worktrees (admin dir vanishes, files survive)",
+      "status": "closed",
+      "priority": "high",
+      "created_by": "Kklh",
+      "created_at": "2026-05-07T10:03:32.779317043Z",
+      "updated_at": "2026-05-08T16:06:44.262207215Z",
+      "closed_at": "2026-05-08T16:06:44.262207215Z",
+      "labels": [
+        "bug"
+      ]
+    },
+    "1ad3368f-d913-4ec0-9a63-c938204e217f": {
+      "uuid": "1ad3368f-d913-4ec0-9a63-c938204e217f",
+      "display_id": 19,
+      "title": "Quality pass: clippy pedantic cleanup in crossbridge-protocol",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun `cargo clippy -p crossbridge-protocol --all-targets -- -W clippy::pedantic` and resolve every warning (currently 10). Top categories: cast_possible_truncation, missing_errors_doc.\n\nAcceptance criteria:\n- `cargo clippy -p crossbridge-protocol --all-targets -- -W clippy::pedantic -D warnings` exits 0.\n- No blanket `#[allow(clippy::pedantic)]` or `#[allow(...)]` over whole modules — fix the underlying issues, only allow specific lints with a one-line justification comment when the pedantic suggestion is genuinely worse.\n- All existing tests still pass (`cargo test -p crossbridge-protocol`).\n- `cargo fmt --check` clean.\n- Cast-truncation warnings: prefer `u32::try_from(...)?` over `as u32` at wire-protocol boundaries; use `#[allow(clippy::cast_possible_truncation)]` only where bounds are statically guaranteed (with a comment).",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T13:54:19.811633120Z",
+      "updated_at": "2026-05-08T14:36:11.556218419Z",
+      "closed_at": "2026-05-08T14:36:11.556218419Z"
+    },
+    "1b7bc2e1-2f14-4c9b-bdd6-4efe04a88ad6": {
+      "uuid": "1b7bc2e1-2f14-4c9b-bdd6-4efe04a88ad6",
+      "display_id": 39,
+      "title": "Drop Determinate Systems magic-nix-cache from CI",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nMagic Nix Cache is deprecated (stops working Feb 2026), and the successor FlakeHub Cache requires Determinate Systems auth — overkill for a personal project. cache.nixos.org is already a fast binary cache, and Swatinem/rust-cache covers cargo target. Drop the magic-nix-cache step. Cost: ~30-60s extra per job pulling rustc/clippy/etc. fresh from cache.nixos.org. Acceptable for a personal project.\n\nAC:\n- .github/workflows/ci.yml no longer references DeterminateSystems/magic-nix-cache-action.\n- Resulting CI run on main passes all three jobs (test, clippy, fmt).",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-09T13:21:59.813568455Z",
+      "updated_at": "2026-05-09T13:22:18.493715662Z",
+      "closed_at": "2026-05-09T13:22:18.493715662Z",
+      "labels": [
+        "refactor"
+      ]
+    },
+    "1bfe6fbb-416e-4431-843d-d2bf75b4138c": {
+      "uuid": "1bfe6fbb-416e-4431-843d-d2bf75b4138c",
+      "display_id": 34,
+      "title": "Add GitHub Actions CI for tests, clippy pedantic, and fmt",
+      "description": "Goal: \n\nAcceptance criteria:\n- \n\nNo CI runs against this repo today. Local enforcement happens via .crosslink/hook-config.json during kickoffs but humans pushing directly bypass it. Pedantic-clean state and 92 passing tests will silently rot.\n\nAdd .github/workflows/ci.yml that runs on push to main and on every pull_request.\n\nAcceptance criteria:\n- File exists at .github/workflows/ci.yml.\n- Three jobs (or one job with three steps; matrix not required): test, clippy, fmt.\n- test: cargo test --workspace exits 0.\n- clippy: cargo clippy --workspace --all-targets -- -W clippy::pedantic -D warnings exits 0. (Match the AC we just landed for #33.)\n- fmt: cargo fmt --check exits 0.\n- Toolchain version matches workspace rust-version (1.87) — pin via dtolnay/rust-toolchain@stable with toolchain: '1.87' or via rust-toolchain.toml file.\n- Cargo registry + target dir cached for speed (Swatinem/rust-cache@v2 is the standard).\n- ubuntu-latest runner.\n- Triggers: pull_request (any branch), push (main only).\n- Workflow name in GitHub UI is 'CI'.\n- README gets a CI badge linking to the workflow runs page.\n- The first run of the workflow on this branch must pass — verify after pushing the branch.\n\nOut of scope:\n- nix-build / nixos test integration (separate concern).\n- Coverage / codecov.\n- Release automation, crate publishing.\n- Cross-platform matrix.\n- Caching beyond rust-cache.",
+      "status": "closed",
+      "priority": "medium",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T20:03:46.704784475Z",
+      "updated_at": "2026-05-09T12:55:20.451738485Z",
+      "closed_at": "2026-05-09T12:55:20.451738485Z",
+      "labels": [
+        "feature"
+      ]
+    },
+    "248b66ed-426d-4d68-97f3-74328bcc5a6a": {
+      "uuid": "248b66ed-426d-4d68-97f3-74328bcc5a6a",
+      "display_id": 17,
+      "title": "End-to-end integration test + unify CROSSBRIDGE_SOCKET_ROOT across all three binaries",
+      "description": "Goal: \n\nAcceptance criteria:\n- \n\nAdd a workspace-level integration test that wires up real crossbridge-supervisor + two real crossbridge-server instances + the real crossbridge-client binary to verify the full bidirectional flow: an issue submitted from repo-a's agent reaches repo-b's crosslink DB as an inbound issue, and an answer issued from repo-b's agent flows back to close out repo-a's outbound issue with the result comments attached.\n\nExisting per-crate integration tests each stub out the components on the other side of their crate boundary (the client tests use a thread-bound mock server; the server's E2E test uses a fake supervisor and a raw socket client; the supervisor tests are pure topology). None exercise the full topology, and none verify that xb-status:answered on the responder lines up with xb-status:resolved + closure on the originator across two separate crosslink databases.\n\nTwo production-code prerequisites first:\n\n1. Unify the runtime-root override on a single env var, CROSSBRIDGE_SOCKET_ROOT, in all three binaries. Today the client reads it; the supervisor only takes --register-socket; the server only takes --runtime-root. Make all three honor the env var (precedence: CLI flag > env var > compiled-in default '/run/crossbridge'). Export the env-var name as a public constant in crossbridge-protocol and have crossbridge-client re-export it.\n\n2. Then add a new workspace member crate 'crossbridge-e2e' at the project root with tests/round_trip.rs that drives real binaries via CARGO_BIN_EXE_* against a single tempdir runtime root configured via the unified env var.\n\nFull spec, acceptance criteria, scenario, and constraints in .design/e2e-integration-test.md (committed alongside this issue).",
+      "status": "closed",
+      "priority": "high",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-07T22:01:08.935224028Z",
+      "updated_at": "2026-05-07T22:57:56.843625754Z",
+      "closed_at": "2026-05-07T22:57:56.843625754Z",
+      "labels": [
+        "feature"
+      ]
+    },
+    "24cc274c-4e6a-464a-a181-4b3b550a6bc4": {
+      "uuid": "24cc274c-4e6a-464a-a181-4b3b550a6bc4",
+      "display_id": 31,
+      "title": "Quality pass: clippy pedantic cleanup in crossbridge-client",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun cargo clippy -p crossbridge-client with -W clippy::pedantic and resolve all 13 warnings. Top categories: cast_possible_truncation, unnecessary_wraps (jj_origin_url returns Result<Option<String>> but never Errs — collapse to Option<String>), needless_pass_by_value, missing_errors_doc, map_unwrap_or.\n\nAcceptance criteria:\n- cargo clippy -p crossbridge-client --all-targets -- -W clippy::pedantic -D warnings exits 0.\n- No blanket #[allow] over whole modules — fix the underlying issues; only allow specific lints with a one-line justification.\n- All existing tests still pass (cargo test -p crossbridge-client), including the end_to_end integration test.\n- cargo fmt --check clean.",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T13:55:16.397525971Z",
+      "updated_at": "2026-05-08T14:57:23.735604780Z",
+      "closed_at": "2026-05-08T14:57:23.735604780Z",
+      "labels": [
+        "refactor"
+      ]
+    },
+    "27a6b90c-d8c2-4117-b450-1615b18f4a28": {
+      "uuid": "27a6b90c-d8c2-4117-b450-1615b18f4a28",
+      "display_id": 10,
+      "title": "test sandbox config 2",
+      "description": "Created by crosslink kickoff",
+      "status": "closed",
+      "priority": "medium",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-06T17:49:24.282474328Z",
+      "updated_at": "2026-05-06T17:49:48.158606796Z",
+      "closed_at": "2026-05-06T17:49:48.158606796Z",
+      "labels": [
+        "feature"
+      ]
+    },
+    "2cb00705-b1b3-4929-9722-d8bbf56bbe09": {
+      "uuid": "2cb00705-b1b3-4929-9722-d8bbf56bbe09",
+      "display_id": 2,
+      "title": "Package crossbridge as systemd service for vringar/nixos-setup",
+      "status": "closed",
+      "priority": "high",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-04T17:58:03.857942079Z",
+      "updated_at": "2026-05-04T21:19:38.978585336Z",
+      "closed_at": "2026-05-04T21:19:38.978585336Z",
+      "comments": {
+        "94849f1c-de9b-47d7-b664-6ea4192e530d": {
+          "author": "2ZD1",
+          "content": "Crossbridge needs to be packaged as a Nix flake output (binary + systemd unit) so vringar/nixos-setup can import it. Requires: (1) flake.nix with package output, (2) a NixOS module with systemd timer+service, (3) config path option pointing to the per-machine crossbridge.toml.",
+          "created_at": "2026-05-04T17:58:11.610795491Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAeqWwW84ECUOHNENm1auDiagDq2GWFrPC29ldGFyBGtBlcYllNC6sX75EGUUxU0nv6vOfVshvSHZ506U/tUijAQ=="
+        },
+        "d6436924-91dd-4c9a-b04e-c796829af2b8": {
+          "author": "2ZD1",
+          "content": "Created default.nix (callPackage derivation with rustPlatform.buildRustPackage) and nix/module.nix (NixOS module with systemd timer+service, DynamicUser, configurable interval/logLevel)",
+          "created_at": "2026-05-04T21:19:36.163777985Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAs5G+2BM6ab8bP8UCyjbWmhSfzHScXTVmxBSogTmc9aWDxx7BU6qmRLVj4TQ9h20Hs8oj9ylo801tMenQvOG+AQ=="
+        },
+        "ea3de800-41b8-49c9-93aa-c3eba6d5d0e0": {
+          "author": "2ZD1",
+          "content": "Design decision: NO flake. Use a traditional default.nix (callPackage pattern) so vringar/nixos-setup can import directly and pass in the correct crosslink source/version at build time. Module provides: services.crossbridge.{enable, configFile, interval}. Package output includes the binary + wrapper scripts in bin/.",
+          "created_at": "2026-05-04T18:04:40.265006085Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABA+2S0Wb8+qlfE+/XNTMMkhkl/VP/5ZYiINN3I9YxzRrk6X/O1Sst3kG3knwoqhiLZ663TwMC3FWyEh9i4C8E2Cw=="
+        }
+      }
+    },
+    "3fda75ff-7247-4989-b69d-06ecf0bbbc74": {
+      "uuid": "3fda75ff-7247-4989-b69d-06ecf0bbbc74",
+      "display_id": 46,
+      "title": "Harden crossbridge-server: close inherited file descriptors at startup",
+      "description": "Goal: \n\nAcceptance criteria:\n- \n\n## Context\n\nThe direnv helper (`nix/direnvrc.sh`) launches `crossbridge-server` detached. A\nbug there leaked direnv's `.envrc` evaluation pipe (fd 3) into the long-lived\nserver: direnv never saw EOF on that pipe, so the shell that triggered `.envrc`\nhung until the server exited. Fixed launcher-side by adding `3>&-` to the\ndetached launch.\n\nThat fix is launcher-specific. This issue is the defense-in-depth complement:\nmake `crossbridge-server` itself drop any inherited file descriptors at startup,\nso it is robust against *any* launcher (Makefile, CI wrapper, shell script, ...)\nthat leaks an fd.\n\n## Why this is safe for this server\n\n`crossbridge-server` never legitimately inherits a file descriptor:\n\n- It **connects out** to the supervisor (`UnixStream::connect`, `supervisor.rs`).\n- It **creates** its own per-peer listening sockets (`listeners.rs`).\n- It opens its own crosslink DB, tokio epoll fd, and log sink.\n- `.design/overview.md`: the server is \"started manually in tmux (not systemd)\"\n  — no socket activation, no fd-passing anywhere in the design.\n\nEvery fd >= 3 the process starts with is therefore a launcher leak.\n\n## What to implement\n\nIn `crossbridge-server/src/main.rs`, as the **first statement of `main()`** —\nbefore `tracing_subscriber`, before `Cli::parse()`, before the tokio runtime\nbuilds its epoll fd — close every inherited fd >= 3:\n\n```rust\n// Drop every inherited fd >= 3 before we open any of our own. A launcher\n// (e.g. a direnv .envrc) may leak its evaluation pipe to us; holding it\n// open hangs the launcher until this long-lived process exits.\n```\n\n- Add `libc` as a direct dependency of `crossbridge-server` (already transitive\n  via tokio; one Cargo.toml line, no compile cost).\n- Use `close_range(2)` — a single atomic syscall, no iteration races. It\n  requires Linux 5.9+. If `close_range` returns `ENOSYS`, fall back to\n  iterating `/proc/self/fd` and closing each entry >= 3.\n- Leave fds 0/1/2 untouched — fd 1/2 carry `tracing` output; fd 0 is always\n  valid as launched.\n\n## Caveat to document in the code comment\n\nClosing inherited fds would break systemd socket activation (which passes\nsockets starting at fd 3 with `$LISTEN_FDS` set). The server has no\nsocket-activation path today, but the comment must call this out so a future\nchange is aware. Optional: skip the close when `$LISTEN_FDS` is set.\n\n## Acceptance criteria\n\n- [ ] `crossbridge-server` closes all inherited fds >= 3 as the first action in `main()`.\n- [ ] Implemented with `close_range`, with a `/proc/self/fd` fallback on `ENOSYS`.\n- [ ] fds 0/1/2 are left intact.\n- [ ] A test verifies an fd opened before `exec` of the server is not held open\n      by the running server (e.g. spawn the server with an extra inherited pipe\n      fd, assert the write end reaches EOF / the fd is absent from\n      `/proc/<pid>/fd`).\n- [ ] `cargo test`, `cargo clippy`, `cargo fmt` all clean.\n- [ ] The `3>&-` fix in `nix/direnvrc.sh` stays — this is complementary, not a replacement.",
+      "status": "open",
+      "priority": "medium",
+      "created_by": "desktop",
+      "created_at": "2026-05-22T20:44:48.073697555Z",
+      "updated_at": "2026-05-22T20:44:49.794828693Z",
+      "labels": [
+        "feature"
+      ]
+    },
+    "427dd451-cf9d-48a7-a3b7-93c0565ad214": {
+      "uuid": "427dd451-cf9d-48a7-a3b7-93c0565ad214",
+      "display_id": 4,
+      "title": "Convert to Cargo workspace, implement shared protocol crate with postcard message types and framing helpers",
+      "description": "Created by crosslink kickoff",
+      "status": "closed",
+      "priority": "medium",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-05T21:02:12.522742152Z",
+      "updated_at": "2026-05-06T17:36:32.909108184Z",
+      "closed_at": "2026-05-06T17:36:32.909108184Z",
+      "labels": [
+        "feature"
+      ],
+      "comments": {
+        "1f4b9801-b6d5-4497-ac9c-8ed0836b1a35": {
+          "author": "va8e",
+          "content": "Plan: Convert single-crate project to Cargo workspace with two members: (1) crates/crossbridge/ for the existing CLI binary, (2) crates/crossbridge-protocol/ for the new shared protocol crate. The protocol crate will define message types (Request, Response, StatusUpdate, Error) using serde + postcard serialization, plus length-prefix framing helpers for encode/decode over streams. Will keep it no_std-compatible with alloc where possible.",
+          "created_at": "2026-05-05T21:06:45.603163816Z",
+          "kind": "plan"
+        },
+        "23bf90da-da6b-4cf6-b355-5ec1689cbc4a": {
+          "author": "va8e",
+          "content": "Committed: Convert to Cargo workspace, add crossbridge-protocol crate (62d5c73) | Files: 12 files changed, 596 insertions(+), 36 deletions(-)",
+          "created_at": "2026-05-05T21:11:43.196988883Z",
+          "kind": "result"
+        },
+        "3e99026e-baa6-4c23-8d6e-f45b600f87d7": {
+          "author": "va8e",
+          "content": "[action] Implementing protocol message types",
+          "created_at": "2026-05-05T21:08:03.950317220Z",
+          "kind": "note"
+        },
+        "4ea25389-2318-4afd-9859-2f770f006b1b": {
+          "author": "va8e",
+          "content": "Plan: Protocol crate defines: Message enum (Request/Response/StatusUpdate variants), Priority enum, Status enum, Request struct (source, target, title, body, priority, uuid), Response struct (source_uuid, target_uuid, body), StatusUpdate struct (uuid, old/new status). Framing uses u32 LE length prefix + postcard serialization. decode_frame reads from byte slice returning (Message, bytes_consumed). All types derive Serialize/Deserialize/Debug/Clone/PartialEq.",
+          "created_at": "2026-05-05T21:08:00.073898190Z",
+          "kind": "plan"
+        },
+        "5a0b1d3b-a67c-40a5-818f-90329ea04249": {
+          "author": "2ZD1",
+          "content": "Duplicate of #5 — created during offline kickoff attempt that didn't sync",
+          "created_at": "2026-05-06T17:36:32.852625498Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABA0giaGMDGvCcSmPJrrYTe71OeyhcyxPff8XP8eq9FoBX/MrJdk1IWJCd4b/ccDIezdmFO8G3rTesSHbbLykXoAw=="
+        },
+        "676fb022-4c85-4304-bb29-112627e1fbc1": {
+          "author": "va8e",
+          "content": "[action] Converting to Cargo workspace layout",
+          "created_at": "2026-05-05T21:06:15.228723161Z",
+          "kind": "note"
+        },
+        "6bf042de-3368-4945-a17b-61eac3c86abb": {
+          "author": "va8e",
+          "content": "Result: Workspace conversion complete. Root Cargo.toml is now a workspace with two members: crates/crossbridge (binary, existing CLI) and crates/crossbridge-protocol (library, new). Protocol crate implements Message enum (Request/Response/StatusUpdate), Status enum (with Error(String) variant), Priority enum, postcard-based to_bytes/from_bytes on Message, and length-prefixed framing (encode_frame/decode_frame/decode_all_frames with MAX_FRAME_LEN=1MiB cap). 24 tests pass (8 binary + 16 protocol). Nix derivation updated with --package crossbridge flag. clippy/fmt not available in env but code follows existing style.",
+          "created_at": "2026-05-05T21:11:10.364276850Z",
+          "kind": "result"
+        },
+        "77d321d0-0f74-46f7-b11a-2ad947ad3462": {
+          "author": "va8e",
+          "content": "Committed: Convert to Cargo workspace, add crossbridge-protocol crate (62d5c73) | Files: 12 files changed, 596 insertions(+), 36 deletions(-)",
+          "created_at": "2026-05-05T21:11:23.142844572Z",
+          "kind": "result"
+        },
+        "b11474df-afaa-4426-bada-84000b664844": {
+          "author": "va8e",
+          "content": "Result: Workspace conversion complete. Root Cargo.toml is now workspace with two members: crates/crossbridge (CLI binary) and crates/crossbridge-protocol (shared protocol crate). Protocol crate has postcard message types (Message, Request, Response, StatusUpdate, Status, Priority) and length-prefixed framing helpers (encode_frame, decode_frame, decode_all_frames). All 24 tests pass, clean compile with no warnings. default.nix updated with cargoBuildFlags for workspace.",
+          "created_at": "2026-05-05T21:10:53.405949422Z",
+          "kind": "result"
+        },
+        "d155d6f4-bba9-4568-968e-33729e2f6cb8": {
+          "author": "va8e",
+          "content": "Plan: Convert single crate to Cargo workspace with two members: crates/crossbridge (existing binary) and crates/crossbridge-protocol (new library). Protocol crate defines message types (Request, Response, StatusUpdate) matching the existing label protocol, serialized with postcard. Framing helpers implement length-prefixed (u32 LE) framing. Binary crate gains dependency on protocol crate. Nix packaging updated for workspace layout.",
+          "created_at": "2026-05-05T21:06:01.396776320Z",
+          "kind": "plan"
+        },
+        "fc551d92-88ba-4cde-a4de-c25d200bff47": {
+          "author": "va8e",
+          "content": "[action] Converting to Cargo workspace layout",
+          "created_at": "2026-05-05T21:06:53.563325709Z",
+          "kind": "note"
+        }
+      }
+    },
+    "462c823f-5dda-4cee-ba77-5f126fb36c48": {
+      "uuid": "462c823f-5dda-4cee-ba77-5f126fb36c48",
+      "display_id": 16,
+      "title": "Force-timeout repro: agent should be killed by timeout(1) before completing. Task: read every .rs file in the repo and report a count, then run cargo test --workspace, then call session end",
+      "description": "Created by crosslink kickoff",
+      "status": "closed",
+      "priority": "medium",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-07T10:23:13.612132381Z",
+      "updated_at": "2026-05-08T16:06:48.566378382Z",
+      "closed_at": "2026-05-08T16:06:48.566378382Z",
+      "labels": [
+        "feature"
+      ]
+    },
+    "53d00b7b-9953-491c-8a26-e0ea988a2ca8": {
+      "uuid": "53d00b7b-9953-491c-8a26-e0ea988a2ca8",
+      "display_id": 25,
+      "title": "Quality pass: clippy pedantic clean workspace-wide",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nResolve every pedantic warning across the entire workspace in one coherent pass.\n\nWhy workspace-wide and not per-crate: `cargo clippy -p <X> -- -W clippy::pedantic -D warnings` lints the entire dep graph, so a per-crate AC isn't independently verifiable until every upstream is also clean. The previous attempt (issues #18-#23, now closed as superseded) coordinated badly across six parallel kickoffs and was abandoned.\n\nAcceptance criteria:\n- `cargo clippy --workspace --all-targets -- -W clippy::pedantic -D warnings` exits 0.\n- No blanket #[allow(clippy::pedantic)] over whole modules. Specific-lint allows must have a one-line justification comment when the pedantic suggestion is genuinely worse (e.g. similar_names on test variables that are intentionally parallel; too_many_lines on a deliberately linear narrative test; unused_async on a helper that hosts a future without a direct .await).\n- All existing tests still pass: `cargo test --workspace` (currently 92 passed, 0 ignored, 0 failed).\n- `cargo fmt --check` clean.\n- Wire protocol behavior, public APIs, and observable test outcomes are unchanged. This is a quality pass, not a refactor — do not change message types, label schemes, or observable behavior.\n- For cast-truncation lints (cast_possible_truncation, cast_sign_loss): prefer u32::try_from(...)? at boundaries; allow only where bounds are statically guaranteed (with a comment).\n\nReference categories from the orchestrator's pre-cleanup run:\n- doc_markdown (~25 sites: missing backticks around type names in doc comments)\n- cast_possible_truncation (~16)\n- missing_errors_doc (~10)\n- map_unwrap_or, manual_map (~5)\n- unnecessary_wraps (jj_origin_url returns Result<Option<String>> but never Errs)\n- needless_pass_by_value, too_many_lines, similar_names, manual_assert (a handful each)\n\nTotal roughly 168 pedantic warnings across the workspace as of the last clean main.",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T14:35:22.781558717Z",
+      "updated_at": "2026-05-08T14:57:23.379114476Z",
+      "closed_at": "2026-05-08T14:57:23.379114476Z"
+    },
+    "56efbadd-65ee-4dd1-9729-d503ce639cba": {
+      "uuid": "56efbadd-65ee-4dd1-9729-d503ce639cba",
+      "display_id": 1,
+      "title": "Unified crossbridge skill for ask + answer",
+      "status": "closed",
+      "priority": "high",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-04T17:58:03.214992980Z",
+      "updated_at": "2026-05-04T21:18:36.347719348Z",
+      "closed_at": "2026-05-04T21:18:36.347719348Z",
+      "comments": {
+        "041432db-661f-4163-9d95-72196c8ce70d": {
+          "author": "2ZD1",
+          "content": "Merge crossbridge-request and crossbridge-answer scripts into a single /crossbridge skill that an orchestrator agent can invoke. Goal: add one line like 'also respond to /crossbridge queries' to orchestrator prompt and have it handle both outbound requests and inbound answers.",
+          "created_at": "2026-05-04T17:58:09.416721760Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAGgIDc4dhR1m+UaIsbwoHzR5kxVeGYuGTbT/yZ84G2iViPDanMQiTT09dujYg14spueE2bZM83BWeHqTzb+LGDQ=="
+        },
+        "5ac8dcc2-6f85-485e-8951-30eab649f18f": {
+          "author": "2ZD1",
+          "content": "Design decision: Option A — single skill/crossbridge.md that covers ask+answer+check as prompt instructions. Keep the shell scripts as convenience accelerators, expose them in PATH via Nix package. Orchestrator just needs 'also respond to /crossbridge queries'.",
+          "created_at": "2026-05-04T18:04:42.444822769Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAUYqmq18fy4rYCLmh0MtOcYgtLJVnIGCfk698ZAyFs17hq8D36Y1VqLRCq4pV/vx2NGOr/N4ZT/OJ4SPCE4sjAg=="
+        },
+        "c822fbaa-53f8-4b7b-86ae-0d476ff73207": {
+          "author": "anon-433a2da8",
+          "content": "Replaced skill/crossbridge-responder.md with unified skill/crossbridge.md covering ask+answer+check. The new skill documents three operations (ask, answer, check), references the shell scripts as primary commands, includes manual fallback commands, and has a brief protocol lifecycle summary.",
+          "created_at": "2026-05-04T21:18:36.222408487Z",
+          "kind": "note"
+        }
+      }
+    },
+    "5a6329c6-a9b7-424f-b45a-217984a55832": {
+      "uuid": "5a6329c6-a9b7-424f-b45a-217984a55832",
+      "display_id": 3,
+      "title": "Convert to Cargo workspace, implement shared protocol crate with postcard message types and framing helpers",
+      "description": "Created by crosslink kickoff",
+      "status": "closed",
+      "priority": "medium",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-05T21:01:48.219402101Z",
+      "updated_at": "2026-05-06T17:36:32.778667447Z",
+      "closed_at": "2026-05-06T17:36:32.778667447Z",
+      "comments": {
+        "69da6f0e-9667-43fa-834f-f090327a804e": {
+          "author": "2ZD1",
+          "content": "Duplicate of #5 — created during offline kickoff attempt that didn't sync",
+          "created_at": "2026-05-06T17:36:32.719973919Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABANkUMSZSL6Bpkmtpjb+q1pNRE2hM0N4rP8Vv5QS1A8AKZ2Pxm77wFjpNbCOmGC3GKdyigI0wNTejXZeWkh/+EAw=="
+        }
+      }
+    },
+    "5e7ba92f-f72e-440b-a9f3-eb3ee122ba2b": {
+      "uuid": "5e7ba92f-f72e-440b-a9f3-eb3ee122ba2b",
+      "display_id": 36,
+      "title": "Fix CI: rust 1.87 too old for transitive deps",
+      "description": "Steps to reproduce:\n1. \n\nExpected: \nActual: \n\nFirst CI run on main (run 25601663135) failed because transitive deps now require rustc 1.88+: darling 0.23, instability 0.3.12, time 0.3.47. Locally rustc 1.94 from the nix shell hides this. Bump workspace rust-version to 1.88 and switch CI toolchain to 'stable' (drop the explicit 1.87 pin).",
+      "status": "closed",
+      "priority": "high",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-09T13:05:31.761316704Z",
+      "updated_at": "2026-05-09T13:06:25.989845372Z",
+      "closed_at": "2026-05-09T13:06:25.989845372Z",
+      "labels": [
+        "bug"
+      ]
+    },
+    "63e37641-f3e2-43e3-8e8a-8a55fab810f4": {
+      "uuid": "63e37641-f3e2-43e3-8e8a-8a55fab810f4",
+      "display_id": 43,
+      "title": "Remove legacy v1 crossbridge polling crate",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\n## Problem\n\nThe original polling-cycle binary in `crossbridge/` predates the v2\nsupervisor + server + client architecture and is no longer part of the\nshipped design. README explicitly calls it \"legacy ... not part of the new\narchitecture\", but it is still:\n\n- a workspace member in `Cargo.toml`,\n- built and installed by `default.nix`, and\n- declared as `mainProgram = \"crossbridge\"` in `default.nix:29` — so\n  `nix run` invokes the deprecated binary.\n\nThe v1 helper scripts `script/crossbridge-request` / `script/crossbridge-answer`\nonly emit v1 labels (`xb-target:`, `xb-status:open`, `xb-status:answered`)\nthat nothing in v2 consumes. They are still installed by `postInstall` in\n`default.nix:22-23`.\n\nKeeping the legacy crate around silently steers users to the wrong tool and\nforces v2 docs/skill to keep distinguishing \"legacy vs current\".\n\n## Scope\n\n1. Remove the `crossbridge/` crate:\n   - Delete the directory.\n   - Drop `\"crossbridge\"` from `[workspace] members` in the root `Cargo.toml`.\n   - Regenerate `Cargo.lock`.\n2. Update `default.nix`:\n   - Drop the `postInstall` lines installing `crossbridge-request` /\n     `crossbridge-answer`.\n   - Change `mainProgram` to one of the v2 binaries\n     (`crossbridge-supervisor` is the most natural — it is what the systemd\n     module wraps).\n3. Delete `script/crossbridge-request` and `script/crossbridge-answer`\n   (they encode the v1 label protocol; v2 uses `crossbridge-client`).\n4. README cleanup:\n   - Drop the \"legacy\" bullet under \"The package installs\" (`README.md:104-105`).\n   - Drop the row for `crossbridge/` in the Repo layout table.\n   - Remove any other references to the legacy binary or helper scripts.\n5. CHANGELOG: add an `### Removed` entry under `[Unreleased]`.\n\n## Preconditions\n\n- The agent skill update (companion issue) should land first or in the same\n  change, otherwise the skill is left pointing at scripts that no longer\n  exist.\n\n## Acceptance\n\n- `cargo build --workspace` and `cargo test --workspace` succeed.\n- `nix-build` produces a derivation whose `bin/` contains only the v2\n  binaries (`crossbridge-supervisor`, `crossbridge-server`,\n  `crossbridge-client`).\n- `rg -i \"legacy|crossbridge-request|crossbridge-answer\"` returns no hits in\n  user-facing files (README, skill, design docs).\n- No remaining references to the v1 polling protocol in shipped code or docs.",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-09T21:38:30.308205347Z",
+      "updated_at": "2026-05-10T00:29:32.244971113Z",
+      "closed_at": "2026-05-10T00:29:32.244971113Z",
+      "labels": [
+        "refactor",
+        "type:cleanup"
+      ],
+      "comments": {
+        "1bcfa79a-874f-4d7e-a3df-b8a23eebcc34": {
+          "author": "2ZD1",
+          "content": "Landed via cherry-pick onto main as 868e65c. Took the v1 crate removal, default.nix mainProgram fix, README/CHANGELOG cleanup, and script/ deletion as-is; SKILL.md hunks dropped (resolved with -X ours) in favor of #42's better rewrite. cargo test --workspace and cargo clippy --workspace -- -D warnings both pass.",
+          "created_at": "2026-05-10T00:29:29.743849908Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAqyZDuq1h9zj+pfcRKVY7zVUNPIZJwJNXDXkKyoCbP+9vePprOTcCxFVEUm/VwMBJCzVJNVVH4eMdA2uqsmIEAA=="
+        }
+      }
+    },
+    "6ae40c86-0621-4461-aaf8-eaef6d4e0e67": {
+      "uuid": "6ae40c86-0621-4461-aaf8-eaef6d4e0e67",
+      "display_id": 21,
+      "title": "Quality pass: clippy pedantic cleanup in crossbridge-server",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun `cargo clippy -p crossbridge-server --all-targets -- -W clippy::pedantic` and resolve every warning (currently 57 — by far the largest count in the workspace). Top categories: cast_possible_truncation, missing_errors_doc, must_use_candidate, uninlined_format_args, unused_async (note: `unused_async` on `run_fake_supervisor` is a false positive — the helper hosts a future even though no `.await` is in its body; allow that one with a comment).\n\nAcceptance criteria:\n- `cargo clippy -p crossbridge-server --all-targets -- -W clippy::pedantic -D warnings` exits 0.\n- No blanket `#[allow(clippy::pedantic)]` or `#[allow(...)]` over whole modules — fix the underlying issues, only allow specific lints with a one-line justification comment when the pedantic suggestion is genuinely worse.\n- All existing tests still pass (`cargo test -p crossbridge-server`), including the `end_to_end` and `oversized_frame` integration tests.\n- `cargo fmt --check` clean.",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T13:54:27.498492315Z",
+      "updated_at": "2026-05-08T14:36:11.679007012Z",
+      "closed_at": "2026-05-08T14:36:11.679007012Z"
+    },
+    "740c91b6-a927-4bac-89a3-26d0104e9f17": {
+      "uuid": "740c91b6-a927-4bac-89a3-26d0104e9f17",
+      "display_id": 45,
+      "title": "crossbridge-server: actionable error when slug derivation fails — point user at --slug",
+      "description": "Steps to reproduce:\n1. \n\nExpected: \nActual: \n\n## Problem\n\nWhen `crossbridge-server` runs without `--slug` and the repo has no `origin` remote configured (e.g. an unpublished local repo), it bails with an unhelpful low-level error that exposes implementation details and gives the user no actionable next step.\n\n### Repro\n\n```\n$ crossbridge-server --group orchestration\nError: deriving slug from /home/vringar/projects/vetinari\n\nCaused by:\n    `jj git remote list` did not list an `origin` remote in /home/vringar/projects/vetinari\n```\n\nThe user has to read the error twice to realize the fix is \"pass `--slug <name>` manually\".\n\n## Desired behavior\n\nWhen slug derivation fails (no `origin` remote in either jj or git), the error should:\n\n1. Lead with what the user must do: pass `--slug <NAME>` explicitly.\n2. Mention briefly *why* derivation failed (no `origin` remote configured) so the user understands the trigger.\n3. Not expose the literal `jj git remote list` / `git remote get-url origin` command string — that is an implementation detail.\n\nA reasonable shape:\n\n```\nError: cannot auto-derive repo slug for /home/vringar/projects/vetinari\n       (the repository has no `origin` remote configured)\n\n       Pass `--slug <NAME>` explicitly, e.g.:\n           crossbridge-server --group orchestration --slug vetinari\n```\n\n## Scope\n\n- `crossbridge-server/src/slug.rs` — change the error returned by `jj_origin_url` / `git_origin_url` when no origin remote exists, OR (preferred) keep those low-level errors but wrap them at the `derive_from_repo` boundary with the actionable message.\n- `crossbridge-server/src/main.rs` — possibly adjust the `.with_context(...)` call so the surfaced top-level message names `--slug` as the fix.\n- Add/update a unit test in `slug.rs` covering the \"no origin remote\" path if one does not already exist.\n\n## Out of scope\n\n- Auto-falling-back to the directory basename. The user asked for an *explicit* demand, not silent inference.\n- Refactoring how slug derivation hooks into the CLI more broadly.",
+      "status": "closed",
+      "priority": "high",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-14T14:56:22.992786771Z",
+      "updated_at": "2026-05-15T22:15:14.783787005Z",
+      "closed_at": "2026-05-15T22:15:14.783787005Z",
+      "labels": [
+        "bug"
+      ],
+      "comments": {
+        "c1cc1008-92d0-48e6-8af8-43c26faccb35": {
+          "author": "desktop",
+          "content": "Resolved on main by commit 878c47c1. derive_from_repo now returns an actionable error pointing the user at --slug <NAME> when no origin remote is configured; resolve_slug surfaces it unwrapped. Also reachable via the new CROSSBRIDGE_OWN_SLUG env override.",
+          "created_at": "2026-05-15T22:15:07.663877066Z",
+          "kind": "note",
+          "signed_by": "SHA256:Z3rEXNb3m5pTVbDpOH0aQthjH5DQ6uSjv1qxawrtDOk",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAg52EZBzRO5K78vCSchgL2iLRuIldPW0wLMoBoA/5K3CoAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABA2oQt8BeVSr4bsoMIEalGwo4CXyEp6bH96Mf8WiQrhZuUZ5+/lSeD7HCs39raMLGUuWAh1iaPHT8wK1d+6nosBQ=="
+        }
+      }
+    },
+    "7957ce48-31b8-4a13-9664-6a5d1de8a4e5": {
+      "uuid": "7957ce48-31b8-4a13-9664-6a5d1de8a4e5",
+      "display_id": 24,
+      "title": "Quality pass: clippy pedantic cleanup in crossbridge (v1 bin)",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun cargo clippy -p crossbridge with pedantic and resolve all 13 warnings. Top categories: unnecessary_wraps, single_match_else, similar_names, manual_let_else.",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T13:54:42.500551731Z",
+      "updated_at": "2026-05-08T13:55:53.342480069Z",
+      "closed_at": "2026-05-08T13:55:53.342480069Z"
+    },
+    "797ac870-1ee1-491c-afce-1b6a3a7f42f4": {
+      "uuid": "797ac870-1ee1-491c-afce-1b6a3a7f42f4",
+      "display_id": 29,
+      "title": "Quality pass: clippy pedantic cleanup in crossbridge-supervisor",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun cargo clippy -p crossbridge-supervisor with -W clippy::pedantic and resolve all 18 warnings. Top categories: cast_possible_truncation, missing_errors_doc, semicolon_if_nothing_returned, match_wild_err_arm, used_underscore_binding.\n\nAcceptance criteria:\n- cargo clippy -p crossbridge-supervisor --all-targets -- -W clippy::pedantic -D warnings exits 0.\n- No blanket #[allow] over whole modules — fix the underlying issues; only allow specific lints with a one-line justification.\n- All existing tests still pass (cargo test -p crossbridge-supervisor).\n- cargo fmt --check clean.",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T13:55:09.085245514Z",
+      "updated_at": "2026-05-08T14:57:23.599096996Z",
+      "closed_at": "2026-05-08T14:57:23.599096996Z",
+      "labels": [
+        "refactor"
+      ]
+    },
+    "7ace7a00-8e76-4e35-a032-9c829cec1c9f": {
+      "uuid": "7ace7a00-8e76-4e35-a032-9c829cec1c9f",
+      "display_id": 27,
+      "title": "Quality pass: clippy pedantic cleanup in crossbridge (v1 bin)",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun cargo clippy -p crossbridge with -W clippy::pedantic and resolve all 13 warnings. Top categories: unnecessary_wraps, single_match_else, similar_names, manual_let_else.\n\nAcceptance criteria:\n- cargo clippy -p crossbridge --all-targets -- -W clippy::pedantic -D warnings exits 0.\n- No blanket #[allow(clippy::pedantic)] over whole modules — fix the underlying issues, only allow specific lints with a one-line justification when the suggestion is genuinely worse.\n- All existing tests still pass (cargo test -p crossbridge).\n- cargo fmt --check clean.",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T13:54:58.662435537Z",
+      "updated_at": "2026-05-08T14:57:23.451995486Z",
+      "closed_at": "2026-05-08T14:57:23.451995486Z",
+      "labels": [
+        "refactor"
+      ]
+    },
+    "7bca6069-e60b-41fc-a656-f900b4eb35b0": {
+      "uuid": "7bca6069-e60b-41fc-a656-f900b4eb35b0",
+      "display_id": 38,
+      "title": "Use npins to pin nixpkgs (and rustc) for deterministic local + CI builds",
+      "description": "Goal: \n\nAcceptance criteria:\n- \n\nToday shell.nix uses bare `<nixpkgs>` which resolves to whatever the user's NIX_PATH points to (currently rustc 1.94). CI uses dtolnay/rust-toolchain@stable which is the GitHub-hosted current stable (different rustc, different clippy, different pedantic lint set). The two diverge silently — the run on #37 fails on clippy::map_unwrap_or warnings that local 1.94 didn't flag.\n\nFix: introduce npins to lock a specific nixpkgs commit, refactor shell.nix to import that pin, and have CI install Nix + run cargo via nix-shell against the same shell.nix. Then pedantic-clean state is reproducible: every machine compiling this repo uses the same rustc, the same clippy, and sees the same lint set. New pedantic warnings only land when the pin is bumped, which is a deliberate act.\n\nAC:\n- npins/ directory at repo root with a nixpkgs pin (current stable channel, e.g. nixos-25.05 or unstable, whichever the user prefers).\n- shell.nix imports the pinned nixpkgs instead of <nixpkgs>.\n- .github/workflows/ci.yml installs Nix (cachix/install-nix-action@v27 or similar) and runs cargo test / cargo clippy --workspace --all-targets -- -W clippy::pedantic -D warnings / cargo fmt --check inside nix-shell.\n- README documents the pin: 'rustc version is whatever nixpkgs in npins/ ships'.\n- The new CI run on the resulting commit passes all three jobs green.\n- Local cargo build via direnv/nix-shell continues to work without manual intervention.",
+      "status": "closed",
+      "priority": "high",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-09T13:14:20.468003036Z",
+      "updated_at": "2026-05-09T13:16:25.983788392Z",
+      "closed_at": "2026-05-09T13:16:25.983788392Z",
+      "labels": [
+        "feature"
+      ]
+    },
+    "7f318491-f2fe-47f0-8653-94cc5b4623e4": {
+      "uuid": "7f318491-f2fe-47f0-8653-94cc5b4623e4",
+      "display_id": 23,
+      "title": "Quality pass: clippy pedantic cleanup in crossbridge-e2e",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun `cargo clippy -p crossbridge-e2e --all-targets -- -W clippy::pedantic` and resolve every warning (currently 57). Top categories: missing_errors_doc, cast_possible_truncation, map_unwrap_or, similar_names (`labels_a_after` vs `labels_b_after` — keep them, they're the most readable; allow `similar_names` for the e2e test specifically), too_many_lines (the round_trip test is intentionally a single linear narrative — allow `too_many_lines` on that fn with a comment), manual_assert.\n\nAcceptance criteria:\n- `cargo clippy -p crossbridge-e2e --all-targets -- -W clippy::pedantic -D warnings` exits 0.\n- No blanket `#[allow(clippy::pedantic)]` or `#[allow(...)]` over whole modules — fix the underlying issues, only allow specific lints with a one-line justification comment when the pedantic suggestion is genuinely worse.\n- The `submit_then_answer_round_trip` integration test must still run unconditionally (no `#[ignore]`) and pass.\n- `cargo fmt --check` clean.",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T13:54:36.313831645Z",
+      "updated_at": "2026-05-08T14:36:11.804394484Z",
+      "closed_at": "2026-05-08T14:36:11.804394484Z"
+    },
+    "8a515bec-3b0e-4cac-935a-a889c8c40b52": {
+      "uuid": "8a515bec-3b0e-4cac-935a-a889c8c40b52",
+      "display_id": 35,
+      "title": "Fix CI: rust 1.87 too old for transitive deps",
+      "description": "Steps to reproduce:\n1. \n\nExpected: \nActual: \n\nFirst CI run on main (run 25601663135) failed because transitive deps now require rustc 1.88+:\n- darling/darling_core/darling_macro 0.23.0 require 1.88\n- instability 0.3.12 requires 1.88\n- time/time-core require 1.88\n\nFix: bump workspace rust-version to 1.88 in Cargo.toml AND switch the CI workflow from a pinned 1.87 to 'stable' (so future dep bumps don't silently break CI again). Local dev shell already uses 1.94, this only catches up to reality.\n\nAC:\n- cargo build --workspace passes locally and on CI.\n- .github/workflows/ci.yml uses dtolnay/rust-toolchain@stable without an explicit version override.\n- Cargo.toml workspace.package.rust-version is bumped (target floor that compiles).",
+      "status": "closed",
+      "priority": "high",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-09T13:05:19.210046897Z",
+      "updated_at": "2026-05-09T13:05:45.448966289Z",
+      "closed_at": "2026-05-09T13:05:45.448966289Z"
+    },
+    "943afed8-5c2b-4555-8ad3-8c9645b0ebe4": {
+      "uuid": "943afed8-5c2b-4555-8ad3-8c9645b0ebe4",
+      "display_id": 28,
+      "title": "Quality pass: clippy pedantic cleanup in crossbridge-protocol",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun cargo clippy -p crossbridge-protocol with -W clippy::pedantic and resolve all 10 warnings. Top categories: cast_possible_truncation, missing_errors_doc.\n\nAcceptance criteria:\n- cargo clippy -p crossbridge-protocol --all-targets -- -W clippy::pedantic -D warnings exits 0.\n- No blanket #[allow] over whole modules — fix the underlying issues; only allow specific lints with a one-line justification.\n- All existing tests still pass (cargo test -p crossbridge-protocol).\n- cargo fmt --check clean.\n- Cast-truncation warnings: prefer u32::try_from(...)? at wire-protocol boundaries; allow cast_possible_truncation only where bounds are statically guaranteed (with a comment).",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T13:55:06.393977014Z",
+      "updated_at": "2026-05-08T14:57:23.528298495Z",
+      "closed_at": "2026-05-08T14:57:23.528298495Z",
+      "labels": [
+        "refactor"
+      ]
+    },
+    "97244c12-e2c3-4768-a1dd-00cbfbd84929": {
+      "uuid": "97244c12-e2c3-4768-a1dd-00cbfbd84929",
+      "display_id": 40,
+      "title": "Bump actions/checkout v4 -> v5 in CI",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nGitHub deprecation annotation flagged actions/checkout@v4 running on Node 20 (deprecated June 2026). v5 runs on Node 24. AC: .github/workflows/ci.yml uses actions/checkout@v5 in all three jobs; resulting CI run passes.",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-09T14:28:55.819755629Z",
+      "updated_at": "2026-05-09T14:29:07.453438208Z",
+      "closed_at": "2026-05-09T14:29:07.453438208Z",
+      "labels": [
+        "refactor"
+      ]
+    },
+    "9c3350cb-4fbf-4f2b-910c-f78718a97d98": {
+      "uuid": "9c3350cb-4fbf-4f2b-910c-f78718a97d98",
+      "display_id": 6,
+      "title": "crossbridge-supervisor: Implement the supervisor daemon. See .design/supervisor.md for full spec. Listens on Unix socket for repo server registrations, tracks peer groups in-memory (HashMap<String, HashMap<String, Stream>>), sends join/leave notifications over persistent streams. Single-threaded tokio event loop. Creates/removes /run/crossbridge/<slug>/ directories. Handles registration (validate unique slug), peer departure (notify survivors, cleanup dirs), and own restart (wipe state). CLI: crossbridge-supervisor [--socket path]. Dependencies: tokio, crossbridge-protocol (workspace dep), tracing, tracing-subscriber, anyhow. NO crosslink dependency.",
+      "description": "Created by crosslink kickoff",
+      "status": "closed",
+      "priority": "medium",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-05T23:03:48.177877700Z",
+      "updated_at": "2026-05-07T19:19:05.919773609Z",
+      "closed_at": "2026-05-07T19:19:05.919773609Z",
+      "labels": [
+        "feature"
+      ],
+      "blockers": [
+        "c7e7fa6b-7ac1-4f30-9785-323fb35260c0"
+      ],
+      "comments": {
+        "65bfbb5c-a41f-4396-aa69-d146092436af": {
+          "author": "bPQu",
+          "content": "[action] Implementing supervisor daemon",
+          "created_at": "2026-05-06T14:34:15.525077298Z",
+          "kind": "note"
+        },
+        "6d66df10-548d-43e8-b4a6-5845c5be3027": {
+          "author": "2ZD1",
+          "content": "## Orchestration role: supervisor crate (consumer)\n\n**Prerequisite**: Issue #5 (protocol) must be merged into main first. This issue is blocked by #5 in the dependency graph.\n\n**Hard constraints — DO NOT:**\n- Create or modify root Cargo.toml (workspace already exists)\n- Create or modify crates/crossbridge-protocol/ (already implemented; just import it)\n- Modify any other crate (crates/crossbridge/, crates/crossbridge-server/, crates/crossbridge-client/)\n- Re-implement protocol message types — import them from `crossbridge_protocol`\n\n**Scope for this issue:**\n- Add ONLY crates/crossbridge-supervisor/ to the existing workspace\n- Add the new crate to workspace.members in root Cargo.toml (one-line edit only)\n- Implement per .design/supervisor.md\n- Use `crossbridge-protocol = { workspace = true }` in your Cargo.toml\n\n**Definition of done:**\n- cargo build -p crossbridge-supervisor passes\n- cargo test -p crossbridge-supervisor passes\n- Work committed; ready to merge",
+          "created_at": "2026-05-06T17:36:46.169059200Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAABpJds28qz7+s+HTKLG0NoxT7rJE2Chq+ciWKxophWbuGxJCBfruFtcH9uI/NjDXsz+MNUTFIswcpnbK+YxRDA=="
+        },
+        "b644b573-740f-471c-9c28-2cb7eb4d74e1": {
+          "author": "bPQu",
+          "content": "Plan: (1) Convert to workspace using existing feature/crossbridge-protocol branch as structural starting point, but redo protocol message types per issue #5 spec (Register, RegisterResponse, Notification, SupervisorMessage, ClientRequest, etc.). (2) Add crates/crossbridge-supervisor with single-threaded tokio rt + UnixListener. (3) State: Rc<RefCell<HashMap<String, HashMap<String, mpsc::Sender<Reply>>>>>. (4) Per-connection task reads Register, validates uniqueness, creates /run/crossbridge/slug/, spawns writer, notifies survivors on disconnect. (5) Tests via tempdir + custom socket path. NOTE: .design/supervisor.md and .design/protocol.md don't exist; I'm proceeding from issue descriptions and DESIGN.md. Other agents are concurrently working on #5 (protocol) and #7 (server) in their own worktrees.",
+          "created_at": "2026-05-06T14:09:07.338857235Z",
+          "kind": "plan"
+        },
+        "ba81a9e3-b33a-4a1e-9273-c8c16dfd31c9": {
+          "author": "bPQu",
+          "content": "[action] Setting up Cargo workspace structure",
+          "created_at": "2026-05-06T14:31:58.291688401Z",
+          "kind": "note"
+        }
+      }
+    },
+    "9c3cc507-f4df-4180-904b-0f6167228f00": {
+      "uuid": "9c3cc507-f4df-4180-904b-0f6167228f00",
+      "display_id": 37,
+      "title": "Drop rust-version from workspace Cargo.toml",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nrust-version was set to 1.87 in the initial skeleton commit (3cd5721) and not revisited. None of the crates are published to crates.io, and the project is only ever built from this machine's nix shell (rustc 1.94+). Each time crosslink's transitive deps bump their MSRV, CI breaks while local dev keeps working silently (run 25601663135 was today's instance, fixed by #36 by bumping to 1.88).\n\nDrop rust-version entirely from [workspace.package] in Cargo.toml. No need for an MSRV contract on a binary-only personal project that's locked to one toolchain.\n\nAC:\n- Cargo.toml workspace.package no longer has a rust-version line.\n- cargo build --workspace passes.\n- CI run on the resulting commit passes (test + clippy + fmt all green).",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-09T13:10:47.817797221Z",
+      "updated_at": "2026-05-09T13:11:23.099655432Z",
+      "closed_at": "2026-05-09T13:11:23.099655432Z",
+      "labels": [
+        "refactor"
+      ]
+    },
+    "a83c1fb3-70de-4710-9527-e19aaafc490d": {
+      "uuid": "a83c1fb3-70de-4710-9527-e19aaafc490d",
+      "display_id": 8,
+      "title": "crossbridge-client: Implement the per-agent CLI. See .design/client.md for full spec. SYNCHRONOUS (no tokio). Derives repo slug from git/jj origin remote (strip .git, take last path component). Three subcommands: (1) peers - list *.socket files in /run/crossbridge/<own-slug>/, (2) submit --issue <id> --target <slug> - read issue from local crosslink DB, connect to peer socket, send ClientRequest::Submit, on success update local labels (xb:outbound, xb-status:pending, xb-ref:<target-uuid>), (3) answer --issue <id> - read inbound issue, extract xb-source and xb-ref labels, collect result comments, send ClientRequest::Answer, on success mark xb-status:answered and close. Uses std::os::unix::net::UnixStream with sync framing helpers from crossbridge-protocol. Dependencies: crossbridge-protocol, crosslink, clap, anyhow. NO tokio.",
+      "description": "Created by crosslink kickoff",
+      "status": "closed",
+      "priority": "medium",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-05T23:04:13.454577487Z",
+      "updated_at": "2026-05-07T19:19:06.037503735Z",
+      "closed_at": "2026-05-07T19:19:06.037503735Z",
+      "labels": [
+        "feature"
+      ],
+      "blockers": [
+        "c7e7fa6b-7ac1-4f30-9785-323fb35260c0"
+      ],
+      "comments": {
+        "23d01371-901c-4d32-82fc-b8360c001ff4": {
+          "author": "2ZD1",
+          "content": "## Orchestration role: client crate (consumer)\n\n**Prerequisite**: Issue #5 (protocol) must be merged into main first. This issue is blocked by #5 in the dependency graph.\n\n**Hard constraints — DO NOT:**\n- Create or modify root Cargo.toml (workspace already exists)\n- Create or modify crates/crossbridge-protocol/ (already implemented; just import it)\n- Modify any other crate (crates/crossbridge/, crates/crossbridge-supervisor/, crates/crossbridge-server/)\n- Re-implement protocol message types — import them from `crossbridge_protocol`\n\n**Scope for this issue:**\n- Add ONLY crates/crossbridge-client/ to the existing workspace\n- Add the new crate to workspace.members in root Cargo.toml (one-line edit only)\n- Implement per .design/client.md (synchronous — no tokio)\n- Use `crossbridge-protocol = { workspace = true }` and `crosslink = { workspace = true }`\n\n**Definition of done:**\n- cargo build -p crossbridge-client passes\n- cargo test -p crossbridge-client passes\n- Work committed; ready to merge",
+          "created_at": "2026-05-06T17:36:52.171703612Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAzmVFG8HaSblbIQb28Bvh59GLRrRA/oYapuQiWstUxfOCNlyUNlHHZfCHdGaayqM4BvVdvZVAX4DBuAC0BbfRBg=="
+        }
+      }
+    },
+    "b31a00cd-e0d4-46bf-a7a1-c192aba39d05": {
+      "uuid": "b31a00cd-e0d4-46bf-a7a1-c192aba39d05",
+      "display_id": 14,
+      "title": "Debug repro: minimal kickoff agent for worktree teardown observation",
+      "description": "Created by crosslink kickoff",
+      "status": "closed",
+      "priority": "medium",
+      "created_by": "Kklh",
+      "created_at": "2026-05-07T10:04:17.041105972Z",
+      "updated_at": "2026-05-08T16:06:48.433984282Z",
+      "closed_at": "2026-05-08T16:06:48.433984282Z",
+      "labels": [
+        "feature"
+      ]
+    },
+    "b986c5ae-6aca-48a6-9cb1-53cbf1e02066": {
+      "uuid": "b986c5ae-6aca-48a6-9cb1-53cbf1e02066",
+      "display_id": 18,
+      "title": "Quality pass: clippy pedantic cleanup in crossbridge (v1 bin)",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun `cargo clippy -p crossbridge --all-targets -- -W clippy::pedantic` and resolve every warning (currently 13). Top categories: unnecessary_wraps, single_match_else, similar_names, manual_let_else.\n\nAcceptance criteria:\n- `cargo clippy -p crossbridge --all-targets -- -W clippy::pedantic -D warnings` exits 0.\n- No blanket `#[allow(clippy::pedantic)]` or `#[allow(...)]` over whole modules — fix the underlying issues, only allow specific lints with a one-line justification comment when the pedantic suggestion is genuinely worse.\n- All existing tests still pass (`cargo test -p crossbridge`).\n- `cargo fmt --check` clean.",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T13:54:15.796610132Z",
+      "updated_at": "2026-05-08T14:36:11.481655867Z",
+      "closed_at": "2026-05-08T14:36:11.481655867Z"
+    },
+    "bfe3c775-e495-4235-a00f-542da03a5cb3": {
+      "uuid": "bfe3c775-e495-4235-a00f-542da03a5cb3",
+      "display_id": 26,
+      "title": "Test",
+      "status": "closed",
+      "priority": "medium",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T14:35:25.802221830Z",
+      "updated_at": "2026-05-08T14:36:11.866149093Z",
+      "closed_at": "2026-05-08T14:36:11.866149093Z"
+    },
+    "c326e492-c0ad-4577-b092-86adbe2e3cbb": {
+      "uuid": "c326e492-c0ad-4577-b092-86adbe2e3cbb",
+      "display_id": 7,
+      "title": "crossbridge-server: Implement the per-repo server. See .design/server.md for full spec. Registers with supervisor (sends Register, receives RegisterAck with peer list), creates listening sockets at /run/crossbridge/<peer-slug>/<own-slug>.socket for each peer. Handles PeerJoined/PeerLeft notifications. Accepts ClientRequest (Submit/Answer) from agents on those sockets. SubmitIssue: creates issue in local crosslink DB with proper labels, handles attachments via jj worktree materialization, idempotent via xb-ref check. SubmitAnswer: finds source issue by UUID, copies comments, swaps status to resolved, closes. Single-threaded tokio. Supervisor reconnection with exponential backoff. CLI: crossbridge-server --group <group> [--slug <slug>] [--repo-path <path>]. Dependencies: tokio, crossbridge-protocol, crosslink, tracing, tracing-subscriber, anyhow, clap.",
+      "description": "Created by crosslink kickoff",
+      "status": "closed",
+      "priority": "medium",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-05T23:04:00.898629772Z",
+      "updated_at": "2026-05-07T19:19:05.978838956Z",
+      "closed_at": "2026-05-07T19:19:05.978838956Z",
+      "labels": [
+        "feature"
+      ],
+      "blockers": [
+        "c7e7fa6b-7ac1-4f30-9785-323fb35260c0"
+      ],
+      "comments": {
+        "b9b569b4-9c3a-4492-973b-c397d91a8760": {
+          "author": "2ZD1",
+          "content": "## Orchestration role: server crate (consumer)\n\n**Prerequisite**: Issue #5 (protocol) must be merged into main first. This issue is blocked by #5 in the dependency graph.\n\n**Hard constraints — DO NOT:**\n- Create or modify root Cargo.toml (workspace already exists)\n- Create or modify crates/crossbridge-protocol/ (already implemented; just import it)\n- Modify any other crate (crates/crossbridge/, crates/crossbridge-supervisor/, crates/crossbridge-client/)\n- Re-implement protocol message types — import them from `crossbridge_protocol`\n\n**Scope for this issue:**\n- Add ONLY crates/crossbridge-server/ to the existing workspace\n- Add the new crate to workspace.members in root Cargo.toml (one-line edit only)\n- Implement per .design/server.md\n- Use `crossbridge-protocol = { workspace = true }` and `crosslink = { workspace = true }`\n\n**Definition of done:**\n- cargo build -p crossbridge-server passes\n- cargo test -p crossbridge-server passes\n- Work committed; ready to merge",
+          "created_at": "2026-05-06T17:36:49.402545234Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAsaAwppmSLyqBMEOHNrEdpHmjzOfpmJLBSNqzZqHBKBO2BGX7nJvnWhplEWcN0l85gcB7LQnHJn7a25Qrxz2aCg=="
+        }
+      }
+    },
+    "c3dacb91-e367-4443-a3e5-e0c94bdfa066": {
+      "uuid": "c3dacb91-e367-4443-a3e5-e0c94bdfa066",
+      "display_id": 42,
+      "title": "Update agent skill to v2 socket protocol",
+      "description": "Steps to reproduce:\n1. \n\nExpected: \nActual: \n\n## Problem\n\n`skill/crossbridge/SKILL.md` documents the v1 polling-bridge workflow, not the\nshipped v2 socket-based architecture.\n\nConcrete drift:\n\n- Tells agents to label issues with `xb-target:<slug>` / `xb-status:open` and\n  wait for \"the bridge daemon\" to copy them. That label-driven flow is only\n  consumed by the legacy polling binary in `crossbridge/`. The v2 server does\n  not poll labels — clients must call `crossbridge-client submit/answer`.\n- Recommends `crossbridge-request` / `crossbridge-answer` shell helpers as the\n  primary entry points. Those scripts (in `script/`) only write the v1 labels;\n  under v2 they are inert.\n- \"Manual fallback\" sections write the same v1 labels — also inert under v2.\n- Footer says \"the bridge runs every ~30s\", which is v1 polling-cycle language.\n  v2 is event-driven via Unix sockets.\n- Never mentions `crossbridge-client` despite that being the only v2 entry\n  point an agent can use today.\n\nNet effect: an agent following this skill will appear to send a request but\nnothing on the v2 transport will fire.\n\n## What v2 actually wants the agent to do\n\n- ask: `crossbridge-client submit --issue <id> --target <slug>` (after\n  creating the issue with `crosslink issue create`).\n- answer: `crossbridge-client answer --issue <id>` once a `result` comment\n  has been added.\n- check: list inbound/outbound issues by `xb:inbound` / `xb:outbound` label.\n- The server appends a footer to every inbound issue's body telling the agent\n  to run `crossbridge-client answer --issue <id>` (see\n  `ANSWER_INSTRUCTION_FOOTER` in `crossbridge-server/src/handler.rs:23`).\n\n## Acceptance\n\n- `skill/crossbridge/SKILL.md` only references the v2 client commands.\n- All `xb-target:` / `xb-status:open` instructions removed.\n- \"Manual fallback\" sections either deleted or rewritten to invoke\n  `crossbridge-client` directly.\n- Polling-language (\"every ~30s\") replaced with the event-driven reality.\n- Cross-check against `.design/client.md`, `.design/server.md`, and\n  `crossbridge-server/src/handler.rs` so the skill matches real behavior.\n\n## Related\n\n- See companion issue for removal of the v1 `crossbridge/` crate; once removed,\n  `script/crossbridge-request` / `script/crossbridge-answer` and any remaining\n  references should be deleted as part of that work.",
+      "status": "closed",
+      "priority": "high",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-09T21:38:06.012969625Z",
+      "updated_at": "2026-05-10T00:29:27.548873411Z",
+      "closed_at": "2026-05-10T00:29:27.548873411Z",
+      "labels": [
+        "bug",
+        "type:docs"
+      ],
+      "comments": {
+        "3256da8d-48e7-4377-b85f-e7be11202aac": {
+          "author": "2ZD1",
+          "content": "Landed via cherry-pick onto main as f13006f. Used the dedicated agent's SKILL.md rewrite (kept all four xb-status states and the Unix-socket transport description) over #43's bundled version which had dropped open/resolved and reverted the frontmatter description to v1 wording.",
+          "created_at": "2026-05-10T00:29:20.121773890Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAqW1n9Mi9IP0jgmAUq0LFoiRy7zMUVu7k8zufOLyJ+b6sFKgNMGEuiTIds+C7slneAjP/9cIkfBrthW8+DZNeAg=="
+        }
+      }
+    },
+    "c6ad08b7-cf3c-465c-81f8-64e3b656dabd": {
+      "uuid": "c6ad08b7-cf3c-465c-81f8-64e3b656dabd",
+      "display_id": 33,
+      "title": "Quality pass: clippy pedantic clean workspace-wide",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nResolve every pedantic warning across the entire workspace in one coherent pass.\n\nWhy workspace-wide and not per-crate: cargo clippy -p X with -W clippy::pedantic -D warnings lints the entire dep graph, so a per-crate AC is not independently verifiable until every upstream is also clean. The previous attempt (issues #18-#23, now closed as superseded) coordinated badly across six parallel kickoffs and was abandoned.\n\nAcceptance criteria:\n- cargo clippy --workspace --all-targets -- -W clippy::pedantic -D warnings exits 0.\n- No blanket #[allow(clippy::pedantic)] over whole modules. Specific-lint allows must have a one-line justification comment when the pedantic suggestion is genuinely worse (e.g. similar_names on test variables that are intentionally parallel; too_many_lines on a deliberately linear narrative test; unused_async on a helper that hosts a future without a direct .await).\n- All existing tests still pass: cargo test --workspace (currently 92 passed, 0 ignored, 0 failed).\n- cargo fmt --check clean.\n- Wire protocol behavior, public APIs, and observable test outcomes are unchanged. This is a quality pass, not a refactor — do not change message types, label schemes, or observable behavior.\n- For cast-truncation lints (cast_possible_truncation, cast_sign_loss): prefer u32::try_from(...)? at boundaries; allow only where bounds are statically guaranteed (with a comment).\n\nReference categories from the orchestrator's pre-cleanup run (per-crate counts):\n- crossbridge (v1 bin): 13 warnings (unnecessary_wraps, single_match_else, similar_names, manual_let_else)\n- crossbridge-protocol: 10 (cast_possible_truncation, missing_errors_doc)\n- crossbridge-supervisor: 18 (cast_possible_truncation, missing_errors_doc, semicolon_if_nothing_returned, match_wild_err_arm, used_underscore_binding)\n- crossbridge-server: 57 (cast_possible_truncation, missing_errors_doc, must_use_candidate, uninlined_format_args; unused_async on run_fake_supervisor is a false positive — allow with comment)\n- crossbridge-client: 13 (cast_possible_truncation, unnecessary_wraps on jj_origin_url, needless_pass_by_value, missing_errors_doc, map_unwrap_or)\n- crossbridge-e2e: 57 (missing_errors_doc, cast_possible_truncation, map_unwrap_or, similar_names labels_a/labels_b — keep them and allow with comment, too_many_lines on round_trip — allow with comment, manual_assert)\n\nTotal ~168 warnings across the workspace as of the last clean main.",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T14:36:00.416899583Z",
+      "updated_at": "2026-05-08T15:27:13.172197354Z",
+      "closed_at": "2026-05-08T15:27:13.172197354Z",
+      "labels": [
+        "refactor"
+      ]
+    },
+    "c7e7fa6b-7ac1-4f30-9785-323fb35260c0": {
+      "uuid": "c7e7fa6b-7ac1-4f30-9785-323fb35260c0",
+      "display_id": 5,
+      "title": "crossbridge-protocol: Convert the project to a Cargo workspace and implement the shared protocol crate. See .design/protocol.md for the full spec. This includes: workspace Cargo.toml at root, crossbridge-protocol/ crate with all message types (Register, RegisterResponse, Notification, SupervisorMessage, ClientRequest, SubmitIssue, SubmitAnswer, AnswerComment, Attachment, ServerResponse), postcard serde, and length-prefixed framing helpers (both async with tokio AsyncRead/AsyncWrite and sync with std Read/Write). Max frame size 16 MiB. Dependencies: serde, postcard, tokio (for async helpers only). No crosslink dependency.",
+      "description": "Created by crosslink kickoff",
+      "status": "closed",
+      "priority": "medium",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-05T23:03:28.231406084Z",
+      "updated_at": "2026-05-07T19:19:05.849872465Z",
+      "closed_at": "2026-05-07T19:19:05.849872465Z",
+      "labels": [
+        "feature"
+      ],
+      "comments": {
+        "0008013d-207d-4b2a-9f98-3cf69fa36fd3": {
+          "author": "qi3w",
+          "content": "Plan: Convert root to Cargo workspace with members crates/crossbridge (existing CLI) and crates/crossbridge-protocol (new library). Protocol crate defines all message types per kickoff: Register/RegisterResponse/Notification/SupervisorMessage (supervisor<->server), ClientRequest/SubmitIssue/SubmitAnswer/AnswerComment/Attachment/ServerResponse (agent<->server). postcard serde. Length-prefixed framing with u32 LE prefix and 16 MiB cap. Sync helpers using std::io::Read/Write; async helpers using tokio::io::{AsyncReadExt,AsyncWriteExt}, gated behind 'tokio' feature. No crosslink dep. Update default.nix cargoBuildFlags for workspace package selection.",
+          "created_at": "2026-05-06T13:38:39.111503418Z",
+          "kind": "plan"
+        },
+        "2880f487-0815-471f-88f0-033e50876f6a": {
+          "author": "qi3w",
+          "content": "[action] Starting workspace conversion: moving src/ to crates/crossbridge/src/",
+          "created_at": "2026-05-06T14:07:27.735208401Z",
+          "kind": "note"
+        },
+        "45ad948b-9599-4b75-be6d-e325142a806e": {
+          "author": "2ZD1",
+          "content": "Merged locally to main at fce0f34 (signed agent commit cf65a35 + orchestrator clippy fix fce0f34). cargo test --workspace and cargo clippy --workspace --all-targets -- -D warnings both clean. No push to origin.",
+          "created_at": "2026-05-06T23:02:01.059782908Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAZxDvs/L5OUSVqO2bG1SGNIEpYlaTSLpOuEN6S3pB7tjwpx9oP6iNhyVnlDV3xC+Bgz4+1Yex/2F9oxwvRxHBCQ=="
+        },
+        "4eebca50-c09f-4f2a-8629-25c7f1d84b2a": {
+          "author": "2ZD1",
+          "content": "Correction to previous handoff comment: this project's hook-config.json blocks 'git apply'. Use the system 'patch' tool instead, from inside your worktree:\n\n  patch -p1 < ../../.salvage-IS4n-s15o-protocol.patch\n\n(Or if your cwd is the project root: 'patch -p1 -d .worktrees/<your-worktree> < .salvage-IS4n-s15o-protocol.patch')",
+          "created_at": "2026-05-07T12:05:03.146358657Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAskzxVcaGhT9SRuwPowPwSaWkFZwcJ49H85AWlZj4KHlgg2wp5rEm2qOl8tdgHzPh69MG9zKMeY+KKID+4cM5DQ=="
+        },
+        "4fb4edf2-ee6d-4862-b94d-c99ca6baff4b": {
+          "author": "2ZD1",
+          "content": "Merged locally to main at fce0f34 (signed agent commit cf65a35 + orchestrator clippy fix fce0f34). cargo test --workspace and cargo clippy --workspace --all-targets -- -D warnings both clean. No push to origin.",
+          "created_at": "2026-05-06T23:02:42.498811793Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAttMoFLe4LD4q//mAXyhvd62wo5Wek2Frocsfe0Z3kRhIW/YQDfEcL/UzokgUmFqS6+39C1dXORJMQqGutDg5AQ=="
+        },
+        "531edaa4-ed22-4092-ba49-7f6831f99f0d": {
+          "author": "2ZD1",
+          "content": "## Orchestration role: foundation crate\n\nThis is the FOUNDATION. Issues #6 (supervisor), #7 (server), #8 (client) are blocked by this and depend on the protocol crate.\n\n**Scope for this issue:**\n1. Convert the project to a Cargo workspace (root Cargo.toml with workspace section)\n2. Move existing crossbridge code into crates/crossbridge/\n3. Create crates/crossbridge-protocol/ with all message types and framing helpers per .design/protocol.md\n4. Workspace.dependencies should include shared dep specs the consumer crates can inherit\n\n**Definition of done:**\n- cargo build passes for the workspace\n- cargo test passes (with unit tests for framing roundtrip)\n- All work committed and merged into main\n\n**For future orchestrators**: Once this is merged into main, run `crosslink issue ready` — issues #6/#7/#8 will then be unblocked and can run in parallel.",
+          "created_at": "2026-05-06T17:36:41.516930553Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAUBbrlBZNQVR+bYF6kfkIMWRaVxH58q2xoBo7D0egQYGIigjArBVp29nSXQhoKpSaRAFZNfGKS9F+wf19KJcpCg=="
+        },
+        "61c49f3c-0dc7-42e0-9455-23a1565096a1": {
+          "author": "2ZD1",
+          "content": "Orchestrator decision: NOT merging the IS4n-Jeg6 attempt; keeping main's existing implementation (cf65a35 + fce0f34) as canonical for #5.\n\nReason: main already has a working spec-compliant protocol crate (15 tests pass, layout matches .design/overview.md exactly: workspace members crossbridge/ + crossbridge-protocol/ at root, no crates/ prefix). The IS4n-Jeg6 attempt put the crates under crates/, which actually diverges from the spec layout — my earlier salvage handoff comment misread the spec and led the new agent astray. Apologies.\n\nThe IS4n-Jeg6 work (be90617 + 6e0442a, 19 tests) is preserved as a branch reference (feature/IS4n-Jeg6-...) for comparison if anyone wants to evaluate it. The .salvage-IS4n-s15o-protocol.patch at repo root is also preserved.\n\nStatus: #5's underlying work is in main. Proceeding to kickoff #6, #7, #8 from main as the original orchestration note (2026-05-06 17:36 comment) directed.",
+          "created_at": "2026-05-07T12:59:18.379820236Z",
+          "kind": "decision",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAAtBEosfStJtT+WGM7XR3DS48TPrXqWmatvZgGCfkyobG0krRnceZI1v+7Lx751XaPE4Mzs2U9Mv//za6rhUeBg=="
+        },
+        "ad1cb33c-d1a9-420b-b07d-6bca8e7cf11d": {
+          "author": "4wFJ",
+          "content": "Plan: Convert root Cargo.toml to workspace with members crossbridge/ (existing CLI) and crossbridge-protocol/ (new crate). Protocol crate has message types, postcard serde, length-prefixed framing (sync+async). tokio optional behind feature flag. Max frame 16 MiB.",
+          "created_at": "2026-05-05T23:11:13.715519314Z",
+          "kind": "plan"
+        },
+        "bdd30501-ff1c-4ce7-bbdb-d080a096060e": {
+          "author": "2ZD1",
+          "content": "Merged locally to main at fce0f34. Includes signed agent commit cf65a35 (workspace conversion + crossbridge-protocol crate, 23 tests pass) and orchestrator commit fce0f34 (one-line useless_format clippy fix in pre-existing v1 route.rs). cargo test --workspace clean, cargo clippy --workspace --all-targets -- -D warnings clean. Cron auto-merge by orchestrator. No push to origin.",
+          "created_at": "2026-05-06T23:01:55.105125902Z",
+          "kind": "note",
+          "signed_by": "SHA256:xsm4hSTMflfh88tZ33utV+v374y8ZWqrEQbsDnjnUXE",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgXp/5K39StJUvkjhIkwBFGxJmrMNGJcdnJKlPulcUC1IAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABAoqRauQRP2NfPIEbrlgkPDe8KGNXqC6cDL+gRujFXkwIuHbdLVf+zdr82amsC/utjgZmdDziKO5S5B8oL31cjAw=="
+        },
+        "e0dd9a09-3c85-435b-bc78-926d3a50c02f": {
+          "author": "qi3w",
+          "content": "[action] Building workspace and running tests",
+          "created_at": "2026-05-06T14:34:39.636823342Z",
+          "kind": "note"
+        },
+        "fa3abc10-eaac-4818-881a-031f1238412a": {
+          "author": "hi0b",
+          "content": "## Salvage from interrupted kickoff (agent IS4n-s15o)\n\nA previous kickoff agent built a working draft of the protocol crate but was killed\nwhen the outer claude-sandbox restarted, before any commits were made. The staged work\nhas been preserved as a patch at the repo root:\n\n  .salvage-IS4n-s15o-protocol.patch  (888 lines, 29.8 KB)\n\nThe patch is visible to fresh kickoff worktrees because the bind mount covers the\nwhole project dir. Apply with:\n\n  git apply ../../.salvage-IS4n-s15o-protocol.patch\n\n(adjust the relative path from inside .worktrees/<your-worktree>/)\n\n### What's in the patch\n\n- crossbridge-protocol/Cargo.toml — serde, postcard (alloc), tokio (optional, behind `async` feature)\n- crossbridge-protocol/src/lib.rs (321 lines) — all message types per .design/protocol.md:\n  Register, RegisterResponse, Notification, SupervisorMessage, ClientRequest,\n  SubmitIssue, SubmitAnswer, AnswerComment, Attachment, ServerResponse,\n  plus ProtocolError + sync framing (write_message_sync / read_message_sync) +\n  async framing (gated by `async` feature)\n- crossbridge-protocol/tests/roundtrip.rs (201 lines) — sync roundtrip tests\n- crossbridge-protocol/tests/async_io.rs (75 lines) — tokio async roundtrip tests\n- Cargo.toml — root becomes workspace AND keeps existing crossbridge package; members = [\".\", \"crossbridge-protocol\"]\n- Cargo.lock — updated for new deps\n- shell.nix — adds clippy and rustfmt to nativeBuildInputs (needed for the agent_lint_commands the previous agent set up)\n- src/main.rs, src/route.rs — pure `cargo fmt` artifacts, no semantic changes\n\n### Architectural choice (different from issue spec)\n\nThe original spec says \"workspace Cargo.toml at root, ... crates/crossbridge/ ...\".\nThis salvage instead keeps src/ at the root and makes the root Cargo.toml both a\npackage and a workspace (members = [\".\", \"crossbridge-protocol\"]). Less churn, but\ndivergent from the spec. Decide whether to keep this shape or move src/ into\ncrates/crossbridge/ as the spec requires before applying the patch.\n\n### Build status\n\n- cargo build --workspace passes\n- Tests not run\n\n### Excluded from the patch (DO NOT apply)\n\nThe previous agent also modified .crosslink/hook-config.json — among other things,\nit deleted the `sandbox.command` config that wraps kickoff agents in claude-sandbox.\nThat edit would break the sandbox isolation for subsequent kickoffs and has been\nomitted from the patch. Don't recreate it. The agent_lint_commands and\nagent_test_commands additions in that diff (cargo clippy / cargo fmt --check / cargo\ntest) are reasonable; you can re-add them by hand if useful, but make sure to keep\nthe sandbox.command setting intact.",
+          "created_at": "2026-05-07T12:03:47.154882010Z",
+          "kind": "handoff"
+        }
+      }
+    },
+    "cca6b353-8177-4667-a558-572dde253fd4": {
+      "uuid": "cca6b353-8177-4667-a558-572dde253fd4",
+      "display_id": 9,
+      "title": "test sandbox config",
+      "description": "Created by crosslink kickoff",
+      "status": "closed",
+      "priority": "medium",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-06T17:49:20.678682096Z",
+      "updated_at": "2026-05-06T17:49:48.092392950Z",
+      "closed_at": "2026-05-06T17:49:48.092392950Z",
+      "labels": [
+        "feature"
+      ]
+    },
+    "ce1cc28c-59e5-400e-a3b3-a8c8925d3e19": {
+      "uuid": "ce1cc28c-59e5-400e-a3b3-a8c8925d3e19",
+      "display_id": 20,
+      "title": "Quality pass: clippy pedantic cleanup in crossbridge-supervisor",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun `cargo clippy -p crossbridge-supervisor --all-targets -- -W clippy::pedantic` and resolve every warning (currently 18). Top categories: cast_possible_truncation, missing_errors_doc, semicolon_if_nothing_returned, match_wild_err_arm, used_underscore_binding.\n\nAcceptance criteria:\n- `cargo clippy -p crossbridge-supervisor --all-targets -- -W clippy::pedantic -D warnings` exits 0.\n- No blanket `#[allow(clippy::pedantic)]` or `#[allow(...)]` over whole modules — fix the underlying issues, only allow specific lints with a one-line justification comment when the pedantic suggestion is genuinely worse.\n- All existing tests still pass (`cargo test -p crossbridge-supervisor`).\n- `cargo fmt --check` clean.",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T13:54:22.759400579Z",
+      "updated_at": "2026-05-08T14:36:11.617590674Z",
+      "closed_at": "2026-05-08T14:36:11.617590674Z"
+    },
+    "cf5d466a-817f-43dc-8a87-8e222033649a": {
+      "uuid": "cf5d466a-817f-43dc-8a87-8e222033649a",
+      "display_id": 30,
+      "title": "Quality pass: clippy pedantic cleanup in crossbridge-server",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun cargo clippy -p crossbridge-server with -W clippy::pedantic and resolve all 57 warnings (largest count in the workspace). Top categories: cast_possible_truncation, missing_errors_doc, must_use_candidate, uninlined_format_args, unused_async (note: unused_async on run_fake_supervisor is a false positive — the helper hosts a future; allow that one with a comment).\n\nAcceptance criteria:\n- cargo clippy -p crossbridge-server --all-targets -- -W clippy::pedantic -D warnings exits 0.\n- No blanket #[allow] over whole modules — fix the underlying issues; only allow specific lints with a one-line justification.\n- All existing tests still pass (cargo test -p crossbridge-server), including the end_to_end and oversized_frame integration tests.\n- cargo fmt --check clean.",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T13:55:13.248797143Z",
+      "updated_at": "2026-05-08T14:57:23.668532834Z",
+      "closed_at": "2026-05-08T14:57:23.668532834Z",
+      "labels": [
+        "refactor"
+      ]
+    },
+    "d1501151-4bb6-456e-b07c-59a7b5eddf47": {
+      "uuid": "d1501151-4bb6-456e-b07c-59a7b5eddf47",
+      "display_id": 22,
+      "title": "Quality pass: clippy pedantic cleanup in crossbridge-client",
+      "description": "Current state: \n\nDesired state: \n\nReason: \n\nRun `cargo clippy -p crossbridge-client --all-targets -- -W clippy::pedantic` and resolve every warning (currently 13). Top categories: cast_possible_truncation, unnecessary_wraps (`jj_origin_url` returns `Result<Option<String>>` but never `Err`s — collapse to `Option<String>`), needless_pass_by_value, missing_errors_doc, map_unwrap_or.\n\nAcceptance criteria:\n- `cargo clippy -p crossbridge-client --all-targets -- -W clippy::pedantic -D warnings` exits 0.\n- No blanket `#[allow(clippy::pedantic)]` or `#[allow(...)]` over whole modules — fix the underlying issues, only allow specific lints with a one-line justification comment when the pedantic suggestion is genuinely worse.\n- All existing tests still pass (`cargo test -p crossbridge-client`), including the `end_to_end` integration test.\n- `cargo fmt --check` clean.",
+      "status": "closed",
+      "priority": "low",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-08T13:54:30.985655398Z",
+      "updated_at": "2026-05-08T14:36:11.742373339Z",
+      "closed_at": "2026-05-08T14:36:11.742373339Z"
+    },
+    "e52c6819-b984-4b99-a1d3-fb91671747d0": {
+      "uuid": "e52c6819-b984-4b99-a1d3-fb91671747d0",
+      "display_id": 44,
+      "title": "crossbridge-server: actionable error when slug derivation fails — point user at --slug",
+      "description": "Steps to reproduce:\n1. \n\nExpected: \nActual: \n\n## Problem\n\nWhen `crossbridge-server` runs without `--slug` and the repo has no `origin` remote configured (e.g. an unpublished local repo), it bails with an unhelpful low-level error that exposes implementation details and gives the user no actionable next step.\n\n### Repro\n\n```\n$ crossbridge-server --group orchestration\nError: deriving slug from /home/vringar/projects/vetinari\n\nCaused by:\n    `jj git remote list` did not list an `origin` remote in /home/vringar/projects/vetinari\n```\n\nThe user has to read the error twice to realize the fix is \"pass `--slug <name>` manually\".\n\n## Desired behavior\n\nWhen slug derivation fails (no `origin` remote in either jj or git), the error should:\n\n1. Lead with what the user must do: pass `--slug <NAME>` explicitly.\n2. Mention briefly *why* derivation failed (no `origin` remote configured) so the user understands the trigger.\n3. Not expose the literal `jj git remote list` / `git remote get-url origin` command string — that is an implementation detail.\n\nA reasonable shape:\n\n```\nError: cannot auto-derive repo slug for /home/vringar/projects/vetinari\n       (the repository has no `origin` remote configured)\n\n       Pass `--slug <NAME>` explicitly, e.g.:\n           crossbridge-server --group orchestration --slug vetinari\n```\n\n## Scope\n\n- `crossbridge-server/src/slug.rs` — change the error returned by `jj_origin_url` / `git_origin_url` when no origin remote exists, OR (preferred) keep those low-level errors but wrap them at the `derive_from_repo` boundary with the actionable message.\n- `crossbridge-server/src/main.rs` — possibly adjust the `.with_context(...)` call so the surfaced top-level message names `--slug` as the fix.\n- Add/update a unit test in `slug.rs` covering the \"no origin remote\" path if one does not already exist.\n\n## Out of scope\n\n- Auto-falling-back to the directory basename. The user asked for an *explicit* demand, not silent inference.\n- Refactoring how slug derivation hooks into the CLI more broadly.",
+      "status": "closed",
+      "priority": "high",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-14T14:49:55.014878792Z",
+      "updated_at": "2026-05-14T15:08:01.867925486Z",
+      "closed_at": "2026-05-14T15:08:01.867925486Z",
+      "comments": {
+        "5bf7102e-8ec9-4154-8480-b78d49bfe85a": {
+          "author": "desktop",
+          "content": "Duplicate of #45 — that one carries the active kickoff worker (IS4n-lzPH-...-7653). This issue was an orphan from a failed hub-cache commit during the original `crosslink issue create`; the local index recorded it before the retry created #45.",
+          "created_at": "2026-05-14T15:07:59.952922680Z",
+          "kind": "note",
+          "signed_by": "SHA256:Z3rEXNb3m5pTVbDpOH0aQthjH5DQ6uSjv1qxawrtDOk",
+          "signature": "U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAg52EZBzRO5K78vCSchgL2iLRuIldPW0wLMoBoA/5K3CoAAAARY3Jvc3NsaW5rLWNvbW1lbnQAAAAAAAAABnNoYTUxMgAAAFMAAAALc3NoLWVkMjU1MTkAAABA2uHZVzTuvuUQlCblb7h3sqDdoVnGV+PMHM7qEHjYIB0aOD4ePs/A2xg1Hv7ZmsZUNNWVRCUDdj0FAqXaEvxtBQ=="
+        }
+      }
+    },
+    "fc80af35-c886-4380-bbc7-b91cfcd0a0a3": {
+      "uuid": "fc80af35-c886-4380-bbc7-b91cfcd0a0a3",
+      "display_id": 41,
+      "title": "Skill file skill/crossbridge.md is not discoverable by Claude Code",
+      "description": "Steps to reproduce:\n1. \n\nExpected: \nActual: \n\nMirror of GitHub issue: https://github.com/vringar/crossbridge/issues/1\n\nThe repo ships a Claude Code skill at skill/crossbridge.md, but in its current shape Claude Code will not pick it up. Two issues:\n\n1. **Filename.** Claude Code skill discovery looks for SKILL.md inside a directory named after the skill, not <skill>.md at the top level of skill/. The current path needs to be skill/crossbridge/SKILL.md.\n2. **Frontmatter.** Skills are technically loadable without frontmatter — Claude Code falls back to the first paragraph as the description — but in that mode the skill has no name and gets a description that wasn't written for invocation hints, so it won't be triggered reliably for relevant user messages. Skills are expected to declare YAML frontmatter with at least name and description. The current file has none.\n\n## Suggested fix\n\nMove skill/crossbridge.md → skill/crossbridge/SKILL.md and prepend YAML frontmatter:\n\n```yaml\n---\nname: crossbridge\ndescription: Use when sending or answering cross-project requests via crossbridge — the xb:* labeled-issue transport between crosslink repos. Covers ask, answer, and check.\n---\n```\n\nSee GH #1 for full discussion and rationale.",
+      "status": "closed",
+      "priority": "high",
+      "created_by": "2ZD1",
+      "created_at": "2026-05-09T20:24:58.012547969Z",
+      "updated_at": "2026-05-09T20:41:07.800756813Z",
+      "closed_at": "2026-05-09T20:41:07.800756813Z",
+      "labels": [
+        "bug",
+        "claude-code"
+      ],
+      "comments": {
+        "e5417dd5-8229-4578-9cf2-2553d047fafb": {
+          "author": "anon-f1ee6723",
+          "content": "Mirrored to GitHub: https://github.com/vringar/crossbridge/issues/1\nFix in PR https://github.com/vringar/crossbridge/pull/2 (will close GH #1 on merge; this issue closes alongside).",
+          "created_at": "2026-05-09T20:28:21.982638652Z",
+          "kind": "note"
+        }
+      }
+    },
+    "fd2940b5-1fd3-4a7c-aa4b-9c612025ba88": {
+      "uuid": "fd2940b5-1fd3-4a7c-aa4b-9c612025ba88",
+      "display_id": 13,
+      "title": "Debug repro: minimal kickoff agent for worktree teardown observation",
+      "description": "Created by crosslink kickoff",
+      "status": "closed",
+      "priority": "medium",
+      "created_by": "Kklh",
+      "created_at": "2026-05-07T10:03:57.177284736Z",
+      "updated_at": "2026-05-08T16:06:48.365376827Z",
+      "closed_at": "2026-05-08T16:06:48.365376827Z",
+      "labels": [
+        "feature"
+      ]
+    }
+  },
+  "next_milestone_id": 1,
+  "watermark": {
+    "timestamp": "2026-05-08T14:58:28.879292167Z",
+    "agent_id": "2ZD1",
+    "agent_seq": 24
+  }
+}
